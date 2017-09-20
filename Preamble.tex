@@ -1,5 +1,5 @@
 %Basics
-\documentclass[aps, prl, rerint, a4paper, english]{revtex4-1}
+\documentclass[aps, prl, reprint, a4paper, english]{revtex4}
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
 
@@ -44,9 +44,8 @@ multi-part-units = single ,
 \usepackage{rotating}
 \usepackage{graphicx}
 \usepackage{caption}
-\usepackage{subcaption}
 \usepackage{wrapfig}
-\usepackage[rmargin=3.2cm,tmargin=3.5cm]{geometry}
+\usepackage{xcolor}
 \usepackage{etoolbox}
 \usepackage{verbatim}
 \usepackage[space]{grffile}
@@ -85,11 +84,7 @@ multi-part-units = single ,
 \usepackage{natbib}
 
 
-%Miscellaneous packages, definitions and new commands
-\usepackage{silence}
-\WarningFilter{revtex4-1}{Repair the float}
-\WarningFilter{natbib}{Package natbib: Empty 'thebibliography' enviroment}
-
+%Definitions and new commands
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 \newcommand{\logas}[1]{\log_{_{10}}{\left( #1 \right)}}
@@ -103,3 +98,7 @@ multi-part-units = single ,
 \newcommand{\degr}{^{\circ}}
 \newcommand{\me}{\mathrm{e}}
 \newcommand{\eula}[1]{ \dpd{L }{#1} - \dod{}{t}\left(\dpd{L}{\dot{#1}}\right)}
+
+\def\rcurs{{\mbox{$\resizebox{.16in}{.08in}{\includegraphics{C:/Users/rwiuf/Dropbox/DTU/LaTeX/Template/script_r/ScriptR}}$}}}
+\def\brcurs{{\mbox{$\resizebox{.16in}{.08in}{\includegraphics{C:/Users/rwiuf/Dropbox/DTU/LaTeX/Template/script_r/BoldR}}$}}}
+\def\hrcurs{{\mbox{$\hat \brcurs$}}}
