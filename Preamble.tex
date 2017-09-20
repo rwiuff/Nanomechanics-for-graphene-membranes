@@ -1,5 +1,5 @@
 %Basics
-\documentclass[aps, prl, reprint, a4paper, english]{revtex4}
+\documentclass[aps, prl, reprint, a4paper, english, 12pt, twocolumn]{revtex4}
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
 
@@ -33,8 +33,8 @@ multi-part-units = single ,
 %Appendix, TOC and Bibliography
 \usepackage{appendix}
 \renewcommand\appendixtocname{Appendices}
-\usepackage[nottoc]{tocbibind}
-\usepackage{lastpage}
+%\usepackage[nottoc]{tocbibind}
+\usepackage[lastpage,user]{zref}
 
 %Figures
 \usepackage[svgnames]{xcolor} % Required to specify font color
@@ -45,6 +45,7 @@ multi-part-units = single ,
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{wrapfig}
+\usepackage[rmargin=2.5cm, tmargin=2.5cm, lmargin=2.5cm, bmargin=2.5cm]{geometry}
 \usepackage{xcolor}
 \usepackage{etoolbox}
 \usepackage{verbatim}
@@ -56,10 +57,10 @@ multi-part-units = single ,
 %Header footer
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\lhead{Chrsitoffer Vendelbo Sørensen \\ Frederik Grunnet Kristensen \\ Rasmus Wiuff s163977}
-\chead{Physics Project \\ Simulated Latice Graphene}
-\rhead{2018 \\ Course 34029}
-\cfoot{Side \thepage\, af \pageref*{LastPage}}
+\lhead{F. G. Kristensen,\\C. V. Sørensen og R. K. F. Wiuff}
+\chead{Simulated Graphene Lattice\\}
+\rhead{10/1-2018\\Course 34029: Physics Project}
+\cfoot{Side \thepage\, af \zpageref{LastPage}}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
@@ -79,10 +80,10 @@ multi-part-units = single ,
 }
 \usepackage[capitalise]{cleveref}
 \usepackage{enumitem}
-\usepackage{titlesec}
 \usepackage{booktabs}
 \usepackage{natbib}
-
+\usepackage{silence}
+\WarningFilter{revtex4-1}{Repair the float}
 
 %Definitions and new commands
 \setlength{\parindent}{0pt}
