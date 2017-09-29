@@ -1,4 +1,6 @@
 # ==============================================================
+#
+# By Rasmus Wiuff, s163977@student.dtu.dk
 # 
 # Script for creating a 2 dimensional nanosheet with predefined
 # hexagonal holes and sheet size using ATKPython.
