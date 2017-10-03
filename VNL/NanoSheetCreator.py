@@ -1,11 +1,12 @@
-# ==============================================================
+# ================================================================
 #
-# By Rasmus Wiuff, s163977@student.dtu.dk
+# By Frederik Grunnet Kristensen, Christoffer Vendelbo Sorensen &
+# Rasmus Wiuff, s163977@student.dtu.dk
 # 
 # Script for creating a 2 dimensional nanosheet with predefined
 # hexagonal holes and sheet size using ATKPython.
 #
-# ==============================================================
+# ================================================================
 
 # Import libraries
 from matplotlib import path
@@ -57,6 +58,6 @@ bulk_configuration = sheet
 
 bulk_configuration.addTags('Hole', atoms)
 
-savename = input("Input filename: ")
+savename = raw_input("Input filename: ")
 
-nlsave('savename',sheet)
+nlsave(savename,sheet)
