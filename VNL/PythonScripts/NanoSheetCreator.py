@@ -16,25 +16,34 @@ import matplotlib.patches as patches
 import math
 
 # Construct sheet
-nC = input("Repetitions along the C axis: ")
+nA = input("Repetitions along the A axis: ")
 nB = input("Repetitions along the B axis: ")
 
 # noinspection PyUnresolvedReferences
-sheet = NanoSheet(2, 2, Carbon)
+lattice = Hexagonal(a=2.4612*Angstrom,
+                    c=6.709*Angstrom)
+# noinspection PyUnresolvedReferences
+elements = [Carbon]*2
+# noinspection PyUnresolvedReferences
+coordinates = [(0,0,0),
+               (0.33333,0.66667,0)]
+# noinspection PyUnresolvedReferences
+sheet = BulkConfiguration(lattice,elements,fractional_coordinates=coordinates)
 
-sheet = sheet.repeat(1, nB, nC)
+sheet = sheet.repeat(nA, nB, 1)
 sheet = sheet.center()
+
 sheetcoor = sheet.cartesianCoordinates()
 sheetcoor = sheetcoor / Ang
 
-size = "The sheet is {:.3f} by {:.3f} Angstrom".format(sheetcoor[-1, -1], sheetcoor[-1, -2])
-
+size = "The sheet is {:.3f} by {:.3f} Angstrom".format(np.amax(sheetcoor[:,0]), np.amax(sheetcoor[:,1]))
 print(size)
 sheetcoor = np.array(sheetcoor)
-sheetcoor = np.delete(sheetcoor, 0, 1)
+sheetcoor = np.delete(sheetcoor, 2, 1)
 
 # Construct Polygon(s)
 s = 1
+pData = np.array([])
 info = np.array(["Tag name", "Center coordinate (x)", "Center coordinate (y)", "Diameter", "Area"])
 while s == 1:
     cX = float(input("Polygon center X-coordinate: "))
@@ -48,6 +57,7 @@ while s == 1:
     p5 = (cX - math.cos(math.pi / 3) * r, cY - math.sin(math.pi / 3) * r)
     p6 = (cX + math.cos(math.pi / 3) * r, cY - math.sin(math.pi / 3) * r)
     p = path.Path([p1, p2, p3, p4, p5, p6, p1])
+    pData = np.append(pData, p)
 
     # Find atoms inside polygon
     Test = p.contains_points(sheetcoor)
@@ -75,24 +85,24 @@ while s == 1:
 
     info = np.vstack((info, instanceinfo))
 
-    # savefig = raw_input("Save hole figure? [Y/N]: ")
-    # if savefig == "Y":
-    #     fig = plt.figure()
-    #     ax = fig.add_subplot(111)
-    #     xp = np.transpose(sheetcoor)[1]
-    #     yp = np.transpose(sheetcoor)[0]
-    #     plt.plot(xp, yp, ',')
-    #     patch = patches.PathPatch(p, facecolor='orange', lw=2)
-    #     ax.add_patch(patch)
-    #     ax.set_xlim(0, sheetcoor[-1, -1])
-    #     ax.set_ylim(0, sheetcoor[-1, -2])
-    #     plt.axis('equal')
-    #     savefigfilename = raw_input("Input filename for hole figure: ")
-    #     savefigformat = "pdf"
-    #     savefigfile = ".".join((savefigfilename, savefigformat))
-    #     plt.savefig(savefigfile, format='pdf')
-    # elif savefig == "N":
-    #     savefig = "N"
+    savefig = raw_input("Save hole figure? [Y/N]: ")
+    if savefig == "Y":
+         fig = plt.figure()
+         ax = fig.add_subplot(111)
+         xp = np.transpose(sheetcoor)[0]
+         yp = np.transpose(sheetcoor)[1]
+         plt.plot(xp, yp, ',')
+         patch = patches.PathPatch(p, facecolor='orange', lw=2)
+         ax.add_patch(patch)
+         ax.set_xlim(0, np.amax(sheetcoor[:,0]))
+         ax.set_ylim(0, np.amax(sheetcoor[:,1]))
+         plt.axis('equal')
+         savefigfilename = raw_input("Input filename for hole figure: ")
+         savefigformat = "pdf"
+         savefigfile = ".".join((savefigfilename, savefigformat))
+         plt.savefig(savefigfile, format='pdf')
+    elif savefig == "N":
+        savefig = "N"
 
     # noinspection PyUnresolvedReferences
     AH = raw_input("Add hole? [Y/N]: ")
