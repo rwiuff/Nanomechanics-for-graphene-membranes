@@ -20,15 +20,15 @@ nA = input("Repetitions along the A axis: ")
 nB = input("Repetitions along the B axis: ")
 
 # noinspection PyUnresolvedReferences
-lattice = Hexagonal(a=2.4612*Angstrom,
-                    c=6.709*Angstrom)
+lattice = Hexagonal(a=2.4612 * Angstrom,
+                    c=6.709 * Angstrom)
 # noinspection PyUnresolvedReferences
-elements = [Carbon]*2
+elements = [Carbon] * 2
 # noinspection PyUnresolvedReferences
-coordinates = [(0,0,0),
-               (0.33333,0.66667,0)]
+coordinates = [(0, 0, 0),
+               (0.33333, 0.66667, 0)]
 # noinspection PyUnresolvedReferences
-sheet = BulkConfiguration(lattice,elements,fractional_coordinates=coordinates)
+sheet = BulkConfiguration(lattice, elements, fractional_coordinates=coordinates)
 
 sheet = sheet.repeat(nA, nB, 1)
 sheet = sheet.center()
@@ -36,7 +36,11 @@ sheet = sheet.center()
 sheetcoor = sheet.cartesianCoordinates()
 sheetcoor = sheetcoor / Ang
 
-size = "The sheet is {:.3f} by {:.3f} Angstrom".format(np.amax(sheetcoor[:,0]), np.amax(sheetcoor[:,1]))
+pV = sheet.primitiveVectors()
+
+sideA = pV[0,0] / Ang
+sideB = pV[1,1] / Ang
+size = "The graphene lattice is {:.3f} by {:.3f} Angstrom".format(sideA, sideB)
 print(size)
 sheetcoor = np.array(sheetcoor)
 sheetcoor = np.delete(sheetcoor, 2, 1)
@@ -87,20 +91,20 @@ while s == 1:
 
     savefig = raw_input("Save hole figure? [Y/N]: ")
     if savefig == "Y":
-         fig = plt.figure()
-         ax = fig.add_subplot(111)
-         xp = np.transpose(sheetcoor)[0]
-         yp = np.transpose(sheetcoor)[1]
-         plt.plot(xp, yp, ',')
-         patch = patches.PathPatch(p, facecolor='orange', lw=2)
-         ax.add_patch(patch)
-         ax.set_xlim(0, np.amax(sheetcoor[:,0]))
-         ax.set_ylim(0, np.amax(sheetcoor[:,1]))
-         plt.axis('equal')
-         savefigfilename = raw_input("Input filename for hole figure: ")
-         savefigformat = "pdf"
-         savefigfile = ".".join((savefigfilename, savefigformat))
-         plt.savefig(savefigfile, format='pdf')
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        xp = np.transpose(sheetcoor)[0]
+        yp = np.transpose(sheetcoor)[1]
+        plt.plot(xp, yp, ',')
+        patch = patches.PathPatch(p, facecolor='orange', lw=2)
+        ax.add_patch(patch)
+        ax.set_xlim(0, np.amax(sheetcoor[:, 0]))
+        ax.set_ylim(0, np.amax(sheetcoor[:, 1]))
+        plt.axis('equal')
+        savefigfilename = raw_input("Input filename for hole figure: ")
+        savefigformat = "pdf"
+        savefigfile = ".".join((savefigfilename, savefigformat))
+        plt.savefig(savefigfile, format='pdf')
     elif savefig == "N":
         savefig = "N"
 
