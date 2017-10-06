@@ -15,40 +15,55 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import math
 
-# Construct sheet
+# -------------------------------------------------- Construct sheet ---------------------------------------------------
+# Set repetitions
 nA = input("Repetitions along the A axis: ")
 nB = input("Repetitions along the B axis: ")
 
-# noinspection PyUnresolvedReferences
+# Create lattice
 lattice = Hexagonal(a=2.4612 * Angstrom,
                     c=6.709 * Angstrom)
-# noinspection PyUnresolvedReferences
+
+# Set atomic elements
 elements = [Carbon] * 2
-# noinspection PyUnresolvedReferences
+
+# Place atoms in unit cell
 coordinates = [(0, 0, 0),
                (0.33333, 0.66667, 0)]
-# noinspection PyUnresolvedReferences
+
+# Create unit sheet
 sheet = BulkConfiguration(lattice, elements, fractional_coordinates=coordinates)
 
+# Repeat unit sheet
 sheet = sheet.repeat(nA, nB, 1)
 sheet = sheet.center()
 
+# Extract cartesian sheet coordinates
 sheetcoor = sheet.cartesianCoordinates()
 sheetcoor = sheetcoor / Ang
 
+# Extract fractional coordinates
+sheetfrac = sheet.fractionalCoordinates()
+
+# Extract primitive vectors
 pV = sheet.primitiveVectors()
 
+# Show sheet size
 sideA = pV[0,0] / Ang
 sideB = pV[1,1] / Ang
 size = "The graphene lattice is {:.3f} by {:.3f} Angstrom".format(sideA, sideB)
 print(size)
+
+# Convert sheetcoordinates to Numpyarray and delete z-coordinates
 sheetcoor = np.array(sheetcoor)
 sheetcoor = np.delete(sheetcoor, 2, 1)
 
-# Construct Polygon(s)
+# ------------------------------------------------ Construct polygon(s) ------------------------------------------------
+# Loopvariable and Information array
 s = 1
-pData = np.array([])
 info = np.array(["Tag name", "Center coordinate (x)", "Center coordinate (y)", "Diameter", "Area"])
+
+# Polygon creation loop
 while s == 1:
     cX = float(input("Polygon center X-coordinate: "))
     cY = float(input("Polygon center Y-coordinate: "))
@@ -61,7 +76,6 @@ while s == 1:
     p5 = (cX - math.cos(math.pi / 3) * r, cY - math.sin(math.pi / 3) * r)
     p6 = (cX + math.cos(math.pi / 3) * r, cY - math.sin(math.pi / 3) * r)
     p = path.Path([p1, p2, p3, p4, p5, p6, p1])
-    pData = np.append(pData, p)
 
     # Find atoms inside polygon
     Test = p.contains_points(sheetcoor)
@@ -80,7 +94,6 @@ while s == 1:
     A = (3 * math.sqrt(3) * a ** 2) / 2
     area = "Area of hexagon is {:.3f} Angstrom squared".format(A)
     print(area)
-    # noinspection PyUnresolvedReferences
     tagname = raw_input("Input tag name: ")
 
     bulk_configuration.addTags(tagname, atoms)
@@ -108,16 +121,13 @@ while s == 1:
     elif savefig == "N":
         savefig = "N"
 
-    # noinspection PyUnresolvedReferences
     AH = raw_input("Add hole? [Y/N]: ")
     if AH == "Y":
         s = 1
     elif AH == "N":
         s = 0
 
-# noinspection PyUnresolvedReferences
 savename = raw_input("Input nanosheet filename: ")
-# noinspection PyUnresolvedReferences
 nlsave(savename, sheet)
 txtformat = "txt"
 savetxt = ".".join((savename, txtformat))
