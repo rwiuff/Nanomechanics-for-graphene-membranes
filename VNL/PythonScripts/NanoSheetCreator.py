@@ -104,7 +104,7 @@ while s == 1:
     A = (3 * math.sqrt(3) * a ** 2) / 2
     area = "Area of hexagon is {:.3f} Angstrom squared".format(A)
     print(area)
-    tagname = raw_input("Input tag name: ")
+    tagname = str(input("Input tag name: "))
 
     bulk_configuration.addTags(tagname, atoms)
 
@@ -112,7 +112,7 @@ while s == 1:
 
     info = np.vstack((info, instanceinfo))
 
-    savefig = raw_input("Save hole figure? [Y/N]: ")
+    savefig = str(input("Save hole figure? [Y/N]: "))
     if savefig == "Y":
         fig = plt.figure()
         ax = fig.add_subplot(111)
@@ -124,20 +124,30 @@ while s == 1:
         ax.set_xlim(0, np.amax(sheetcoor[:, 0]))
         ax.set_ylim(0, np.amax(sheetcoor[:, 1]))
         plt.axis('equal')
-        savefigfilename = raw_input("Input filename for hole figure: ")
+        savefigfilename = str(input("Input filename for hole figure: "))
         savefigformat = "pdf"
         savefigfile = ".".join((savefigfilename, savefigformat))
         plt.savefig(savefigfile, format='pdf')
     elif savefig == "N":
         savefig = "N"
 
-    AH = raw_input("Add hole? [Y/N]: ")
+    AH = str(input("Add hole? [Y/N]: "))
     if AH == "Y":
         s = 1
     elif AH == "N":
         s = 0
 
-savename = raw_input("Input nanosheet filename: ")
+# ---------------------------------------------------- Repeat sheet ----------------------------------------------------
+R = str(input("Repeat sheet? [Y/N]: "))
+if R == "Y":
+    reps = int(input("A-vector repetitions: "))
+    sheet = sheet.repeat(reps, 1, 1)
+    reps = int(input("B-vector repetitions: "))
+    sheet = sheet.repeat(1, reps, 1)
+elif R == "N":
+    R = "N"
+
+savename = str(input("Input nanosheet filename: "))
 nlsave(savename, sheet)
 txtformat = "txt"
 savetxt = ".".join((savename, txtformat))
