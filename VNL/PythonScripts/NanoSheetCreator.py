@@ -10,6 +10,7 @@
 
 # Import libraries
 import numpy as np
+from numpy import linalg as LA
 from matplotlib import path
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -42,33 +43,42 @@ sheet = sheet.center()
 sheetcoor = sheet.cartesianCoordinates()
 sheetcoor = sheetcoor / Ang
 
-# Extract fractional coordinates
-sheetfrac = sheet.fractionalCoordinates()
-
 # Extract primitive vectors
 pV = sheet.primitiveVectors()
+pA = np.array(pV[0])
+pB = np.array(pV[1])
 
 # Show sheet size
-sideA = pV[0,0] / Ang
-sideB = pV[1,1] / Ang
+sideA = float(LA.norm(pA) / Ang)
+sideB = float(LA.norm(pB) / Ang)
 size = "The graphene lattice is {:.3f} by {:.3f} Angstrom".format(sideA, sideB)
 print(size)
 
-# Convert sheetcoordinates to Numpyarray and delete z-coordinates
+# Find center coordinates
+pA1 = pA / 2
+pB1 = pB / 2
+cX0 = pA1[0] + pB1[0]
+cY0 = pA1[1] + pB1[1]
+print(cX0)
+print(cY0)
+
+# Convert sheet coordinates to Numpy array and delete z-coordinates
 sheetcoor = np.array(sheetcoor)
 sheetcoor = np.delete(sheetcoor, 2, 1)
 
 # ------------------------------------------------ Construct polygon(s) ------------------------------------------------
-# Loopvariable and Information array
+# Loop variable and Information array
 s = 1
 info = np.array(["Tag name", "Center coordinate (x)", "Center coordinate (y)", "Diameter", "Area"])
 
 # Polygon creation loop
 while s == 1:
-    cX = float(input("Polygon center X-coordinate: "))
-    cY = float(input("Polygon center Y-coordinate: "))
+    cXI = float(input("Polygon center X-offset: "))
+    cYI = float(input("Polygon center Y-offset: "))
     d = float(input("Polygon diameter: "))
     r = d / 2
+    cX = cX0 + cXI
+    cY = cY0 + cYI
     p1 = (cX + r, cY)
     p2 = (cX + math.cos(math.pi / 3) * r, cY + math.sin(math.pi / 3) * r)
     p3 = (cX - math.cos(math.pi / 3) * r, cY + math.sin(math.pi / 3) * r)
