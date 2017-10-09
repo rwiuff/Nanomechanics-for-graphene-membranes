@@ -59,8 +59,6 @@ pA1 = pA / 2
 pB1 = pB / 2
 cX0 = pA1[0] + pB1[0]
 cY0 = pA1[1] + pB1[1]
-print(cX0)
-print(cY0)
 
 # Convert sheet coordinates to Numpy array and delete z-coordinates
 sheetcoor = np.array(sheetcoor)
@@ -73,8 +71,14 @@ info = np.array(["Tag name", "Center coordinate (x)", "Center coordinate (y)", "
 
 # Polygon creation loop
 while s == 1:
-    cXI = float(input("Polygon center X-offset: "))
-    cYI = float(input("Polygon center Y-offset: "))
+    try:
+        cXI = float(raw_input("Polygon center X-offset (default: 0): "))
+    except ValueError:
+        cXI = 0
+    try:
+        cYI = float(raw_input("Polygon center Y-offset (default: 0): "))
+    except ValueError:
+        cYI = 0
     d = float(input("Polygon diameter: "))
     r = d / 2
     cX = cX0 + cXI
@@ -104,7 +108,7 @@ while s == 1:
     A = (3 * math.sqrt(3) * a ** 2) / 2
     area = "Area of hexagon is {:.3f} Angstrom squared".format(A)
     print(area)
-    tagname = str(input("Input tag name: "))
+    tagname = raw_input("Input tag name: ")
 
     bulk_configuration.addTags(tagname, atoms)
 
@@ -112,7 +116,7 @@ while s == 1:
 
     info = np.vstack((info, instanceinfo))
 
-    savefig = str(input("Save hole figure? [Y/N]: "))
+    savefig = raw_input("Save hole figure? [Y/N]: ")
     if savefig == "Y":
         fig = plt.figure()
         ax = fig.add_subplot(111)
@@ -124,21 +128,21 @@ while s == 1:
         ax.set_xlim(0, np.amax(sheetcoor[:, 0]))
         ax.set_ylim(0, np.amax(sheetcoor[:, 1]))
         plt.axis('equal')
-        savefigfilename = str(input("Input filename for hole figure: "))
+        savefigfilename = raw_input("Input filename for hole figure: ")
         savefigformat = "pdf"
         savefigfile = ".".join((savefigfilename, savefigformat))
         plt.savefig(savefigfile, format='pdf')
     elif savefig == "N":
         savefig = "N"
 
-    AH = str(input("Add hole? [Y/N]: "))
+    AH = raw_input("Add hole? [Y/N]: ")
     if AH == "Y":
         s = 1
     elif AH == "N":
         s = 0
 
 # ---------------------------------------------------- Repeat sheet ----------------------------------------------------
-R = str(input("Repeat sheet? [Y/N]: "))
+R = raw_input("Repeat sheet? [Y/N]: ")
 if R == "Y":
     reps = int(input("A-vector repetitions: "))
     sheet = sheet.repeat(reps, 1, 1)
@@ -147,7 +151,18 @@ if R == "Y":
 elif R == "N":
     R = "N"
 
-savename = str(input("Input nanosheet filename: "))
+# ---------------------------------------------------- Process tags ----------------------------------------------------
+# Create numpy array with tag names
+tags = sheet.tags()
+tags = np.array(list(tags))
+itag = sheet.indicesFromTags(tags=tags[0])
+print(itag)
+# tagindex = np.array([])
+# for i in range(tags.size):
+#     itag = np.array(sheet.indicesFromTags(tags=tags[i]))
+#     tagindex = np.vstack((tagindex,itag))
+# print(tagindex)
+savename = raw_input("Input nanosheet filename: ")
 nlsave(savename, sheet)
 txtformat = "txt"
 savetxt = ".".join((savename, txtformat))
