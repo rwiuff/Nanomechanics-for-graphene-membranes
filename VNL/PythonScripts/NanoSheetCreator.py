@@ -144,24 +144,59 @@ while s == 1:
 # ---------------------------------------------------- Repeat sheet ----------------------------------------------------
 R = raw_input("Repeat sheet? [Y/N]: ")
 if R == "Y":
-    reps = int(input("A-vector repetitions: "))
-    sheet = sheet.repeat(reps, 1, 1)
-    reps = int(input("B-vector repetitions: "))
-    sheet = sheet.repeat(1, reps, 1)
+    Areps = int(input("A-vector repetitions: "))
+    sheet = sheet.repeat(Areps, 1, 1)
+    Breps = int(input("B-vector repetitions: "))
+    sheet = sheet.repeat(1, Breps, 1)
+    # ---------------------------------------------- Process repeated tags ---------------------------------------------
+    # Define repeater variable
+    RV = int(2 * nB)
+    # Define hole instances
+    HI = Areps * Breps
+    # Create numpy array with tag names
+    tags = sheet.tags()
+    tags = np.array(list(tags))
+    # Create tag array
+    tagindex = np.array([])
+    t = 0
+    for i in range(tags.size):
+        # Tag indices for tag
+        tag = sheet.indicesFromTags(tags=tags[i])
+        tag = np.array(tag)
+        # Sorted indices
+        tag = np.sort(tag, axis=None)
+        # New tag size
+        IndexSize = tag.size / HI
+        # Create new tag
+        c = 0
+        print(tag)
+        print(IndexSize)
+        for i in range(HI):
+            newtag = np.array([])
+            for j in range(IndexSize):
+                if tag.size == IndexSize:
+                    newtag = tag
+                else:
+                    if newtag.size == IndexSize:
+                        break
+                    else:
+                        if tag[j] + 1 == tag[j + 1]:
+                            newtag = np.append(newtag, tag[j])
+                        elif tag[j] - 1 == tag[j - 1]:
+                            newtag = np.append(newtag, tag[j])
+                        elif tag[j] + RV == tag[j + RV]:
+                            newtag = np.append(newtag, tag[j])
+            tag = np.setdiff1d(tag, newtag)
+            newtagname = "".join((str(tags[t]), str(c)))
+            newtag = newtag.astype(int)
+            sheet.addTags(newtagname, newtag)
+            c = c + 1
+        t = t + 1
+
+
 elif R == "N":
     R = "N"
 
-# ---------------------------------------------------- Process tags ----------------------------------------------------
-# Create numpy array with tag names
-tags = sheet.tags()
-tags = np.array(list(tags))
-itag = sheet.indicesFromTags(tags=tags[0])
-print(itag)
-# tagindex = np.array([])
-# for i in range(tags.size):
-#     itag = np.array(sheet.indicesFromTags(tags=tags[i]))
-#     tagindex = np.vstack((tagindex,itag))
-# print(tagindex)
 savename = raw_input("Input nanosheet filename: ")
 nlsave(savename, sheet)
 txtformat = "txt"
