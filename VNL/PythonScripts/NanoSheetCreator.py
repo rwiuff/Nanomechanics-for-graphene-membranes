@@ -157,7 +157,6 @@ if R == "Y":
     tags = sheet.tags()
     tags = np.array(list(tags))
     # Create tag array
-    tagindex = np.array([])
     t = 0
     for i in range(tags.size):
         # Tag indices for tag
@@ -169,8 +168,6 @@ if R == "Y":
         IndexSize = tag.size / HI
         # Create new tag
         c = 0
-        print(tag)
-        print(IndexSize)
         for i in range(HI):
             newtag = np.array([])
             for j in range(IndexSize):
@@ -190,6 +187,9 @@ if R == "Y":
             newtagname = "".join((str(tags[t]), str(c)))
             newtag = newtag.astype(int)
             sheet.addTags(newtagname, newtag)
+            print(tag)
+            print(newtagname)
+            print(newtag)
             c = c + 1
         t = t + 1
 
