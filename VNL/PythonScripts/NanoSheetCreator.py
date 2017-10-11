@@ -157,42 +157,22 @@ if R == "Y":
     tags = sheet.tags()
     tags = np.array(list(tags))
     # Create tag array
-    t = 0
     for i in range(tags.size):
         # Tag indices for tag
         tag = sheet.indicesFromTags(tags=tags[i])
         tag = np.array(tag)
         # Sorted indices
         tag = np.sort(tag, axis=None)
-        # New tag size
-        IndexSize = tag.size / HI
-        # Create new tag
-        c = 0
-        for i in range(HI):
-            newtag = np.array([])
-            for j in range(IndexSize):
-                if tag.size == IndexSize:
-                    newtag = tag
-                else:
-                    if newtag.size == IndexSize:
-                        break
-                    else:
-                        if tag[j] + 1 == tag[j + 1]:
-                            newtag = np.append(newtag, tag[j])
-                        elif tag[j] - 1 == tag[j - 1]:
-                            newtag = np.append(newtag, tag[j])
-                        elif tag[j] + RV == tag[j + RV]:
-                            newtag = np.append(newtag, tag[j])
-            tag = np.setdiff1d(tag, newtag)
-            newtagname = "".join((str(tags[t]), str(c)))
-            newtag = newtag.astype(int)
-            sheet.addTags(newtagname, newtag)
-            print(tag)
-            print(newtagname)
-            print(newtag)
-            c = c + 1
-        t = t + 1
+        # Construct array with split tags
+        tagsize = np.array(tag.shape)
+        newtagsize = tagsize / HI
+        newtag = np.array([])
+        newtag = tag.reshape(HI, newtagsize)
+        newtag = newtag.astype(int)
 
+        for j in range(HI):
+            newtagname = "".join((tags[i], str(j)))
+            sheet.addTags(newtagname, newtag[j, :])
 
 elif R == "N":
     R = "N"
