@@ -1,0 +1,19 @@
+\subsection{Geometry}
+
+In order to set up the simulation environment the basic geometry of system must be defined. Using generating vectors as well as unitcells the structure and holes of the graphene sheet will be defined within this geometry. 
+
+\subsubsection{Bravais Lattice \& Generating Vectors}
+At first we want to specify a Bravais lattice for the graphene-layer. The Bravais lattice is a lattice that is invariant under translation which means that the lattice doesn't change when you translate it with the vector 
+
+\begin{equation}
+    \mathbf{T}=n\mathbf{a_{1}}+m\mathbf{a_{2}}\ \ \ \mathbf{a_{1}},\mathbf{a_{2}} \in \mathbb{R}^{2} 
+\end{equation}
+
+Where $n,m \in \mathbb{Z}$ and $\mathbf{a_{1}}$ \& $\mathbf{a_{2}}$ are the generating vectors for the space lattice. Moreover, all the points in the lattice are given by 
+
+\begin{equation}
+    \mathbf{R}=(nd,md) 
+\end{equation}
+
+where $d$ is the spacing between the lattice points. \\
+As we are working with graphene which is carbon atoms arranged in a hexagonal structure, we want to choose a hexagonal Bravais lattice and define our generating vectors accordingly. Both generating vector start at the center of a hexagon. This gives $\mathbf{a_{1}}=(d,0)$ \& $\mathbf{a_{2}}=\left(-\dfrac{d}{2},\dfrac{\sqrt{3}d}{2}\right)$. I fig(\figref) a drawing of the lattice with its generating vectors is shown. 
