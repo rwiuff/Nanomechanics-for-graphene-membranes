@@ -1,0 +1,5 @@
+                      Tag name          Center coordinate (x)          Center coordinate (y)                       Diameter                           Area
+                         Hole0                         40.319                        -32.480                          5.000                         16.238
+                         Hole1                         49.069                        -17.320                         10.000                         64.952
+                         Hole2                         60.319                          2.170                         15.000                        146.142
+                         Hole3                         74.069                         25.980                         20.000                        259.808
