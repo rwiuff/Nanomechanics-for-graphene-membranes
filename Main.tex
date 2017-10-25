@@ -84,6 +84,45 @@ multi-part-units = single ,
 \usepackage{silence}
 \WarningFilter{revtex4-1}{Repair the float}
 
+%Python
+\usepackage{listings}
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm,
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emph={MyClass,__init__},          % Custom highlighting
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=tb,                         % Any extra options here
+showstringspaces=false            % 
+}}
+
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+
 %Definitions and new commands
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
@@ -104,33 +143,16 @@ multi-part-units = single ,
 %Titlepage herunder:
 \begin{abstract}
   \begin{description}
-  \item[abstract]
-  In this paper we will analyse the dynamics and mechanics of carbon nano membranes. To calculate how every atom should be placed and how they react under different circumstances is a long and time consuming task for people doing experimental work. That's why we aim to create, through simulation, comparable data points for further use experimentally.
-    \item[Background] Since the isolation and characterisation of
-    Graphene in 2004 by Andre Geim and
-Konstantin Novoselov, scientists have marvelled over the physical properties and potential
-application of Graphene. Being a relatively new material, many aspects and ideas are being
-investigated and researched at all times. Graphene yield extreme tensile strength as well as
-extreme electric conductivity, yet its structure is fairly simple. Graphene consists solely of
-carbon atoms thus making it, as carbon atoms are greatly understood in terms of chemical
-bonding, easy to simulate using specialised software. As graphene is a very versatile
-material the possibilities for research in simulation enviroments are virtually limitless.
-Therefore it is basically possible to make experiments limited only by imagination, in order
-to discover new properties and possible applications of graphene. This saves ressources
-before entering the lab, where where the simulated reality is tested.
-    \item[Purpose] A graphene layer on top of a substrate with different sized and shaped holes, would
-form a nanomembrane. It is expected possible to create such a nanomembrane at the
-size of few tens of nanometers at Nanotech with Block-copolymer lithography or TEM
-structuring of a substrate. In a virtual enviroment, it is possible to simulate phonons
-in the graphene atop of these holes in the membrane. The purpose of this project is to
-simulate phonons in the nanomembrane and find the optimal conditions for producing
-phonons in the terahertz spectrum.
-    \item[Method] We will employ the software Atomistic ToolKit (ATK) to calculate phonon properties
-of membranes as well as performing molecular dynamics of the excited membrane. The
-software will enable prompt setup of relevant structures so that more time is free to analysis
-and actual simulations.
-    \item[Results] My money's in that office, right? If she start giving me some bullshit about it ain't there, and we got to go someplace else and get it, I'm gonna shoot you in the head then and there.
-    \item[Conclusion] My money's in that office, right? If she start giving me some bullshit about it ain't there, and we got to go someplace else and get it, I'm gonna shoot you in the head then and there.
+  \item[Background]
+  \textit{To Be Written Now}
+  \item[Purpose]
+  \textit{To Be Written Now}
+  \item[Method]
+  \textit{To Be Written Now}
+  \item[Results]
+  \textit{To Be Written Later}
+  \item[Conclusions]
+  \textit{To Be Written Later}
   \end{description}
 \end{abstract}
 
@@ -143,7 +165,7 @@ and actual simulations.
 \author{Rasmus Kronborg Finnemann Wiuff (s163977)}
 \email[E-mail at ]{s163977@student.dtu.dk}
 \affiliation{Technical University of Denmark}
-\homepage[Homepage of the Technical University of Denmark ]{dtu.dk}
+\homepage[Homepage of the Technical University of Denmark ]{http://www.dtu.dk/english/}
 
 \maketitle
 
@@ -155,9 +177,11 @@ and actual simulations.
 \setcounter{page}{1}
 
 %Text
-\section{Introduciton to Nanomechanics and Atomistix ToolKit}
+\section{Introducing the project}
 \input{sections/Intro.tex}
+\section{Introduciton to Lattice Geometry, Nanomechanics and Atomistix ToolKit}
 \input{sections/Geometry.tex}
+\input{sections/Nanomechanics.tex}
 \input{sections/MD.tex}
 \input{sections/ATK.tex}
 %Text
