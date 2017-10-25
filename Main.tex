@@ -86,6 +86,8 @@ multi-part-units = single ,
 
 %Python
 \usepackage{minted}
+\usemintedstyle{monokai}
+\renewcommand\listoflistingscaption{List of source codes}
 
 %Definitions and new commands
 \setlength{\parindent}{0pt}
@@ -106,18 +108,18 @@ multi-part-units = single ,
 
 %Titlepage herunder:
 \begin{abstract}
-  \begin{description}
+ \begin{description}
   \item[Background]
-  \textit{To Be Written Now}
+        \textit{To Be Written Now}
   \item[Purpose]
-  \textit{To Be Written Now}
+        \textit{To Be Written Now}
   \item[Method]
-  \textit{To Be Written Now}
+        \textit{To Be Written Now}
   \item[Results]
-  \textit{To Be Written Later}
+        \textit{To Be Written Later}
   \item[Conclusions]
-  \textit{To Be Written Later}
-  \end{description}
+        \textit{To Be Written Later}
+ \end{description}
 \end{abstract}
 
 \title{Nanomechanics for graphene membranes}
@@ -159,6 +161,8 @@ multi-part-units = single ,
 \newpage
 \listoffigures
 \listoftables
+\listoflistings
+\onecolumngrid
 \newpage
 %Appendicer herunder:
 \input{Appendix.tex}
