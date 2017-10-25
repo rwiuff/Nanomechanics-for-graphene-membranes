@@ -1,12 +1,12 @@
-# ================================================================
+# ===============================================================
 #
-# By Frederik Grunnet Kristensen, Christoffer Vendelbo Sorensen &
-# Rasmus Wiuff, s163977@student.dtu.dk
+# By Frederik Grunnet Kristensen, Christoffer Vendelbo Sorensen
+# & Rasmus Wiuff, s163977@student.dtu.dk
 # 
 # Script for creating a 2 dimensional nanosheet with predefined
 # hexagonal holes and sheet size using ATKPython.
 #
-# ================================================================
+# ===============================================================
 
 # Import libraries
 import numpy as np
@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import math
 
-# -------------------------------------------------- Construct sheet ---------------------------------------------------
+# ----------------------- Construct sheet -----------------------
 # Set repetitions
 nA = input("Repetitions along the A axis: ")
 nB = input("Repetitions along the B axis: ")
@@ -33,7 +33,8 @@ coordinates = [(0, 0, 0),
                (0.33333, 0.66667, 0)]
 
 # Create unit sheet
-sheet = BulkConfiguration(lattice, elements, fractional_coordinates=coordinates)
+sheet = BulkConfiguration(lattice, elements,
+                          fractional_coordinates=coordinates)
 
 # Repeat unit sheet
 sheet = sheet.repeat(nA, nB, 1)
@@ -51,7 +52,8 @@ pB = np.array(pV[1])
 # Show sheet size
 sideA = float(LA.norm(pA) / Ang)
 sideB = float(LA.norm(pB) / Ang)
-size = "The graphene lattice is {:.3f} by {:.3f} Angstrom".format(sideA, sideB)
+size = "The graphene lattice is {:.3f} by {:.3f} Angstrom".format(
+    sideA, sideB)
 print(size)
 
 # Find center coordinates
@@ -60,23 +62,26 @@ pB1 = pB / 2
 cX0 = pA1[0] + pB1[0]
 cY0 = pA1[1] + pB1[1]
 
-# Convert sheet coordinates to Numpy array and delete z-coordinates
+# Convert sheet coordinates to array and delete z-coordinates
 sheetcoor = np.array(sheetcoor)
 sheetcoor = np.delete(sheetcoor, 2, 1)
 
-# ------------------------------------------------ Construct polygon(s) ------------------------------------------------
+# -------------------- Construct polygon(s) ---------------------
 # Loop variable and Information array
 s = 1
-info = np.array(["Tag name", "Center coordinate (x)", "Center coordinate (y)", "Diameter", "Area"])
+info = np.array(["Tag name", "Center coordinate (x)",
+                 "Center coordinate (y)", "Diameter", "Area"])
 
 # Polygon creation loop
 while s == 1:
     try:
-        cXI = float(raw_input("Polygon center X-offset (default: 0): "))
+        cXI = float(
+            raw_input("Polygon center X-offset (default: 0): "))
     except ValueError:
         cXI = 0
     try:
-        cYI = float(raw_input("Polygon center Y-offset (default: 0): "))
+        cYI = float(
+            raw_input("Polygon center Y-offset (default: 0): "))
     except ValueError:
         cYI = 0
     d = float(input("Polygon diameter: "))
@@ -84,11 +89,15 @@ while s == 1:
     cX = cX0 + cXI
     cY = cY0 + cYI
     p1 = (cX + r, cY)
-    p2 = (cX + math.cos(math.pi / 3) * r, cY + math.sin(math.pi / 3) * r)
-    p3 = (cX - math.cos(math.pi / 3) * r, cY + math.sin(math.pi / 3) * r)
+    p2 = (cX + math.cos(math.pi / 3) * r,
+          cY + math.sin(math.pi / 3) * r)
+    p3 = (cX - math.cos(math.pi / 3) * r,
+          cY + math.sin(math.pi / 3) * r)
     p4 = (cX - r, cY)
-    p5 = (cX - math.cos(math.pi / 3) * r, cY - math.sin(math.pi / 3) * r)
-    p6 = (cX + math.cos(math.pi / 3) * r, cY - math.sin(math.pi / 3) * r)
+    p5 = (cX - math.cos(math.pi / 3) * r,
+          cY - math.sin(math.pi / 3) * r)
+    p6 = (cX + math.cos(math.pi / 3) * r,
+          cY - math.sin(math.pi / 3) * r)
     p = path.Path([p1, p2, p3, p4, p5, p6, p1])
 
     # Find atoms inside polygon
@@ -104,7 +113,8 @@ while s == 1:
 
     bulk_configuration = sheet
 
-    a = (cX + math.cos(math.pi / 3) * r) - (cX - math.cos(math.pi / 3) * r)
+    a = (cX + math.cos(math.pi / 3) * r) - (
+        cX - math.cos(math.pi / 3) * r)
     A = (3 * math.sqrt(3) * a ** 2) / 2
     area = "Area of hexagon is {:.3f} Angstrom squared".format(A)
     print(area)
@@ -112,7 +122,9 @@ while s == 1:
 
     bulk_configuration.addTags(tagname, atoms)
 
-    instanceinfo = np.array([tagname, "{:.3f}".format(cX), "{:.3f}".format(cY), "{:.3f}".format(d), "{:.3f}".format(A)])
+    instanceinfo = np.array(
+        [tagname, "{:.3f}".format(cX), "{:.3f}".format(cY),
+         "{:.3f}".format(d), "{:.3f}".format(A)])
 
     info = np.vstack((info, instanceinfo))
 
@@ -128,7 +140,8 @@ while s == 1:
         ax.set_xlim(0, np.amax(sheetcoor[:, 0]))
         ax.set_ylim(0, np.amax(sheetcoor[:, 1]))
         plt.axis('equal')
-        savefigfilename = raw_input("Input filename for hole figure: ")
+        savefigfilename = raw_input(
+            "Input filename for hole figure: ")
         savefigformat = "pdf"
         savefigfile = ".".join((savefigfilename, savefigformat))
         plt.savefig(savefigfile, format='pdf')
@@ -141,14 +154,14 @@ while s == 1:
     elif AH == "N":
         s = 0
 
-# ---------------------------------------------------- Repeat sheet ----------------------------------------------------
+# ------------------------ Repeat sheet -------------------------
 R = raw_input("Repeat sheet? [Y/N]: ")
 if R == "Y":
     Areps = int(input("A-vector repetitions: "))
     sheet = sheet.repeat(Areps, 1, 1)
     Breps = int(input("B-vector repetitions: "))
     sheet = sheet.repeat(1, Breps, 1)
-    # ---------------------------------------------- Process repeated tags ---------------------------------------------
+    # ------------------ Process repeated tags ------------------
     # Define repeater variable
     RV = int(2 * nB)
     # Define hole instances
@@ -181,4 +194,5 @@ savename = raw_input("Input nanosheet filename: ")
 nlsave(savename, sheet)
 txtformat = "txt"
 savetxt = ".".join((savename, txtformat))
-np.savetxt(savetxt, info, fmt='%30s %30s %30s %30s %30s', delimiter='|')
+np.savetxt(savetxt, info, fmt='%30s %30s %30s %30s %30s',
+           delimiter='|')
