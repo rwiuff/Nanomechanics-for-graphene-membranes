@@ -4,12 +4,16 @@
 In this project we will utilise the Atomistix ToolKit, developed by QuantumWise\footnote{\url{https://quantumwise.com/}}, or ATK for short. The Toolkit takes Python scripts as inputs and simulates a completely custom lattice enviroment with various applied calculations. It is possible to simulate very specific scenarios, alter the simulation parameters and extract results for analysis easily and fast.
 \subsubsection{Nanolanguage}
 ATKPython (the standalone simulation program) extends the Python language with Nanolanguage which tells ATKPython what to do when launched. One can set up specific bravais lattices and repeat them into large 2D structures. Then specific atoms can be tagged or altered and calculations can be set up. All of these features are available through QuantumWise VNL, a GUI which sets up the scripts and calculations, if need be. The GUI is shown on \cref{VNLLAB}
+\onecolumngrid
+
+
 \begin{figure}
  \centering
  \includegraphics[width=\columnwidth]{Figures/VNLLabfloor.png}
  \caption{The VNL Labfloor user interface shows project files in the center frame and various tools in the left pane.}
  \label{VNLLAB}
 \end{figure}
+\twocolumngrid
 \subsubsection{VNL and ATK workflow}
 The workflow for running simulations is described below:
 \begin{enumerate}
@@ -22,7 +26,7 @@ The workflow for running simulations is described below:
  \item Analyse with built-in tools
 \end{enumerate}
 \subsubsection{NanoSheetCreator.py}
-In this project Nanolanguage will largely be used to alter crated simulation scripts, made with the VNL GUI, before using ATKPython, however a script for creating the Graphene lattice with specifically sized hexagonal holes has been written to effectively creating various lattices. The script makes a hexagonal bravais lattice and tags atoms at a specific location and in a custom sized hexagonal shape. The the script can repeat this setup as many times along the generating vectors.
+In this project Nanolanguage will largely be used to alter crated simulation scripts, made with the VNL GUI, before using ATKPython, however a script for creating the Graphene lattice with specifically sized hexagonal holes has been written to effectively creating various lattices. The script makes a hexagonal bravais lattice and tags atoms at a specific location and in a custom sized hexagonal shape. Then the script can repeat this setup as many times along the generating vectors.
 
 First the script creates a bravais-lattice consisting of a hexagonal unit cell. Then two carbon atoms are placed in the unitcell and the unit cell is repeated to the users specifications.
 \onecolumngrid
