@@ -1,5 +1,5 @@
 %Basics
-\documentclass[aps, prl, reprint, a4paper, english, 12pt, twocolumn]{revtex4}
+\documentclass[aps, prl, a4paper, english, 12pt, twocolumn]{revtex4}
 \bibliographystyle{apsrev4-1}
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
@@ -9,6 +9,7 @@
 \usepackage{commath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{bm}
 \usepackage{physics}
 \usepackage{mathtools}
 \usepackage{siunitx}
@@ -29,7 +30,6 @@ inter-unit-product = \ensuremath{{\cdot{}}} ,
 number-unit-product = \ ,
 multi-part-units = single ,
 }
-\usepackage{units}
 
 %Appendix, TOC and Bibliography
 \usepackage{appendix}
@@ -42,10 +42,9 @@ multi-part-units = single ,
 \usepackage{tikz}
 \usetikzlibrary{shadings}
 \usepackage{float}
-\usepackage{rotating}
 \usepackage{graphicx}
 \usepackage{wrapfig}
-\usepackage[rmargin=2.5cm, tmargin=2.5cm, lmargin=2.5cm, bmargin=2.5cm]{geometry}
+\usepackage[a4paper, centering, rmargin=2.5cm, tmargin=2.5cm, lmargin=2.5cm, bmargin=2.5cm]{geometry}
 \usepackage{xcolor}
 \usepackage{etoolbox}
 \usepackage{verbatim}
@@ -53,6 +52,7 @@ multi-part-units = single ,
 \usepackage[final]{pdfpages}
 \usepackage{array}
 \usepackage{multirow}
+\usepackage{dcolumn}
 
 %Header footer
 \usepackage{fancyhdr}
@@ -108,7 +108,7 @@ multi-part-units = single ,
 %Titlepage herunder:
 \begin{abstract}
  \begin{description}
-  In this report we will focus on nanomembranes and analyse how this react when a force is applied to them. Nanomembranes can be fabricated via the method of chemical vapor deposition (CVD) and this have been test in the lab by using electrostatic gates \cite{Zande2010}. There are also examples of using lasers to drive a vibration in a membrane \cite{Davidovikj2016} but both of this membranes however are way lager then the ones we will be studying in this report. the concept of carbon nanomembranes have existed for a couple of years all ready so what we are going to focus on are the the smallest nanomembranes that can be made right now.
+  \item[Abstract] In this report we will focus on nanomembranes and analyse how this react when a force is applied to them. Nanomembranes can be fabricated via the method of chemical vapor deposition (CVD) and this have been test in the lab by using electrostatic gates \cite{Zande2010}. There are also examples of using lasers to drive a vibration in a membrane \cite{Davidovikj2016} but both of this membranes however are way lager then the ones we will be studying in this report. the concept of carbon nanomembranes have existed for a couple of years all ready so what we are going to focus on are the the smallest nanomembranes that can be made right now.
  \end{description}
 \end{abstract}
 
