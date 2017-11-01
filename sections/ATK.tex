@@ -3,31 +3,19 @@
 \subsection{Atomistix ToolKit: ATKPython and Nanolanguage}
 In this project we will utilise the Atomistix ToolKit, developed by QuantumWise\footnote{QuantumWise' webpage: \href{https://quantumwise.com/}{https://quantumwise.com/}}, or ATK for short. The Toolkit takes Python scripts as inputs and simulates a completely custom lattice enviroment with various applied calculations. It is possible to simulate very specific scenarios, alter the simulation parameters and extract results for analysis easily and fast.
 \subsubsection{Nanolanguage}
-ATKPython (the standalone simulation program) extends the Python language with Nanolanguage which tells ATKPython what to do when launched. One can set up specific bravais lattices and repeat them into large 2D structures. Then specific atoms can be tagged or altered and calculations can be set up. All of these features are available through QuantumWise VNL, a GUI which sets up the scripts and calculations, if need be. The GUI is shown on \cref{VNLLAB}.
+ATKPython (the standalone simulation program) extends the Python language with Nanolanguage which tells ATKPython what to do when launched. One can set up specific bravais lattices and repeat them into large 2D structures. Then specific atoms can be tagged or altered and calculations can be set up. All of these features are available through QuantumWise VNL, a GUI which sets up the scripts and calculations, if need be. The GUI is shown on \cref{VNLLAB}. When working with VNL both GUI and CLI are used. The GUI can be used to setup the simulation and the simulation files can be altered to eg. producing custom datasets. The typical workflow when using VNL and ATK is depicted on \cref{workflow}
 \begin{figure}
  \centering
  \includegraphics[width=\columnwidth]{Figures/VNLLabfloor.png}
  \caption{The VNL Labfloor user interface shows project files in the center frame and various tools in the left pane.}
  \label{VNLLAB}
 \end{figure}
-\subsubsection{VNL and ATK workflow}
-The workflow for running simulations is described below:
-\begin{enumerate}
- \item Create lattice\\
-       Using the GUI builder or, as in our case, a script.
- \item (optional) Alter lattice with text editor\\
-       Edit or change parameters of the lattice.
- \item Set up calculators\\
-       Configure calculators for various tasks as part of the simulation.
- \item (optional) Alter calculation parameters and output files with text editor\\
-       Change or edit variables and calculator parameters.
- \item Run simulations\\
-       Let ATKPython run the simulation.
- \item (optional) Extract data with ATKPython\\
-       Extract data with ATKPython in a CLI enviroment.
- \item Analyse with built-in tools\\
-       Use the GUI to extract or show data.
-\end{enumerate}
+\begin{figure}
+  \centering
+  \includegraphics[width=\columnwidth]{Figures/Workflow.eps}
+  \caption{Diagram showing the typical workflow in VNL.}
+  \label{workflow}
+\end{figure}
 \subsubsection{NanoSheetCreator.py}
 In this project Nanolanguage will largely be used to alter crated simulation scripts, made with the VNL GUI, before using ATKPython, however a script for creating the Graphene lattice with specifically sized hexagonal holes has been written to effectively creating various lattices. The script makes a hexagonal bravais lattice and tags atoms at a specific location and in a custom sized hexagonal shape. Then the script can repeat this setup as many times along the generating vectors.
 
