@@ -1,15 +1,10 @@
 %Basics
-\documentclass[aps, prl, a4paper, english, 12pt, twocolumn, longbibliography, nofootinbib]{revtex4-1}
-\bibliographystyle{apsrmp4-1}
+\documentclass[aps, prb, a4paper, english, 12pt, twocolumn, longbibliography, amsmath, amssymb]{revtex4-1}
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
 
 %Symbols and scientifics
-\usepackage{amsmath}
-\usepackage{commath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{bm}
+\usepackage{amsmath, amsfonts, amssymb, bm}
 \usepackage{physics}
 \usepackage{mathtools}
 \usepackage{siunitx}
@@ -39,13 +34,10 @@ multi-part-units = single ,
 
 %Figures
 \usepackage[svgnames]{xcolor} % Required to specify font color
-\usepackage{tikz}
-\usetikzlibrary{shadings}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage[a4paper, centering, rmargin=2.5cm, tmargin=2.5cm, lmargin=2.5cm, bmargin=2.5cm]{geometry}
-\usepackage{xcolor}
 \usepackage{etoolbox}
 \usepackage{verbatim}
 \usepackage[space]{grffile}
@@ -67,7 +59,6 @@ multi-part-units = single ,
 %Text tools
 \usepackage[normalem]{ulem}
 \usepackage{import}
-\usepackage{newclude}
 \usepackage{url}
 \usepackage{lipsum}
 \usepackage{microtype}
@@ -90,8 +81,6 @@ multi-part-units = single ,
 \renewcommand{\listoflistingscaption}{Listings}
 
 %Definitions and new commands
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 \newcommand{\logas}[1]{\log_{_{10}}{\left( #1 \right)}}
 \newcommand{\sins}[1]{\sin{\left( #1 \right)}}
 \newcommand{\tans}[1]{\tan{\left( #1 \right)}}
@@ -134,6 +123,13 @@ multi-part-units = single ,
 \pagenumbering{arabic}
 
 \tableofcontents
+
+% ToC before List-ofs fix
+\makeatletter
+\let\toc@pre\relax
+\let\toc@post\relax
+\makeatother
+
 \thispagestyle{empty}
 \newpage
 \setcounter{page}{1}
