@@ -24,7 +24,7 @@ which atkpython
 # Define the job
 cd $PBS_O_WORKDIR
 export OMP_NUM_THREADS=1
-mpirun -np $PBS_NP atkpython DynamicalMatrix.py
+mpirun -np $PBS_NP atkpython Sheet1Vib.py
 #
 #
 #
