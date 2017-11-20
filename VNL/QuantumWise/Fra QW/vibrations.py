@@ -3,8 +3,8 @@
 # Analysis from File
 # -------------------------------------------------------------
 path = 'DynamicalMatrix.hdf5'
-configuration = nlread(path, BulkConfiguration)[-1]
 dynamical_matrix = nlread(path, DynamicalMatrix)[-1]
+configuration    = nlread(path, BulkConfiguration)[-1]
 
 # -------------------------------------------------------------
 # Vibrational Mode
@@ -12,7 +12,7 @@ dynamical_matrix = nlread(path, DynamicalMatrix)[-1]
 vibrational_mode = VibrationalMode(
     configuration=configuration,
     dynamical_matrix=dynamical_matrix,
-    kpoint_fractional=[0.0001, 0.0001, 0],
+    kpoint_fractional=[0, 0, 0],
     mode_indices=None,
     )
-nlsave('Sheet1Vib.hdf5', vibrational_mode)
+nlsave('vibrations.hdf5', vibrational_mode)

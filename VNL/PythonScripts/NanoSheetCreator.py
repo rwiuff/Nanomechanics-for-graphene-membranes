@@ -22,7 +22,7 @@ nA = input("Repetitions along the A axis: ")
 nB = input("Repetitions along the B axis: ")
 
 # Create hexagonal bravais lattice
-lattice = Hexagonal(a=2.4612 * Angstrom, c=6.709 * Angstrom)
+lattice = Hexagonal(a=2.4612 * Angstrom, c=20 * Angstrom)
 
 # Set atomic elements
 elements = [Carbon] * 2

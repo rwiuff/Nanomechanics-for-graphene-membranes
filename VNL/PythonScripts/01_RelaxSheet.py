@@ -1,7 +1,4 @@
 from NanoLanguage import *
-# from NL.CommonConcepts.Configurations.Utilities import cartesian2fractional
-# from NL.CommonConcepts.Configurations.Utilities import fractional2cartesian
-# configuration = nlread('silicene_relax_hexagonal.nc', BulkConfiguration)[-1];
 
 # -------------------------------------------------------------
 # Load File
@@ -40,7 +37,7 @@ nlprint(bulk_configuration)
 # -------------------------------------------------------------
 # Optimize Geometry
 # -------------------------------------------------------------
-myConstraints = bulk_configuration.indicesFromTags('Substrate')
+myConstraints = bulk_configuration.indicesFromTags('FixedFinal')
 bulk_configuration = OptimizeGeometry(
     bulk_configuration,
     max_forces=0.001 * eV / Ang,
