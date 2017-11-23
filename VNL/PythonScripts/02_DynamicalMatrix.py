@@ -9,6 +9,8 @@ bulk_configuration = nlread(path, BulkConfiguration)[-1]
 # Dynamical Matrix
 # -------------------------------------------------------------
 myConstraints = bulk_configuration.indicesFromTags('FixedFinal')
+myConstraints = map(int, myConstraints)
+print(len(myConstraints))
 dynamical_matrix = DynamicalMatrix(
     configuration=bulk_configuration,
     repetitions=[3, 3, 1],

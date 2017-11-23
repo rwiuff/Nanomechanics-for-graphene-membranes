@@ -10,7 +10,7 @@
 source ~/.bashrc
 
 # What atkpython to use
-#export PATH="/zhome/a6/1/31221/tgbin/ATKdev/VNL-ATK-2017.1/bin:$PATH"
+export PATH="/zhome/a6/1/31221/tgbin/ATKdev/VNL-ATK-2017.1/bin:$PATH"
 
 module purge
 module load intel
