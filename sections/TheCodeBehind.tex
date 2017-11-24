@@ -1,0 +1,25 @@
+% !TEX root = ../Main.tex
+
+\subsection{The Scripts}
+The scripts in the workflow will be described in this section.
+\subsubsection{NanoSheetCreator.py}\label{NSCS}
+The first script generates the graphene sheet with atoms tagged in a hexagonally shaped path. The output is the sheet in the \textit{.hdf5} format.
+
+First the script creates a bravais-lattice consisting of a hexagonal unit cell. Then two carbon atoms are placed in the unitcell and the unit cell is repeated to the users specifications. \cref{2435} demonstrates, by example from NanoSheetCreator.py, how such lattice is created with Nanolanguage.
+
+The script prints information about the size of the sheet and the user is asked to input position and size of the hexagonal tag wanted. One can save the sheet and tag as a figure before adding more tags. Lastly the sheet can be repeated and information about the position and sizes of the tags are printed to a \textit{.txt} file.
+
+The Python script creating the lattice and tags are printed and commented in the Appendix on \cpagerefrange{NSCstart}{NSCend}
+\onecolumngrid
+
+\begin{listing}
+ \inputminted[python3=true,bgcolor=Black,linenos=true,firstline=24,lastline=35]{python}{VNL/PythonScripts/NanoSheetCreator.py}
+ \caption{Lines 24-35 from the NanoSheetCreator.py shows how Nanolanguage can be used to create a hexagonal bravais lattice}
+ \label{2435}
+\end{listing}
+\twocolumngrid
+
+\subsubsection{00\_FixConstraints.py}\label{00}
+\subsubsection{01\_RelaxSheet.py}\label{01}
+\subsubsection{02\_DynamicalMatrix.py}\label{02}
+\subsubsection{03\_SheetVibrations.py}\label{03}
