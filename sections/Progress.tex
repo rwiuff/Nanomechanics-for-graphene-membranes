@@ -1,0 +1,41 @@
+% !TEX root = ../Main.tex
+
+\begin{turnpage}
+\begin{figure}
+  \resizebox{1\linewidth}{!}{
+  \begin{ganttchart}[
+    time slot format=little-endian,
+    title label font=\small,
+    hgrid,
+    newline shortcut=true,
+    bar label node/.append style={align=right},
+    progress=today,
+    today=06-12-2017,
+    ]{04-09-2017}{19-01-2018}
+    \gantttitlecalendar{year, month, week=1} \\
+    \ganttgroup[progress=none]{Preliminary work}{04-09-2017}{29-09-2017} \\
+    \ganttbar[progress=none]{Find Project}{04-09-2017}{15-09-2017} \\
+    \ganttlinkedmilestone[progress=none]{Choose Project}{15-09-2017} \\
+    \ganttlinkedbar[progress=none]{Define project}{15-09-2017}{29-09-2017} \\
+    \ganttlinkedmilestone[progress=none]{Hand-in Project Resume}{29-09-2017} \\
+    \ganttgroup[name=Paper]{Write Paper}{30-09-2017}{10-01-2018} \\
+    \ganttbar[progress=none]{Lattice theory research}{30-09-2017}{27-10-2017} \\
+    \ganttbar[name=W1, progress=none]{Write \nth{1} chapter}{30-09-2017}{27-10-2017} \\
+    \ganttlinkedmilestone[name=C1, progress=none]{Hand-in \nth{1} chapter}{27-10-2017} \\
+    \ganttgroup{Code development and simulations}{27-10-2017}{01-01-2018} \\
+    \ganttbar[name=Code]{Code development}{27-10-2017}{10-12-2017} \\
+    \ganttgroup{Membrane simulations}{10-12-2017}{17-12-2017} \\
+    \ganttbar{Size vs Frequency}{10-12-2017}{11-12-2017} \\
+    \ganttlinkedbar{Near Realism setup}{12-12-2017}{14-12-2017} \\
+    \ganttlinkedbar{Mode connections}{14-12-2017}{17-12-2017} \\
+    \ganttlinkedbar{Data Analysis}{10-12-2017}{01-01-2018} \\
+    \ganttlinkedbar{Paper writing}{10-12-2017}{10-01-2018} \\
+    \ganttlinkedmilestone{Hand-in Project paper}{10-01-2018} \\
+    \ganttgroup{Exam}{10-01-2018}{19-01-2018} \\
+    \ganttbar{Prepare exam}{10-01-2018}{19-01-2018} \\
+    \ganttlinkedmilestone{Exam}{19-01-2018}
+  \end{ganttchart}}
+  \caption{Gantt Chart showing the project schedule.}
+  \label{GC}
+\end{figure}
+\end{turnpage}
