@@ -28,6 +28,7 @@
 # *.ps
 # *.eps
 *.pdf
+!*eps-converted-to.pdf
 !Resume.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
