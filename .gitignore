@@ -1,5 +1,5 @@
-# Ignore SheetVib
-SheetVib*
+# Ignore hdf5
+*.hdf5
 
 # Created by https://www.gitignore.io/api/latex
 

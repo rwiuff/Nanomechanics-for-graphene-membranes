@@ -35,10 +35,6 @@ for mode in numpy.arange(n_modes):
             eigenvectors[:, mode], constrained_displacements)
     else:
         eigenvector = eigenvectors[:, mode]
-# print(eigenvalues)
-# print(eigenvectors)
-#numpy.savetxt('EigenValues.csv', eigenvalues, delimiter=',')
-#numpy.savetxt('EigenVectors.csv', eigenvectors, delimiter=',')
 numpy.savez_compressed(
     'EigenSystem', EigenValues=eigenvalues, EigenVectors=eigenvectors)
 loaded = numpy.load('EigenSystem.npz')
