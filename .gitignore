@@ -1,5 +1,9 @@
 # Ignore hdf5
 *.hdf5
+!DynamicalMatrix.hdf5
+!Sheet.hdf5
+!SheetFixed.hdf5
+!SheetRelaxed.hdf5
 
 # Created by https://www.gitignore.io/api/latex
 
@@ -24,6 +28,7 @@
 # *.ps
 # *.eps
 *.pdf
+!Resume.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
