@@ -26,9 +26,9 @@ for i in range(nof + 1):
         break
     elif i >= 9:
         # Choose file
-        myfile = np.append(myfile, '{}nmDynamicalMatrix.hdf5'.format(i + 1))
+        myfile = np.append(myfile, '{}DynamicalMatrix.hdf5'.format(i + 1))
     else:
-        myfile = np.append(myfile, '0{}nmDynamicalMatrix.hdf5'.format(i + 1))
+        myfile = np.append(myfile, '0{}DynamicalMatrix.hdf5'.format(i + 1))
     # Load configuration with calculator
     configuration = np.append(configuration, nlread(
         myfile[i], BulkConfiguration)[-1])
