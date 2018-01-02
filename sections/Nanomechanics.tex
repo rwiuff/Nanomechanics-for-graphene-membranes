@@ -1,9 +1,14 @@
 % !TEX root = ../Main.tex
 
 \subsection{Nanomechanics}
-This following section will focus on the mechanics of the know defined geometry of the Graphene sheet. It will incorporate boundary conditions in two dimensions, Hooke's law, the normal modes of the lattice as well as phonons. (relaxation energy)
+This following section will focus on the mechanics of the now defined geometry of the Graphene sheet. It will incorporate boundary conditions in two dimensions, Hooke's law, the normal modes of the lattice as well as phonons. (relaxation energy)
 \subsubsection{Equations of motion and their solutions (normal modes)(equilibrium)}
-
+To describe the dynamics of the system one must decompose the system into simpler elements in order to understand what happens for the system as a whole. Basically we want to describe the displacements each atom makes and then sum it up to some bigger form of system. The basis consist of a mass-spring system where each atom has a mass and where the \textit{atomic interaction potential} works as the spring in between each atom. The specific interaction potential we will be working with is called the \textit{Lennard-Jones Potential}. The potential is given by 
+\begin{equation}
+    \phi(r)=-\dfrac{A}{r^{6}}+\dfrac{B}{r^{12}}
+\end{equation}\cite{}
+where $A$ is, $B$ is and $r$ is the spacing between the atoms. 
+The potential can be derived from the force between the atoms as the force is the second derivative of the potential energy with respect to the atom spacing $r$. 
 \subsubsection{Periodic functions}
 \subsubsection{Reciprocal space, Blochs theorem, Bloch wavevector}
 
@@ -19,7 +24,8 @@ where
 \begin{equation}
      (q_{x},q_{y})=\dfrac{2\pi}{X}(m,n)
 \end{equation}
-Here $m,n$ are integers in the interval $-\dfrac{\mathcal{N}}{2}, +\dfrac{\mathcal{N}}{2}$. The range of $q_{x},q_{y}$ becomes $-\dfrac{\pi}{r_{0}},+\dfrac{\pi}{r_{0}}$ 
+Here $m,n$ are integers in the interval $-\dfrac{\mathcal{N}}{2}, +\dfrac{\mathcal{N}}{2}$. The range of $q_{x},q_{y}$ becomes $-\dfrac{\pi}{r_{0}},+\dfrac{\pi}{r_{0}}$.\\
+In the specific case of this study we work with a fixed boundary, more specific, a clamped boundary which means that no bending is allowed in the plane. A clamped boundary results in the need for numerical approximations in calculations of the dynamics. As the tools used for calculations are on a"per atom" atom basis, there wont be any need for finite-element models nor any partial differential equations sovler (PDE). Instead... 
 
 \subsubsection{Normal Modes of Two-Dimensional Hexagonal lattice}
 
