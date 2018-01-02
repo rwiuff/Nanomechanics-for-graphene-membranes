@@ -3,12 +3,24 @@
 \subsection{Nanomechanics}
 This following section will focus on the mechanics of the now defined geometry of the Graphene sheet. It will incorporate boundary conditions in two dimensions, Hooke's law, the normal modes of the lattice as well as phonons. (relaxation energy)
 \subsubsection{Equations of motion and their solutions (normal modes)(equilibrium)}
-To describe the dynamics of the system one must decompose the system into simpler elements in order to understand what happens for the system as a whole. Basically we want to describe the displacements each atom makes and then sum it up to some bigger form of system. The basis consist of a mass-spring system where each atom has a mass and where the \textit{atomic interaction potential} works as the spring in between each atom. The specific interaction potential we will be working with is called the \textit{Lennard-Jones Potential}. The potential is given by 
+To describe the dynamics of the system one must decompose the system into simpler elements in order to understand what happens for the system as a whole. Basically we want to describe the displacements each atom makes and then sum it up to some bigger form of system. The basis of a system containing only two atoms consist of a mass-spring system where each atom has a mass and where the \textit{atomic interaction potential} works as the spring in between each atom. The specific interaction potential we will be working with is called the \textit{Lennard-Jones Potential}\text{\cite[eq.1.3]{Cleland2003}}. The potential is given by \begin{equation}
+    \phi(r)=-\dfrac{A}{r^{6}}+\dfrac{B}{r^{12}}\label{LJPot}
+\end{equation} where $A$ is the strength of the attractive interaction , $B$ is the strength of the repulsive interaction and $r$ is the spacing between the atoms. 
+The potential can be derived from the force between the atoms as the force is the derivative of the negative potential energy with respect to the atom spacing $r$\text{\cite[eq.1.1]{Cleland2003}}.\begin{equation}
+    f(r)\equiv -\dfrac{\text{d}\phi}{\text{d}r}
+\end{equation} However it is more convenient to work with the potential instead of the force. \\
+The system is in a relaxed state when the distance between the atoms is equal to the \textit{equilibrium distance} $r=r_{0}$. The equilibrium distance\text{\cite[p.3]{Cleland2003}} is given by \begin{equation}
+    r_{0}=\left(\dfrac{2B}{A}\right)^{\dfrac{1}{6}}\label{eqdist}
+\end{equation} Inserting \eqref{eqdist} in \eqref{LJPot} gives the minimum potential energy \begin{equation}
+    \phi(r_{0})=-\dfrac{A^{2}}{4B}
+\end{equation}When we work with larger systems we want the system to be relaxed i.e. in equilibrium first. However, for such systems it is not always the case hence why it must be relaxed with the required relaxation energy before we can apply external forces on it. Now that the small system has been described in its equilibrium state. We want to know what happens when we displace the atoms from their equilibrium position, that is to exert an external force on the atoms. As it is with all masses within classic mechanical theory, the atoms will start to oscillate around their equilibrium position. Therefore a \textit{harmonic potential approximation} is needed to describe the energy associated with such a displacement. This approximation only works for small displacements from equilibrium i.e. small external forces. This is because the approximation is made by using a \textit{Taylor series} expansion\text{\cite[eq.1.5]{Cleland2003}} where only the first and second order terms are kept hence the approximation fails the further you get away from the equilibrium position. The expansion of the potential is given by
 \begin{equation}
-    \phi(r)=-\dfrac{A}{r^{6}}+\dfrac{B}{r^{12}}
-\end{equation}\cite{}
-where $A$ is, $B$ is and $r$ is the spacing between the atoms. 
-The potential can be derived from the force between the atoms as the force is the second derivative of the potential energy with respect to the atom spacing $r$. 
+\begin{split}
+    \phi(r)=\phi(r_{0})+\left\dfrac{\text{d}\phi}{\text{d}r} \right|_{r_{0}}(r-r_{0})+\\\left\dfrac{1}{2!}\dfrac{\text{d}^{2}\phi}{\text{d}r^{2}}\right|_{r_{0}} (r-r_{0})^{2}+\\\dfrac{1}{3!}\left\dfrac{\text{d}^{3}\phi}{\text{d}r^{3}}\right|_{r_{0}}(r-r_{0})^{3}+...
+    \end{split}
+\end{equation}Where the term $\left\dfrac{\text{d}\phi}{\text{d}r} \right|_{r_{0}}$ equals 0 at equilibrium position. Dropping the higher order terms the series becomes the \textit{harmonic potential approximation}\text{\cite[eq.1.5]{Cleland2003}}\begin{equation}
+    \approx \phi(r_{0})+\left\dfrac{1}{2}\dfrac{\text{d}^{2}\phi}{\text{d}r^{2}}\right|_{r_{0}}(r-r_{0})^{2}
+\end{equation}It can be seen that the potential energy depends on the displacement from equilibrium squared. If the displacement is defined as $u=r-r_{0}$ we can make an equation equivalent to Hooke's Law
 \subsubsection{Periodic functions}
 \subsubsection{Reciprocal space, Blochs theorem, Bloch wavevector}
 
