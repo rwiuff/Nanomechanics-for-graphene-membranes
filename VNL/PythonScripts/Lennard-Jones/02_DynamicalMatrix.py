@@ -22,7 +22,7 @@ dynamical_matrix = DynamicalMatrix(
     processes_per_displacement=1,
     log_filename_prefix='displacement_',
     use_wigner_seitz_scheme=False,
-    constraints=None,
+    constraints=myConstraints,
 )
 nlsave('DynamicalMatrix.hdf5', dynamical_matrix)
 nlsave('DynamicalMatrix.hdf5', bulk_configuration)
