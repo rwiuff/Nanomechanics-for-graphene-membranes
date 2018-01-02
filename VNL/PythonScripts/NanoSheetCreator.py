@@ -158,7 +158,11 @@ while s == 1:
         ax.set_ylim(0, np.amax(sheetcoor[:, 1]))
         plt.axis('equal')
         # Save figure with custom name
-        savefigfilename = raw_input("Input filename for hole figure: ")
+        NM = int(d) / 10
+        NM = str(NM)
+        if len(NM) == 1:
+            NM = "".join(("0", NM))
+        savefigfilename = "{}{}".format(NM, "nm")
         savefigformat = "pdf"
         savefigfile = ".".join((savefigfilename, savefigformat))
         plt.savefig(savefigfile, format='pdf')
