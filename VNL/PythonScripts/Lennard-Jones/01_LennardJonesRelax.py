@@ -40,7 +40,7 @@ bulk_configuration = OptimizeGeometry(
     bulk_configuration,
     max_forces=0.001 * eV / Ang,
     max_stress=0.001 * eV / Ang**3,
-    max_steps=500,
+    max_steps=250,
     max_step_length=0.2 * Ang,
     trajectory_filename='RelaxTraj.hdf5',
     optimizer_method=LBFGS(),

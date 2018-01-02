@@ -1,18 +1,29 @@
 from NanoLanguage import *
-import numpy
+import numpy as np
 
 # -------------------------------------------------------------
 # Load File
 # -------------------------------------------------------------
 path = 'Sheet.hdf5'
 bulk_configuration = nlread(path, BulkConfiguration)[-1]
+
+# -------------------------------------------------------------
+# Create Substrate tag
+# -------------------------------------------------------------
+coor = bulk_configuration.fractionalCoordinates()
+sub = np.array([])
+for i in range(coor.shape[0]):
+    if coor[i,2] < 0.50:
+        sub = np.append([sub], [i])
+sub = sub.astype(int)
+sub = sub.tolist()
+bulk_configuration.addTags('Substrate', sub)
+
 constraints = bulk_configuration.indicesFromTags('Substrate')
-print(constraints)
-quit
+
 # -------------------------------------------------------------
 # Fix Constraints
 # -------------------------------------------------------------
-
 # Make indices of atoms in configuration and get constraints.
 atomindices = numpy.arange(bulk_configuration.numberOfAtoms())
 #constraints = constraints
@@ -26,6 +37,24 @@ new_xyz = new_xyz[atomindices_new]
 bulk_configuration._changeAtoms(positions=new_xyz * Angstrom)
 constraints = constraints_new
 bulk_configuration.addTags('FixedFinal', constraints)
+
+# -------------------------------------------------------------
+# Make Layer tags
+# -------------------------------------------------------------
+coor = bulk_configuration.fractionalCoordinates()
+l1 = np.array([])
+l2 = np.array([])
+for i in range(coor.shape[0]):
+    if coor[i,2] < 0.50:
+        l2 = np.append([l2], [i])
+    elif coor[i,2] > 0.50:
+        l1 = np.append([l1], [i])
+l1 = l1.astype(int)
+l2 = l2.astype(int)
+l1 = l1.tolist()
+l2 = l2.tolist()
+bulk_configuration.addTags('Layer1', l1)
+bulk_configuration.addTags('Layer2', l2)
 
 nlsave('SheetFixed.hdf5', bulk_configuration)
 nlprint(bulk_configuration)

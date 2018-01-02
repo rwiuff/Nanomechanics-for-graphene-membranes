@@ -199,12 +199,11 @@ while showsave == 0:
                 print("Only integers accepted")
             except TypeError:
                 print("Only integers accepted")
-
+ymin, ymax = -0.01, 0.02
 if showsave == 1:
     ylabel('$\omega$ [eV]')
     plt.show()
 elif showsave == 2:
-    ymin, ymax = -0.01, 0.02
     ylim(ymin, ymax)
     ylabel('$\omega$ [eV]')
     ax = plt.gca()
@@ -224,7 +223,6 @@ elif showsave == 3:
     savefig('FrequencyModeProjections.png')
     print("+=====================================+")
 elif showsave == 4:
-    ymin, ymax = -0.01, 0.02
     ylim(ymin, ymax)
     ylabel('$\omega$ [eV]')
     ax = plt.gca()
