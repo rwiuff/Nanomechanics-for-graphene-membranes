@@ -1,7 +1,9 @@
 % !TEX root = ../Main.tex
-\subsection{\faGithub \ Code Repository}
+\subsection{\faGithub \ Code Repository and code compendium}
 All of the mentioned code and scripts exists as a repository available online:\newline
 \url{https://github.com/rwiuff/Nanomechanics-for-graphene-membranes}
+Beware that ATKPython is required to run the scripts.
+The code can also be found in the Code Compendium in \cref{CoCo}.
 
 \subsection{NanoSheetCreator.py and NanoMembraneCreator.py}\label{NSCS}
 The first script generates the graphene membrane with atoms tagged in a hexagonally shaped path. The output is the sheet in the \textit{.hdf5} format.
@@ -20,6 +22,7 @@ The user is then asked to input position and size of the hexagonal tag wanted fo
 
 \subsection{00\_FixConstraints.py}\label{00}
 A historical bug in ATKPython demands consecutive indices for constrained atoms when using the function \textit{phononEigensystem}. Thus a script was written to ensure that tag with these indices were consecutive. Furthermore, when working with two layer membranes, the script tags the individual layers as "Layer1" and "Layer2".
+
 \subsection{01\_RelaxSheet.py and 01\_LennardJonesRelax.py}\label{01}
 
 

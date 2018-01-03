@@ -3,12 +3,14 @@
 # By Frederik Grunnet Kristensen, Christoffer Vendelbo Sorensen
 # & Rasmus Wiuff, s163977@student.dtu.dk
 #
-# Script for creating a 2 dimensional lattice with predefined
-# hexagonal holes and sheet size, using ATKPython.
+# Script for creating a 2 dimensional double layered membrane with
+# predefined hexagonal holes and sheet size, using ATKPython.
 #
 # =====================================================================
 
-# Import libraries
+# -------------------------------------------------------------
+# Import Libraries
+# -------------------------------------------------------------
 import numpy as np
 from numpy import linalg as LA
 from matplotlib import path
@@ -16,13 +18,15 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import math
 
-# --------------------------- Construct sheet --------------------------
+# -------------------------------------------------------------
+# Construct sheet
+# -------------------------------------------------------------
 # Input user for repetitions of generating vectors
 nA = input("Repetitions along the A axis: ")
 nB = input("Repetitions along the B axis: ")
 
 # Create hexagonal bravais lattice
-lattice = Hexagonal(a=2.4612 * Angstrom, c=20 * Angstrom)
+lattice = Hexagonal(a=2.4612 * Angstrom, c=3.2 * Angstrom)
 
 # Set atomic elements
 elements = [Carbon] * 2
@@ -34,8 +38,13 @@ coordinates = [(0, 0, 0), (0.33333, 0.66667, 0)]
 sheet = BulkConfiguration(lattice, elements,
                           fractional_coordinates=coordinates)
 
-# Repeat unit sheet along generating vectors
-sheet = sheet.repeat(nA, nB, 1)
+# Repeat unit sheet along generating vectors and create substrate
+sheet = sheet.repeat(nA, nB, 2)
+
+# Increase Lattice Parameters
+new_a = float(LA.norm(sheet.primitiveVectors()[0]))
+new_lattice = Hexagonal(a=new_a * Angstrom, c=20 * Angstrom)
+sheet.setBravaisLattice(bravais_lattice=new_lattice)
 sheet = sheet.center()
 
 # Extract cartesian sheet coordinates
@@ -65,7 +74,9 @@ cY0 = pA1[1] + pB1[1]
 sheetcoor = np.array(sheetcoor)
 sheetcoor = np.delete(sheetcoor, 2, 1)
 
-# ----------------------- Construct hexagon(s) -------------------------
+# -------------------------------------------------------------
+# Construct hexagonal tags
+# -------------------------------------------------------------
 # Loop variable and Information array
 s = 1
 info = np.array(
@@ -117,13 +128,12 @@ while s == 1:
     for i in range(Test.size):
         if Test[i] == True:
             atoms = np.append([atoms], [i])
+            i = i + 2
 
     # Tag the found atoms
     atoms = atoms.astype(int)
     atoms = atoms.tolist()
-
-    # Define sheet as a bulk configuration
-    bulk_configuration = sheet
+    print(atoms)
 
     # Calculate and print area of hexagon
     a = (cX + math.cos(math.pi / 3) * r) - (
@@ -134,7 +144,7 @@ while s == 1:
     # Prompt user for tag name
     tagname = raw_input("Input tag name: ")
     # Add tag
-    bulk_configuration.addTags(tagname, atoms)
+    sheet.addTags(tagname, atoms)
     # Add tag information to Numpy array
     instanceinfo = np.array(
         [tagname, "{:.3f}".format(cX), "{:.3f}".format(cY),
@@ -175,41 +185,6 @@ while s == 1:
     elif AH == "N":
         s = 0
 
-# ---------------------------- Repeat sheet ----------------------------
-R = raw_input("Repeat sheet? [Y/N]: ")
-if R == "Y":
-    # Repetitions along first generating vector
-    Areps = int(input("A-vector repetitions: "))
-    sheet = sheet.repeat(Areps, 1, 1)
-    # Repetitions along second generating vector
-    Breps = int(input("B-vector repetitions: "))
-    sheet = sheet.repeat(1, Breps, 1)
-    # --------------------- Process repeated tags ----------------------
-    # Calculate total repetitions
-    HI = Areps * Breps
-    # Create numpy array with tag names
-    tags = sheet.tags()
-    tags = np.array(list(tags))
-    # Create new tags for each original tag
-    for i in range(tags.size):
-        # Tag indices for given tag
-        tag = sheet.indicesFromTags(tags=tags[i])
-        tag = np.array(tag)
-        # Sort tag indices
-        tag = np.sort(tag, axis=None)
-        # Construct array with split tags
-        tagsize = np.array(tag.shape)
-        newtagsize = tagsize / HI
-        newtag = np.array([])
-        newtag = tag.reshape(HI, newtagsize)
-        newtag = newtag.astype(int)
-        # Add new tag to configuration
-        for j in range(HI):
-            newtagname = "".join((tags[i], str(j)))
-            sheet.addTags(newtagname, newtag[j, :])
-
-elif R == "N":
-    R = "N"
 # Prompt user for savename
 savename = raw_input("Input nanosheet filename: ")
 # Save bulk configuration as .hdf5 file
