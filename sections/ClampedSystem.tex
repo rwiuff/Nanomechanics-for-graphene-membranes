@@ -6,11 +6,15 @@ This is done by defining a sheet of a definite size in VNL and thereafter check 
 Furthermore, only the frequencies for the first 10 modes will be checked.
 \onecolumngrid
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=\columnwidth]{Figures/FrequencyModeProjectionsZoomFit.eps}
     \caption{Frequency plotted as a function of hole size. Every green dot being a specific mod, and the red and blue lines being trend curves for the first and second mod.}
     \label{size vs frequency}
 \end{figure}
 \twocolumngrid
-Looking at the data it is clear to see that the frequency decreases when the size of the hole increase.
+Looking at the data it is clear to see that the frequency decreases when the size of the hole increase. Using the regression for the first and second mode it is determined that the relation between frequency and hole size can be described by:
+\begin{equation}
+    f=a\cdot\dfrac{1}{x^n}+b
+\end{equation}
+Where $f$ is the frequency, $x$ is the size of the holes, and where $a, b$ and $n$ are all constant. Compering the constants for the first mode to the constants for the second it is seen that $a$ and $b$ decreases while $n$ increases. This changes in constants all lead to a more rapid decrease in frequency the higher the mode which is looked at is.
