@@ -4,13 +4,11 @@
 In order to simulate the vibrational modes in a graphene lattice, the dynamical matrix needs to be, both calculated and postprocessed. Both of which needs substantial amounts of computational power and time. The workflow is therefore created with steps of scripts which can be sent to a hpc cluster for computation.
 The workflow for simulating a graphene sheet is described as such:
 \begin{enumerate}
-  \item Create the sheet in question with \textbf{NanoSheetCreator.py} (\labelcref{NSCS}).
-  \item Use VNL Builder GUI to ensure correctly tagged holes.
-  \item Use \textbf{00\_FixConstraints.py} (\labelcref{00}) to fix the tagged atom indices\footnote{Due to a bug in ATKPython some numpy manipulation of the atomic bulk configuration was needed. See \cref{00}}.
-  \item Use \textbf{01\_RelaxSheet.py} (\labelcref{01}) to optimise the bond length and geometry of the graphene sheet.
-  \item Use \textbf{02\_DynamicalMatrix.py} (\labelcref{02}) to compute the Dynamical Matrix for the sheet.
-  \item Use \textbf{03\_SheetVibrations.py} (\labelcref{03}) to find calculate the vibrational modes of the sheet.
-  \item \todo{Insert Analysis tools}
+  \item Create the sheet in question with \textbf{NanoSheetCreator.py} or \textbf{NanoMembraneCreator.py} (\cref{NSCS}).
+  \item Use VNL Builder GUI to ensure correctly tagged holes. When creating two layer membranes, it is nessecary to remove the atoms in the hexagonal tag in one of the layers.
+  \item Use \textbf{00\_FixConstraints.py} (\cref{00}) to fix the tagged atom indices\footnote{Due to a bug in ATKPython some numpy manipulation of the atomic bulk configuration was needed. See \cref{00}}.
+  \item Use \textbf{01\_RelaxSheet.py} or \textbf{01\_LennardJonesRelax.py} (\cref{01}) to optimise the bond length and geometry of the graphene sheet and apply inter-atom potentials.
+  \item Use \textbf{02\_DynamicalMatrix.py} (\cref{02}) to compute the Dynamical Matrix for the sheet.
+  \item Use \textbf{03\_SheetVibrations.py} (\cref{03}) to calculate the vibrational modes of the sheet.
+  \item Postprocessing and analysis of the created \textit{.hdf5} files will then take place. (\cref{DEA})
 \end{enumerate}
-Flowchart is shown on \cref{fc}.
-\todo[inline]{Insert flowchart here}

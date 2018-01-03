@@ -6,7 +6,7 @@ This following section will focus on the mechanics of the now defined geometry o
 \subsubsection{A simple system of two atoms: Equilibrium state, Lennard-Jones Potential, Displaced state and Hooke's Law PLOTS??}
 To describe the dynamics of the system one must decompose the system into simpler elements in order to understand what happens for the system as a whole. Basically we want to describe the displacements each atom makes and then sum it up to some bigger form of system. The basis of a system containing only two atoms consist of a mass-spring system where each atom has a mass and where the \textit{atomic interaction potential} works as the spring in between each atom. The specific interaction potential we will be working with is called the \textit{Lennard-Jones Potential}\text{\cite[eq.1.3]{Cleland2003}}. The potential is given by \begin{equation}
     \phi(r)=-\dfrac{A}{r^{6}}+\dfrac{B}{r^{12}}\label{LJPot}
-\end{equation} where $A$ is the strength of the attractive interaction , $B$ is the strength of the repulsive interaction and $r$ is the spacing between the atoms. 
+\end{equation} where $A$ is the strength of the attractive interaction , $B$ is the strength of the repulsive interaction and $r$ is the spacing between the atoms.
 The potential can be derived from the force between the atoms as the force is the derivative of the negative potential energy with respect to the atom spacing $r$\text{\cite[eq.1.1]{Cleland2003}}.\begin{equation}
     f(r)\equiv -\dfrac{\text{d}\phi}{\text{d}r}
 \end{equation} However it is more convenient to work with the potential instead of the force. \\
@@ -35,7 +35,7 @@ The system is in a relaxed state when the distance between the atoms is equal to
         \end{split}
     \end{equation}If the  displacement is defined as $u\equiv r-r_{0}$ we can see that \eqref{hooke} is an equivalent to Hooke's Law.\begin{equation}
         u\equiv r-r_{0}=\dfrac{1}{\text{d}^{2}\phi(r)/\text{d}r^{2}}f_{ext}=\dfrac{1}{k}f_{ext}
-    \end{equation}Where $k=\dfrac{\text{d}^{2}\phi(r)}{\text{d}r^{2}}$. This last result emphasises that the system of two atoms can be viewed as a mass-spring system. The next step is to scale up this theory to two and three dimensions. 
+    \end{equation}Where $k=\dfrac{\text{d}^{2}\phi(r)}{\text{d}r^{2}}$. This last result emphasises that the system of two atoms can be viewed as a mass-spring system. The next step is to scale up this theory to two and three dimensions.
 \subsubsection{Dynamics in a three dimensional lattice}
 
 \subsubsection{Periodic functions}
@@ -43,21 +43,18 @@ The system is in a relaxed state when the distance between the atoms is equal to
 
 \subsubsection{Boundary Conditions in Two Dimensions}
 
-When describing the motion of the atoms in the lattice as well as the forces acting upon them, some boundary conditions must be defined. Because the system is very large compared to the characteristic wavelength in the displacement field, periodic boundary conditions (PBC) work well. The actual boundaries as well as the specific normal modes are not of significant importance due the same fact of size difference in the system vs. the characteristic wavelength. \\ 
+When describing the motion of the atoms in the lattice as well as the forces acting upon them, some boundary conditions must be defined. Because the system is very large compared to the characteristic wavelength in the displacement field, periodic boundary conditions (PBC) work well. The actual boundaries as well as the specific normal modes are not of significant importance due the same fact of size difference in the system vs. the characteristic wavelength. \\
 An intuitive approach to imagining PBC is to take the plane of the system and fold it in to at torus. All the four edges has now been put together pairwise. This means that any force acting on one atom which causes some form of motion is now translated on to the atom next to it.\\
-For an arbitrary system in two dimensions of size $X$ (side lenght) and with atomic spacing $r_{0}$, each axis has $\mathcal{N}=\dfrac{X}{r_{0}}$ atoms. The total amount of atoms in the sheet naturally becomes $N=\mathcal{N}^{2}$. The Bloch wavevector can be described as 
+For an arbitrary system in two dimensions of size $X$ (side lenght) and with atomic spacing $r_{0}$, each axis has $\mathcal{N}=\dfrac{X}{r_{0}}$ atoms. The total amount of atoms in the sheet naturally becomes $N=\mathcal{N}^{2}$. The Bloch wavevector can be described as
 \begin{equation}
      \mathbf{q}=(q_{x},q_{y})
 \end{equation}
-where 
+where
 \begin{equation}
      (q_{x},q_{y})=\dfrac{2\pi}{X}(m,n)
 \end{equation}
 Here $m,n$ are integers in the interval $-\dfrac{\mathcal{N}}{2}, +\dfrac{\mathcal{N}}{2}$. The range of $q_{x},q_{y}$ becomes $-\dfrac{\pi}{r_{0}},+\dfrac{\pi}{r_{0}}$.\\
-In the specific case of this study we work with a fixed boundary, more specific, a clamped boundary which means that no bending is allowed in the plane. A clamped boundary results in the need for numerical approximations in calculations of the dynamics. As the tools used for calculations are on a"per atom" atom basis, there wont be any need for finite-element models nor any partial differential equations sovler (PDE). Instead... 
+In the specific case of this study we work with a fixed boundary, more specific, a clamped boundary which means that no bending is allowed in the plane. A clamped boundary results in the need for numerical approximations in calculations of the dynamics. As the tools used for calculations are on a"per atom" atom basis, there wont be any need for finite-element models nor any partial differential equations sovler (PDE). Instead...
 
 \subsubsection{Normal Modes of Two-Dimensional Hexagonal lattice}
-
-
-\todo[inline]{Write section}
  
