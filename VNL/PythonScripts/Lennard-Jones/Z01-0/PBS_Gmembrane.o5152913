@@ -1,9 +1,0 @@
-/opt/intel/2013.1.039/impi/4.1.1.036/intel64/bin/mpirun
-n-62-29-12
-/zhome/a6/1/31221/tgbin/ATKdev/VNL-ATK-2017.1/bin/atkpython
-+------------------------------------------------------------------------------+
-|                                                                              |
-| Atomistix ToolKit 2017.1 [Build ce08f12]                                     |
-|                                                                              |
-+------------------------------------------------------------------------------+
-APPLICATION TERMINATED WITH THE EXIT STRING: Killed (signal 9)
