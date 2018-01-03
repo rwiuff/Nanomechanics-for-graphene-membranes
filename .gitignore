@@ -231,3 +231,6 @@ TSWLatexianTemp*
 *-tags.tex
 
 # End of https://www.gitignore.io/api/latex
+sharelatex-git.py
+sharelatex-git
+.sharelatex-git
