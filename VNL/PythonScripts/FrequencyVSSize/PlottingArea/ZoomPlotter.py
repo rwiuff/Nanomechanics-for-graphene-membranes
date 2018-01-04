@@ -126,8 +126,8 @@ tick_locator = matplotlib.ticker.MaxNLocator(nbins=10, prune=None)
 cb.locator = tick_locator
 cb.update_ticks()
 # Set x-ticks = the symmetry points
-kticks = [w * 1 for w in range(12)]
-ticklabels = ['%i nm' % w for w in range(11)]
+kticks = [w * 1 for w in range(nof + 2)]
+ticklabels = ['%i nm' % w for w in range(nof + 1)]
 xticks(kticks, ticklabels)
 grid(kticks)
 
@@ -141,17 +141,17 @@ for i in range(nof):
         eV).flatten())[0]
 
 
-def reciproc(x, a, b, n):
-    return a * (1 / (x**n)) + b
+def reciproc(x, a, n):
+    return a * (1 / (x**n))
 
 
-popt, pcov = curve_fit(reciproc, x, y, p0=(1, 1, 2))
+popt, pcov = curve_fit(reciproc, x, y, p0=(1, 2))
 perr = np.sqrt(np.diag(pcov))
 x_rec0 = np.linspace(x[0], x[-1], num=len(x) * 10)
 y_rec0 = reciproc(x_rec0, *popt)
 
-rec0label = r'$a={:.3e}\pm{:.3e}$' '\n' r'$b={:.3e}\pm{:.3e}$' '\n' r'$n={:.3f}\pm{:.3e}$'.format(
-    popt[0], perr[0], popt[1], perr[1], popt[2], perr[2])
+rec0label = r'$a={:.3e}\pm{:.3e}$' '\n' r'$n={:.3f}\pm{:.3e}$'.format(
+    popt[0], perr[0], popt[1], perr[1])
 
 # -------------------------------------------------------------
 # Fit 1/r^2 plot for mode 1
@@ -163,20 +163,21 @@ for i in range(nof):
         eV).flatten())[1]
 
 
-def reciproc(x, a, b, n):
-    return a * (1 / (x**n)) + b
+def reciproc(x, a, n):
+    return a * (1 / (x**n))
 
 
-popt, pcov = curve_fit(reciproc, x, y, p0=(1, 1, 2))
+popt, pcov = curve_fit(reciproc, x, y, p0=(1, 2))
 perr = np.sqrt(np.diag(pcov))
 x_rec1 = np.linspace(x[0], x[-1], num=len(x) * 10)
 y_rec1 = reciproc(x_rec1, *popt)
-rec1label = r'$a={:.3e}\pm{:.3e}$' '\n' r'$b={:.3e}\pm{:.3e}$' '\n' r'$n={:.3f}\pm{:.3e}$'.format(popt[0], perr[0], popt[1], perr[1], popt[2], perr[2])
+rec1label = r'$a={:.3e}\pm{:.3e}$' '\n' r'$n={:.3f}\pm{:.3e}$'.format(
+    popt[0], perr[0], popt[1], perr[1])
 
 # -------------------------------------------------------------
 # Show or save plots
 # -------------------------------------------------------------
-rec = r'$a \cdot \frac{1}{x^n} + b$'
+rec = r'$a \cdot \frac{1}{x^n}$'
 showsave = 0
 menu = np.array(["Show plot                  ", "Show zoomed and fitted plot",
                  "Save plot                  ", "Save zoomed and fitted plot"])
@@ -200,12 +201,11 @@ while showsave == 0:
             except TypeError:
                 print("Only integers accepted")
 ymin, ymax = -0.01, 0.02
+ylabel('$\omega$ [eV]')
 if showsave == 1:
-    ylabel('$\omega$ [eV]')
     plt.show()
 elif showsave == 2:
     ylim(ymin, ymax)
-    ylabel('$\omega$ [eV]')
     ax = plt.gca()
     ax.plot(x_rec0, y_rec0, 'b-', label=rec0label)
     ax.plot(x_rec1, y_rec1, 'r-', label=rec1label)
@@ -213,7 +213,6 @@ elif showsave == 2:
     plt.show()
 
 elif showsave == 3:
-    ylabel('$\omega$ [eV]')
     print("+=====================================+")
     print("|              Saving plots           |")
     print("|-------------------------------------|")
@@ -224,7 +223,6 @@ elif showsave == 3:
     print("+=====================================+")
 elif showsave == 4:
     ylim(ymin, ymax)
-    ylabel('$\omega$ [eV]')
     ax = plt.gca()
     ax.plot(x_rec0, y_rec0, 'b-', label=rec0label)
     ax.plot(x_rec1, y_rec1, 'r-', label=rec1label)
