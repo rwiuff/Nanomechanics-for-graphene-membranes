@@ -15,6 +15,20 @@ Furthermore, only the frequencies for the first 10 modes will be checked.
 \twocolumngrid
 Looking at the data it is clear to see that the frequency decreases when the size of the hole increase. Using the regression for the first and second mode it is determined that the relation between frequency and hole size can be described by:
 \begin{equation}
-    f=a\cdot\dfrac{1}{x^n}+b
+    f=a\cdot\dfrac{1}{x^n}
 \end{equation}
-Where $f$ is the frequency, $x$ is the size of the holes, and where $a, b$ and $n$ are all constant. Compering the constants for the first mode to the constants for the second it is seen that $a$ and $b$ decreases while $n$ increases. This changes in constants all lead to a more rapid decrease in frequency the higher the mode which is looked at is.
+Where $f$ is the frequency, $x$ is the size of the holes, and where $a$ and $n$ are constant. Compering the constants for the first mode to the constants for the second it is seen that $a$ decreases while $n$ increases. This changes in constants all lead to a more rapid decrease in frequency the higher the mode which is looked at is. This trend can also be used as a scaling factor to predict the frequency for even bigger holes, for example: If you want a 20 nm hole we can predict that the frequency of first mode for this hole will be
+\begin{eqnarray*}
+    f=\left(8.743\cdot10^{-3}\pm2.012\cdot10^{-4}\right)\cdot\dfrac{1}{20^{1.428\pm5.166\cdot10^{-2}}}\\=1.213\cdot10^{-4}\pm 1.898\cdot 10^{-5} \mathrm{eV}
+\end{eqnarray*}
+
+\subsubsection{Interlayer interaction}
+\onecolumngrid
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{Figures/FrequencyModeProjectionsZeta.eps}
+    \caption{$\epsilon=0.31$, $\epsilon=1.00$, $\epsilon=10.0$}
+    \label{}
+\end{figure}
+\twocolumngrid
