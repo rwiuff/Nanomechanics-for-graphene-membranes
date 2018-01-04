@@ -133,11 +133,12 @@ cmap, norm = cm.get_cmap('brg'), None  # 'hot','brg','seismic'
 # Plot projections
 # -------------------------------------------------------------
 Index = np.array([0, 1, 3, 5, 6])
-ymin, ymax = -0.005, 0.01
+ymin, ymax = -0.005, 0.015
 fig = plt.figure(figsize=(8, 6))
 gs = gridspec.GridSpec(1, 2, width_ratios=[1, 6])
+gs.update(wspace=0.03)
 
-plt.subplot(gs[0])
+ax1=plt.subplot(gs[0])
 myscale = RFprojection[4]  # /numpy.max(projection)
 plt.scatter(numpy.repeat(np.array([1]), RFn_modes),
             RFfrequency_list[4].inUnitsOf(eV).flatten(), c=myscale,
@@ -153,9 +154,9 @@ ticklabels = ['5nm']
 xticks(kticks, ticklabels)
 grid(kticks)
 ylabel('$\omega$ [eV]')
-#ylim(ymin, ymax)
+ylim(ymin, ymax)
 
-plt.subplot(gs[1])
+ax2=plt.subplot(gs[1])
 myscale = {}
 for i in range(nof):
     myscale[i] = projection[i]  # /numpy.max(projection)
@@ -172,7 +173,8 @@ ticklabels = ['0', '0.31', '1.00', '10.0']
 xticks(kticks, ticklabels)
 grid(kticks)
 xlabel('$\epsilon$ [8.909 meV]')
-#ylim(ymin, ymax)
+ylim(ymin, ymax)
+plt.setp(ax2.get_yticklabels(), visible=False)
 # colorbar
 # colorbar(ticks=[-1, 0, 1], orientation='vertical')
 cax = plt.axes([0.91, 0.1, 0.03, 0.8])

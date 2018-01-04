@@ -49,17 +49,38 @@ for i in range(nof):
         myfile[i], int(n_modes[i]))
     print(pstring)
 print('+---------------------------------------------------------------------+')
-# quit()
+
 # -------------------------------------------------------------
 # Make projection vectors
 # -------------------------------------------------------------
+projectionmode = 0
 projection_vibration = {}
-for i in range(nof):
-    constrained = dynamical_matrix[i].constraints()
-    tmp = numpy.zeros((n_modes[i]), dtype=float)
-    tmp[2::3] = 1  # project on z-motion
-    projection_vibration[i] = tmp
-    # print 'Projecting on: ', projection_vibration[i], n_modes[i]
+if projectionmode == 0:
+    for i in range(nof):
+        constrained = dynamical_matrix[i].constraints()
+        tmp = numpy.zeros((n_modes[i]), dtype=float)
+        tmp[2::3] = 1  # project on z-motion
+        projection_vibration[i] = tmp
+        # print 'Projecting on: ', projection_vibration[i], n_modes[i]
+elif projectionmode == 1:
+    for i in range(nof):
+        projectionindex = np.array([])
+        tagconfig = nlread('HoleTag.hdf5', BulkConfiguration)[-1]
+        projectionindex = tagconfig.indicesFromTags('Hole')
+        tmp = numpy.zeros((n_modes[i]), dtype=float)
+        tmp[projectionindex] = 1
+        projection_vibration[i] = tmp
+        print 'Projecting on: ', projection_vibration[i], n_modes[i]
+elif projectionmode == 2:
+    for i in range(nof):
+        projectionindex = np.array([])
+        tagconfig = nlread('HoleTag.hdf5', BulkConfiguration)[-1]
+        projectionindex = tagconfig.indicesFromTags('Hole')
+        tmp = numpy.zeros((n_modes[i]), dtype=float)
+        not_in_indices = [x for x in range(len(tmp)) if x not in projectionindex]
+        tmp[not_in_indices] = 1
+        projection_vibration[i] = tmp
+        print 'Projecting on: ', projection_vibration[i], n_modes[i]
 
 # -------------------------------------------------------------
 # Set qpoint
