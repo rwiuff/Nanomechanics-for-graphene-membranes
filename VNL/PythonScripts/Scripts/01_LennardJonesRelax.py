@@ -43,8 +43,8 @@ lj_interlayer_potential.setTags(['Layer1', 'Layer2'])
 
 # Combine all 3 potential sets in a single calculator.
 calculator = TremoloXCalculator(
-    parameters=[potentialSet_layer1, potentialSet_layer2,
-                lj_interlayer_potential])
+    parameters=[potentialSet_layer1,
+                potentialSet_layer2, lj_interlayer_potential])
 calculator.setVerletListsDelta(0.25 * Angstrom)
 
 

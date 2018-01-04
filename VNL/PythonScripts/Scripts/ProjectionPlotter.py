@@ -159,20 +159,19 @@ for i in range(nof):
 # Define reciprocal function
 
 
-def reciproc(x, a, b, n):
-    return a * (1 / (x**n)) + b
+def reciproc(x, a, n):
+    return a * (1 / (x**n))
 
 
 # Fit reciprocal curve
-popt, pcov = curve_fit(reciproc, x, y, p0=(1, 1, 2))
+popt, pcov = curve_fit(reciproc, x, y, p0=(1, 2))
 perr = np.sqrt(np.diag(pcov))
 x_rec0 = np.linspace(x[0], x[-1], num=len(x) * 10)
 y_rec0 = reciproc(x_rec0, *popt)
 
 # Create legend label
-rec0label = r'$a={:.3e}\pm{:.3e}$' '\n' r'$b={:.3e}\pm{:.3e}$'
-'\n' r'$n={:.3f}\pm{:.3e}$'.format(
-    popt[0], perr[0], popt[1], perr[1], popt[2], perr[2])
+rec0label = r'$a={:.3e}\pm{:.3e}$' '\n' r'$n={:.3f}\pm{:.3e}$'.format(
+    popt[0], perr[0], popt[1], perr[1])
 
 # -------------------------------------------------------------
 # Fit 1/r^2 plot for mode 1
@@ -186,20 +185,19 @@ for i in range(nof):
 # Define reciprocal function
 
 
-def reciproc(x, a, b, n):
-    return a * (1 / (x**n)) + b
+def reciproc(x, a, n):
+    return a * (1 / (x**n))
 
 
 # Fit reciprocal curve
-popt, pcov = curve_fit(reciproc, x, y, p0=(1, 1, 2))
+popt, pcov = curve_fit(reciproc, x, y, p0=(1, 2))
 perr = np.sqrt(np.diag(pcov))
 x_rec1 = np.linspace(x[0], x[-1], num=len(x) * 10)
 y_rec1 = reciproc(x_rec1, *popt)
 
 # Create legend label
-rec1label = r'$a={:.3e}\pm{:.3e}$' '\n' r'$b={:.3e}\pm{:.3e}$'
-'\n' r'$n={:.3f}\pm{:.3e}$'.format(
-    popt[0], perr[0], popt[1], perr[1], popt[2], perr[2])
+rec1label = r'$a={:.3e}\pm{:.3e}$' '\n' r'$n={:.3f}\pm{:.3e}$'.format(
+    popt[0], perr[0], popt[1], perr[1])
 
 # -------------------------------------------------------------
 # Show or save plots

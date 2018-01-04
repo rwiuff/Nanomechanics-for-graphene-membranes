@@ -11,6 +11,7 @@
 # -------------------------------------------------------------
 # Import Libraries
 # -------------------------------------------------------------
+import numpy as np
 from numpy import linalg as LA
 from matplotlib import path
 import matplotlib.pyplot as plt

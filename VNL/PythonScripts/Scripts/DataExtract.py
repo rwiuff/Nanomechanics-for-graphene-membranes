@@ -26,9 +26,11 @@ for i in range(nof + 1):
         break
     elif i >= 9:
         # Choose file
-        myfile = np.append(myfile, '{}DynamicalMatrix.hdf5'.format(i + 1))
+        myfile = np.append(myfile,
+                           '{}DynamicalMatrix.hdf5'.format(i + 1))
     else:
-        myfile = np.append(myfile, '0{}DynamicalMatrix.hdf5'.format(i + 1))
+        myfile = np.append(myfile,
+                           '0{}DynamicalMatrix.hdf5'.format(i + 1))
     # Load configuration with calculator
     configuration = np.append(configuration, nlread(
         myfile[i], BulkConfiguration)[-1])
@@ -38,9 +40,9 @@ for i in range(nof + 1):
         dynamical_matrix, nlread(myfile[i], DynamicalMatrix)[-1])
 
     # Vibrational state to project onto
-    n_modes = np.append(n_modes, (len(configuration[i]) - len(dynamical_matrix[i].constraints())
-                                  ) * 3)  # len(configuration)*3#
-    # projection_vibration = numpy.zeros((n_modes),dtype=float)
+    n_modes = np.append(n_modes, (len(
+        configuration[i]) -
+        len(dynamical_matrix[i].constraints())) * 3)
 
 # Display loaded matrices and modes
 print('+---------------------------------------------------------------------+')
@@ -77,7 +79,8 @@ elif projectionmode == 2:
         tagconfig = nlread('HoleTag.hdf5', BulkConfiguration)[-1]
         projectionindex = tagconfig.indicesFromTags('Hole')
         tmp = numpy.zeros((n_modes[i]), dtype=float)
-        not_in_indices = [x for x in range(len(tmp)) if x not in projectionindex]
+        not_in_indices = [x for x in range(
+            len(tmp)) if x not in projectionindex]
         tmp[not_in_indices] = 1
         projection_vibration[i] = tmp
         print 'Projecting on: ', projection_vibration[i], n_modes[i]
@@ -99,28 +102,35 @@ RMS = {}
 
 for i in range(nof):
     print(
-        "Calculating the projected phonon dispersion for {}".format(myfile[i]))
+        "Calculating the projected phonon dispersion for {}".format(
+            myfile[i]))
     T = 300. * Kelvin
     qpoints[i], frequency_list[i], projection[i], anti_projection[i], RMS[i] = ProjectedPhononBandsDisplacement(
-        configuration[i], dynamical_matrix[i], fractional_qpoints, projection_vibration[i], temperature=T)
-    #print(qpoints[i], frequency_list[i],projection[i], anti_projection[i], RMS[i])
+        configuration[i], dynamical_matrix[i],
+        fractional_qpoints, projection_vibration[i], temperature=T)
+
 print("+========================+")
 print("|    Saving datafiles    |")
 print("--------------------------")
 with open('qpoints.pickle', 'wb') as handle:
-    pickle.dump(qpoints, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    pickle.dump(qpoints, handle,
+                protocol=pickle.HIGHEST_PROTOCOL)
 print("| (1/5): Q-points        |")
 with open('frequency_list.pickle', 'wb') as handle:
-    pickle.dump(frequency_list, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    pickle.dump(frequency_list, handle,
+                protocol=pickle.HIGHEST_PROTOCOL)
 print("| (2/5): Frequency list  |")
 with open('projection.pickle', 'wb') as handle:
-    pickle.dump(projection, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    pickle.dump(projection, handle,
+                protocol=pickle.HIGHEST_PROTOCOL)
 print("| (3/5): Projection      |")
 with open('anti_projection.pickle', 'wb') as handle:
-    pickle.dump(anti_projection, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    pickle.dump(anti_projection, handle,
+                protocol=pickle.HIGHEST_PROTOCOL)
 print("| (4/5): Anti projection |")
 with open('RMS.pickle', 'wb') as handle:
-    pickle.dump(RMS, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    pickle.dump(RMS, handle,
+                protocol=pickle.HIGHEST_PROTOCOL)
 print("| (5/5): RMS             |")
 print("+========================+")
 quit()
