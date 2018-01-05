@@ -4,6 +4,7 @@
 # -------------------------------------------------------------
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
+import matplotlib.lines as mlines
 from NanoLanguage import *
 from pylab import *
 import pickle
@@ -179,6 +180,10 @@ grid(kticks)
 xlabel('$\epsilon$ [8.909 meV]')
 ylim(ymin, ymax)
 plt.setp(ax2.get_yticklabels(), visible=False)
+blue_line = mlines.Line2D(
+    [], [], color='blue',
+    label=r'Frequency for mode $1$, $2$, $4$, $6$ and $7$')
+plt.legend(handles=[blue_line], loc=8)
 # colorbar
 # colorbar(ticks=[-1, 0, 1], orientation='vertical')
 cax = plt.axes([0.91, 0.1, 0.03, 0.8])
