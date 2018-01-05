@@ -142,8 +142,8 @@ tick_locator = matplotlib.ticker.MaxNLocator(nbins=10, prune=None)
 cb.locator = tick_locator
 cb.update_ticks()
 # Set x-ticks
-kticks = [w * 1 for w in range(12)]
-ticklabels = ['%i nm' % w for w in range(11)]
+kticks = [w * 1 for w in range(nof+2)]
+ticklabels = ['%i nm' % w for w in range(nof+1)]
 xticks(kticks, ticklabels)
 grid(kticks)
 plt.subplots_adjust(left=None, bottom=None, right=0.97, top=None,
@@ -232,9 +232,13 @@ while showsave == 0:
                 print("Only integers accepted")
 # Define graph ranges
 ymin, ymax = -10, 20
+xmin, xmax = 0.5326636405016747, 10.565891401841617
+xlim(xmin, xmax)
 # Show plot
 if showsave == 1:
     ylabel('$\omega$ [meV]')
+    ymin, ymax = -25, 225
+    ylim(ymin, ymax)
     plt.show()
 # Show fitted plot
 elif showsave == 2:

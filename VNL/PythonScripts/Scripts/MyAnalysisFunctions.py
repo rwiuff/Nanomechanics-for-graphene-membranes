@@ -80,7 +80,7 @@ def ProjectedPhononBandsDisplacement(configuration, dynamical_matrix, qpoints, p
     qpoint = qpoints[:]
 
 
-    # Calculate eigevalues and eigenvectors from dynamical matrix.
+    # Calculate eigenvalues and eigenvectors from dynamical matrix.
     print("Calculating eigenvalues and eigenvectors")
     eigenvalues, eigenvectors = dynamical_matrix.phononEigensystem(qpoint)
     frequency_list[0, :] = eigenvalues.inUnitsOf(eV)
