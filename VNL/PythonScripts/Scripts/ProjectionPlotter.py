@@ -128,16 +128,16 @@ for i in range(nof):
     if plotmode == 0:
         scatter(numpy.repeat(np.array([i + 1]), n_modes[i]),
                 frequency_list[i].inUnitsOf(
-            eV).flatten(), c=myscale[i], s=150, marker='o',
+            eV).flatten()*1000, c=myscale[i], s=150, marker='o',
             edgecolor='none', cmap=cmap, norm=norm)
     elif plotmode == 1:
         scatter(numpy.repeat(np.array([i + 1]), n_modes[i]),
-                frequency_list[i].inUnitsOf(eV).flatten(),
+                frequency_list[i].inUnitsOf(eV).flatten()*1000,
                 c=myscale[i], s=15 + myscale[i] * 120, marker='o',
                 edgecolor='none', cmap=cmap, norm=norm)
 # colorbar
 cb = colorbar()  # colorbar(ticks=[-1, 0, 1], orientation='vertical')
-cb.set_label('projection', fontsize=20)
+cb.set_label('projection', fontsize=12)
 tick_locator = matplotlib.ticker.MaxNLocator(nbins=10, prune=None)
 cb.locator = tick_locator
 cb.update_ticks()
@@ -146,6 +146,8 @@ kticks = [w * 1 for w in range(12)]
 ticklabels = ['%i nm' % w for w in range(11)]
 xticks(kticks, ticklabels)
 grid(kticks)
+plt.subplots_adjust(left=None, bottom=None, right=0.97, top=None,
+                    wspace=None, hspace=None)
 
 # -------------------------------------------------------------
 # Fit 1/r^2 plot for mode 0
@@ -154,7 +156,7 @@ x = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 y = np.zeros(10)
 for i in range(nof):
     y[i] = np.sort(frequency_list[i].inUnitsOf(
-        eV).flatten())[0]
+        eV).flatten()*1000)[0]
 
 # Define reciprocal function
 
@@ -170,7 +172,7 @@ x_rec0 = np.linspace(x[0], x[-1], num=len(x) * 10)
 y_rec0 = reciproc(x_rec0, *popt)
 
 # Create legend label
-rec0label = r'$a={:.3e}\pm{:.3e}$' '\n' r'$n={:.3f}\pm{:.3e}$'.format(
+rec0label = r'$a={:.3f}\pm{:.3f}$' '\n' r'$n={:.3f}\pm{:.3f}$'.format(
     popt[0], perr[0], popt[1], perr[1])
 
 # -------------------------------------------------------------
@@ -180,7 +182,7 @@ x = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 y = np.zeros(10)
 for i in range(nof):
     y[i] = np.sort(frequency_list[i].inUnitsOf(
-        eV).flatten())[1]
+        eV).flatten()*1000)[1]
 
 # Define reciprocal function
 
@@ -196,14 +198,14 @@ x_rec1 = np.linspace(x[0], x[-1], num=len(x) * 10)
 y_rec1 = reciproc(x_rec1, *popt)
 
 # Create legend label
-rec1label = r'$a={:.3e}\pm{:.3e}$' '\n' r'$n={:.3f}\pm{:.3e}$'.format(
+rec1label = r'$a={:.3f}\pm{:.3f}$' '\n' r'$n={:.3f}\pm{:.3f}$'.format(
     popt[0], perr[0], popt[1], perr[1])
 
 # -------------------------------------------------------------
 # Show or save plots
 # -------------------------------------------------------------
 # Print menu
-rec = r'$a \cdot \frac{1}{x^n} + b$'
+rec = r'$a \cdot \frac{1}{x^n}$'
 showsave = 0
 menu = np.array(["Show plot                  ",
                  "Show zoomed and fitted plot",
@@ -229,15 +231,15 @@ while showsave == 0:
             except TypeError:
                 print("Only integers accepted")
 # Define graph ranges
-ymin, ymax = -0.01, 0.02
+ymin, ymax = -10, 20
 # Show plot
 if showsave == 1:
-    ylabel('$\omega$ [eV]')
+    ylabel('$\omega$ [meV]')
     plt.show()
 # Show fitted plot
 elif showsave == 2:
     ylim(ymin, ymax)
-    ylabel('$\omega$ [eV]')
+    ylabel('$\omega$ [meV]')
     ax = plt.gca()
     ax.plot(x_rec0, y_rec0, 'b-', label=rec0label)
     ax.plot(x_rec1, y_rec1, 'r-', label=rec1label)
@@ -245,7 +247,7 @@ elif showsave == 2:
     plt.show()
 # Save plot
 elif showsave == 3:
-    ylabel('$\omega$ [eV]')
+    ylabel('$\omega$ [meV]')
     print("+=====================================+")
     print("|              Saving plots           |")
     print("|-------------------------------------|")
@@ -257,7 +259,7 @@ elif showsave == 3:
 # Save fitted plot
 elif showsave == 4:
     ylim(ymin, ymax)
-    ylabel('$\omega$ [eV]')
+    ylabel('$\omega$ [meV]')
     ax = plt.gca()
     ax.plot(x_rec0, y_rec0, 'b-', label=rec0label)
     ax.plot(x_rec1, y_rec1, 'r-', label=rec1label)

@@ -136,7 +136,7 @@ cmap, norm = cm.get_cmap('brg'), None  # 'hot','brg','seismic'
 # Plot projections
 # -------------------------------------------------------------
 Index = np.array([0, 1, 3, 5, 6])
-ymin, ymax = -0.005, 0.015
+ymin, ymax = -1.5, 15
 fig = plt.figure(figsize=(8, 6))
 gs = gridspec.GridSpec(1, 2, width_ratios=[1, 6])
 gs.update(wspace=0.03)
@@ -144,19 +144,19 @@ gs.update(wspace=0.03)
 ax1 = plt.subplot(gs[0])
 myscale = RFprojection[4]  # /numpy.max(projection)
 plt.scatter(numpy.repeat(np.array([1]), RFn_modes),
-            RFfrequency_list[4].inUnitsOf(eV).flatten(), c=myscale,
+            RFfrequency_list[4].inUnitsOf(eV).flatten() * 1000, c=myscale,
             s=15 + myscale * 120, marker='o', edgecolor='none',
             cmap=cmap, norm=norm)
 for i in range(5):
     j = Index[i]
-    plt.axhline(y=RFfrequency_list[4].inUnitsOf(eV).flatten()[j])
+    plt.axhline(y=RFfrequency_list[4].inUnitsOf(eV).flatten()[j] * 1000)
     print(RFfrequency_list[4].inUnitsOf(eV).flatten()[j])
 # Set x-ticks = the symmetry points
 kticks = [1]
 ticklabels = ['5nm']
 xticks(kticks, ticklabels)
 grid(kticks)
-ylabel('$\omega$ [eV]')
+ylabel('$\omega$ [meV]')
 ylim(ymin, ymax)
 
 ax2 = plt.subplot(gs[1])
@@ -167,11 +167,11 @@ for i in range(nof):
     # print numpy.max(projection[i])
     plt.scatter(numpy.repeat(np.array([i + 1]), n_modes[i]),
                 frequency_list[i].inUnitsOf(eV).flatten(
-    ), c=myscale[i], s=15 + myscale[i] * 120, marker='o',
+    ) * 1000, c=myscale[i], s=15 + myscale[i] * 120, marker='o',
         edgecolor='none', cmap=cmap, norm=norm)
 for i in range(5):
     j = Index[i]
-    plt.axhline(y=RFfrequency_list[4].inUnitsOf(eV).flatten()[j])
+    plt.axhline(y=RFfrequency_list[4].inUnitsOf(eV).flatten()[j] * 1000)
 # Set x-ticks = the symmetry points
 kticks = [w * 1 for w in range(nof + 2)]
 ticklabels = ['0', '0.31', '1.00', '10.0']
@@ -180,15 +180,17 @@ grid(kticks)
 xlabel('$\epsilon$ [8.909 meV]')
 ylim(ymin, ymax)
 plt.setp(ax2.get_yticklabels(), visible=False)
+plt.subplots_adjust(left=0.07, bottom=None, right=0.88, top=None,
+                    wspace=None, hspace=None)
 blue_line = mlines.Line2D(
     [], [], color='blue',
     label=r'Frequency for mode $1$, $2$, $4$, $6$ and $7$')
 plt.legend(handles=[blue_line], loc=8)
 # colorbar
 # colorbar(ticks=[-1, 0, 1], orientation='vertical')
-cax = plt.axes([0.91, 0.1, 0.03, 0.8])
+cax = plt.axes([0.89, 0.1, 0.03, 0.8])
 cb = plt.colorbar(cax=cax)
-cb.ax.set_label('projection')
+cb.set_label('projection', fontsize=12)
 # -------------------------------------------------------------
 # Show or save plots
 # -------------------------------------------------------------
