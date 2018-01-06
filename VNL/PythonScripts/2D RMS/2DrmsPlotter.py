@@ -19,6 +19,7 @@ myfile = np.array([])
 configuration = np.array([])
 dynamical_matrix = np.array([])
 n_modes = np.array([])
+vibrationalmodes = np.array([])
 
 # -------------------------------------------------------------
 # Load data from dynamical matrices
@@ -68,52 +69,21 @@ pstring = "| The File {} contains {:4d} modes |".format(
     RFDM, int(RFn_modes))
 print(pstring)
 print('+-------------------------------------------------------+')
+myfile = np.array([])
+for i in range(nof + 1):
+    if i == nof:
+        break
+    elif i >= 9:
+        # Choose file
+        myfile = np.append(myfile,
+                           '{}SheetVib.hdf5'.format(i + 1))
+    else:
+        myfile = np.append(myfile,
+                           '0{}SheetVib.hdf5'.format(i + 1))
 
-# -------------------------------------------------------------
-# Create and fill data dictionaries
-# -------------------------------------------------------------
-qpoints = {}
-frequency_list = {}
-projection = {}
-anti_projection = {}
-RMS = {}
-RFfrequency_list = {}
-RFprojection = {}
-RFRMS = {}
+RFSV = '05nmSheetVib.hdf5'
+RFvibrationalmodes = nlread(RFSV, VibrationalMode)[-1]
 
-print("+=========================+")
-print("|    Loading datafiles    |")
-print("|-------------------------|")
-with open('qpoints.pickle', 'rb') as handle:
-    qpoints = pickle.load(handle)
-print("| (1/5): Q-points         |")
-with open('frequency_list.pickle', 'rb') as handle:
-    frequency_list = pickle.load(handle)
-print("| (2/5): Frequency list   |")
-with open('projection.pickle', 'rb') as handle:
-    projection = pickle.load(handle)
-print("| (3/5): Projection       |")
-with open('anti_projection.pickle', 'rb') as handle:
-    anti_projection = pickle.load(handle)
-print("| (4/5): Anti projection  |")
-with open('RMS.pickle', 'rb') as handle:
-    RMS = pickle.load(handle)
-print("| (5/5): RMS              |")
-print("+=========================+")
-
-print("+=========================+")
-print("|    Loading datafiles    |")
-print("|-------------------------|")
-with open('Referencefrequency_list.pickle', 'rb') as handle:
-    RFfrequency_list = pickle.load(handle)
-print("| (1/3): Frequency list   |")
-with open('ReferenceProjection.pickle', 'rb') as handle:
-    RFprojection = pickle.load(handle)
-print("| (2/3): Projection       |")
-with open('RFRMS.pickle', 'rb') as handle:
-    RFRMS = pickle.load(handle)
-print("| (3/3): RFRMS            |")
-print("+=========================+")
 # -------------------------------------------------------------
 # Define colormaps
 # -------------------------------------------------------------
@@ -122,61 +92,90 @@ cmap, norm = cm.get_cmap('brg'), None  # 'hot','brg','seismic'
 # -------------------------------------------------------------
 # Plot RMS
 # -------------------------------------------------------------
-ymin, ymax = -1.5, 15
-fig = plt.figure(figsize=(8, 8))
-gs = gridspec.GridSpec(2, 2)
-gs.update(wspace=0.03)
+fig = plt.figure(figsize=(5, 4))
+gs = gridspec.GridSpec(4, 5)
+gs.update(wspace=0.03, hspace=0.03)
+ax1 = {}
+ax2 = {}
+Index = [0, 1, 3, 5, 6]
+coor = np.array([])
+for i in range(5):
+    print('+--------------------------------+')
+    pstring = "| Plotting clamped plot {:2d} of {:2d} |".format(
+        int(1 + i), int('5'))
+    print(pstring)
+    print('+--------------------------------+')
+    ax1[i] = plt.subplot(gs[0, i])
+    VM = RFvibrationalmodes.movie(
+        mode_index=Index[i], temperature=300000 * Kelvin)
+    coor = VM.image(19)
+    coor = coor.cartesianCoordinates().inUnitsOf(Ang)
+    VM = np.array([])
+    x = coor[:, 0]
+    y = coor[:, 1]
+    z = coor[:, 2]
+    z = (coor[:, 2]) - 10
+    plt.tricontourf(x, y, z, 200)
+    plt.ylim(-31.1505, 31.1505)
+    plt.xlim(50.464, 112.765)
 
-ax1 = plt.subplot(gs[0])
-coor = RFconfiguration.cartesianCoordinates().inUnitsOf(Ang)
-x = coor[:, 0]
-y = coor[:, 1]
-tagindex = np.array(RFconfiguration.indicesFromTags(tags='FixedFinal'))
-RMSscale = np.array(RFRMS[4]).flatten()
+for i in range(1, 5):
+    plt.setp(ax1[i].get_yticklabels(), visible=False)
+    plt.subplots_adjust(left=0.07, bottom=None, right=0.88, top=None,
+                        wspace=None, hspace=None)
+for i in range(5):
+    plt.setp(ax1[i].get_xticklabels(), visible=False)
+    plt.subplots_adjust(left=0.07, bottom=None, right=0.88, top=None,
+                        wspace=None, hspace=None)
 
-#RMSscale = RMSscale[2::3]
-print(RMSscale.size)
-myscale = np.ones((x.size))
-j = 0
-myscale[tagindex] = 0
-np.set_printoptions(threshold=numpy.nan)
-test = np.array([])
+RFvibrationalmodes = np.array([])
+Index = [2, 3, 5, 7, 8]
+coor = np.array([])
+c = 0
+for j in range(3):
+    vibrationalmodes = nlread(myfile[j], VibrationalMode)[-1]
+    for i in range(5):
+        c = c + 1
+        print('+--------------------------------+')
+        pstring = "| Plotting mode plot    {:2d} of {:2d} |".format(
+            int(c), int('15'))
+        print(pstring)
+        print('+--------------------------------+')
+        ax2[c - 1] = plt.subplot(gs[j + 1, i])
+        VM = vibrationalmodes.movie(
+            mode_index=Index[i], temperature=300000 * Kelvin)
+        coor = VM.image(19)
+        coor = coor.cartesianCoordinates().inUnitsOf(Ang)
+        rmindex = np.array([])
+        for i in range(coor.shape[0]):
+            if coor[i, 2] < 10:
+                rmindex = np.append(rmindex, [i])
+        coor = np.delete(coor, rmindex, axis=0)
+        VM = np.array([])
+        x = coor[:, 0]
+        y = coor[:, 1]
+        z = (coor[:, 2]) - 11.8747
+        plt.tricontourf(x, y, z, 200)
+        plt.ylim(-30.5601, 30.5601)
+        plt.xlim(20.5441, 82.8171)
 
-for i in range(myscale.size):
-    if myscale[i] == 1:
-        myscale[i] = RMSscale[j]
-        j = j + 1
-    else:
-        test = np.append(test, [i])
-print(test)
-print(myscale)
-print(RMSscale)
-plt.tricontourf(x, y, myscale, 20)
-plt.show()
-quit()
-ax2 = plt.subplot(gs[1])
-myscale = {}
-for i in range(nof):
-    myscale[i] = projection[i]  # /numpy.max(projection)
-for i in range(nof):
-    # print numpy.max(projection[i])
-    plt.scatter(numpy.repeat(np.array([i + 1]), n_modes[i]),
-                frequency_list[i].inUnitsOf(eV).flatten(
-    ) * 1000, c=myscale[i], s=15 + myscale[i] * 120, marker='o',
-        edgecolor='none', cmap=cmap, norm=norm)
+rangeindex = [0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 10, 0, 0, 0, 0]
+for i in range(15):
+    if i != rangeindex[i]:
+        plt.setp(ax2[i].get_yticklabels(), visible=False)
+        plt.subplots_adjust(left=0.07, bottom=None, right=0.88, top=None,
+                            wspace=None, hspace=None)
+for i in range(10):
+    plt.setp(ax2[i].get_xticklabels(), visible=False)
+    plt.subplots_adjust(left=0.07, bottom=None, right=0.88, top=None,
+                        wspace=None, hspace=None)
 
-plt.setp(ax2.get_yticklabels(), visible=False)
-plt.subplots_adjust(left=0.07, bottom=None, right=0.88, top=None,
-                    wspace=None, hspace=None)
-blue_line = mlines.Line2D(
-    [], [], color='blue',
-    label=r'Frequency for mode $1$, $2$, $4$, $6$ and $7$')
-plt.legend(handles=[blue_line], loc=8)
-# colorbar
-# colorbar(ticks=[-1, 0, 1], orientation='vertical')
+
 cax = plt.axes([0.89, 0.1, 0.03, 0.8])
 cb = plt.colorbar(cax=cax)
-cb.set_label('projection', fontsize=12)
+cb.set_label('Displacement [$\AA$]', fontsize=12)
+plt.show()
+quit()
 # -------------------------------------------------------------
 # Show or save plots
 # -------------------------------------------------------------
