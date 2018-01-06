@@ -2,8 +2,8 @@
 
 \subsection{Nanomechanics}
 This following section will focus on the mechanics of the now defined geometry of the Graphene sheet. It will incorporate boundary conditions in two dimensions, Hooke's law, the normal modes of the lattice as well as phonons.
-\subsubsection{A simple system of two atoms: Equilibrium state, Lennard-Jones Potential, Displaced state, Hooke's Law, the equation of motion for a simple harmonic oscillator and its normal mode solution PLOTS??}
-To describe the dynamics of the system one must decompose the system into simpler elements in order to understand what happens for the system as a whole. Basically we want to describe the displacements each atom makes and then sum it up to some bigger form of system. The basis of a system containing only two atoms consist of a mass-spring system where each atom has a mass and where the \textit{atomic interaction potential} works as the spring in between each atom. The specific interaction potential we will be working with is called the \textit{Lennard-Jones Potential}\text{\cite[eq.1.3]{Cleland2003}}. The potential is given by \begin{equation}
+\subsubsection{Mechanics and dynamics of a simple system containing two atoms PLOTS??}
+To describe the dynamics of the system one must decompose the system into simpler elements in order to understand what happens for the system as a whole. Basically we want to describe the displacements each atom makes and then sum it up to some bigger form of system. The basis of a system containing only two atoms can be described a mass-spring system where each atom has a mass and where the \textit{atomic interaction potential} works as the spring in between each atom. The specific interaction potential we will be working with is called the \textit{Lennard-Jones Potential}\text{\cite[eq.1.3]{Cleland2003}}. The potential is given by \begin{equation}
     \phi(r)=-\dfrac{A}{r^{6}}+\dfrac{B}{r^{12}}\label{LJPot}
 \end{equation} where $A$ is the strength of the attractive interaction , $B$ is the strength of the repulsive interaction and $r$ is the spacing between the atoms.
 The potential can be derived from the force between the atoms as the force is the derivative of the negative potential energy with respect to the atom spacing $r$\text{\cite[eq.1.1]{Cleland2003}}.\begin{equation}
@@ -47,8 +47,7 @@ $\dfrac{\text{d}U_{tot}}{\text{d}r}=0$. Working on with this expression and usin
     \end{equation} This concludes the example of a system of two atoms. 
     The next step is to scale up this theory to two and three dimensions.
 \subsubsection{Dynamics in a three dimensional lattice} As we have now moved on to three dimensions the position of each atom now has three coordinates and we will be working with bulk systems containing many atoms. To accommodate for these changes we will use vector notation. Otherwise the progression will be similar to the two atom system, first defining the interaction potential with the harmonic approximation and a \textit{Tensor} function, then the system of equations of motion which contains a \textit{Dynamical Matrix}, an eigenvector-eigenvalue problem as well as the wavevector $\textbf{q}$ and at last discussing the solutions to the system of equations.\\
-
-
+To describe the atoms in the lattice and their vector field displacement $\mathbf{u}(\mathbf{r},t)$ we are still going to use classic mechanical theory as every atom in the lattice are seen as point masses, just like the system of two atoms. As defined in \cref{BLGV} we have a lattice with $\mathbf{R}_{i}$ lattice points. In \cref{BLGV} we look at a two dimensional lattice but the following will describe a three dimensional lattice which basically means that $\mathbf{R}_{i}$ will have an additional coordinate. As it was with the system of two atoms, we want this system to be at equilibrium and therefore we choose an origin where the atom at the center of the $j$'th unitcell is place on the $\mathbf{R}_{j}$ lattice point. Again looking at \cref{hexagon} that would be an example of such as system in two dimensions. 
 \subsubsection{Periodic functions}
 \subsubsection{Reciprocal space, Blochs theorem, Bloch wavevector}
 
@@ -65,7 +64,7 @@ where
      (q_{x},q_{y})=\dfrac{2\pi}{X}(m,n)
 \end{equation}
 Here $m,n$ are integers in the interval $-\dfrac{\mathcal{N}}{2}, +\dfrac{\mathcal{N}}{2}$. The range of $q_{x},q_{y}$ becomes $-\dfrac{\pi}{r_{0}},+\dfrac{\pi}{r_{0}}$.\\
-In the specific case of this study we work with a fixed boundary, more specific, a clamped boundary which means that no bending is allowed in the plane. A clamped boundary results in the need for numerical approximations in calculations of the dynamics. As the tools used for calculations are on a"per atom" atom basis, there wont be any need for finite-element models nor any partial differential equations sovler (PDE). Instead...
+In the specific case of this study we work with a fixed boundary, more specific, a clamped boundary which means that no bending is allowed in the plane. A clamped boundary results in the need for numerical approximations in calculations of the dynamics. As the tools used for calculations are on a"per atom" atom basis, there wont be any need for finite-element models nor any partial differential equations solver (PDE). Instead...
 
 \subsubsection{Normal Modes of Two-Dimensional Hexagonal lattice}
  
