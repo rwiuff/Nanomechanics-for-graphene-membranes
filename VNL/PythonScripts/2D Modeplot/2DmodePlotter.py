@@ -4,48 +4,16 @@
 # -------------------------------------------------------------
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
-import matplotlib.lines as mlines
 from NanoLanguage import *
 from pylab import *
 import pickle
 import numpy as np
-import numpy.polynomial.polynomial as poly
-from scipy.optimize import curve_fit
 
 # -------------------------------------------------------------
 # Create data arrays
 # -------------------------------------------------------------
-myfile = np.array([])
 configuration = np.array([])
-dynamical_matrix = np.array([])
-n_modes = np.array([])
 vibrationalmodes = np.array([])
-
-# -------------------------------------------------------------
-# Load data from dynamical matrices
-# -------------------------------------------------------------
-nof = 3
-for i in range(nof + 1):
-    if i == nof:
-        break
-    elif i >= 9:
-        # Choose file
-        myfile = np.append(myfile,
-                           '{}DynamicalMatrix.hdf5'.format(i + 1))
-    else:
-        myfile = np.append(myfile,
-                           '0{}DynamicalMatrix.hdf5'.format(i + 1))
-    # Load configuration with calculator
-    configuration = np.append(configuration, nlread(
-        myfile[i], BulkConfiguration)[-1])
-
-    # Load DynamicalMatrix
-    dynamical_matrix = np.append(
-        dynamical_matrix, nlread(myfile[i], DynamicalMatrix)[-1])
-
-    # Vibrational state to project onto
-    n_modes = np.append(n_modes, (len(configuration[i]) - len(
-        dynamical_matrix[i].constraints())) * 3)
 
 # -------------------------------------------------------------
 # Load data from clamped reference dynamical matrix
@@ -53,22 +21,7 @@ for i in range(nof + 1):
 RFDM = '05nmDynamicalMatrix.hdf5'
 RFconfiguration = nlread(RFDM, BulkConfiguration)[-1]
 RFdynamical_matrix = nlread(RFDM, DynamicalMatrix)[-1]
-RFn_modes = ((len(RFconfiguration) - len(
-    RFdynamical_matrix.constraints())) * 3)
-
-# Display loaded matrices and modes
-print('+------------------------------------------------------+')
-for i in range(nof):
-    pstring = "| The File {} contains {:4d} modes |".format(
-        myfile[i], int(n_modes[i]))
-    print(pstring)
-print('+------------------------------------------------------+')
-
-print('+-------------------------------------------------------+')
-pstring = "| The File {} contains {:4d} modes |".format(
-    RFDM, int(RFn_modes))
-print(pstring)
-print('+-------------------------------------------------------+')
+nof = 3
 myfile = np.array([])
 for i in range(nof + 1):
     if i == nof:
