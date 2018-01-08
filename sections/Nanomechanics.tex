@@ -1,7 +1,7 @@
 % !TEX root = ../Main.tex
 
 \subsection{Nanomechanics}
-This following section will focus on the mechanics of the now defined geometry of the Graphene sheet. It will incorporate boundary conditions in two dimensions, Hooke's law, the normal modes of the lattice as well as phonons.
+This following section will focus on the mechanics of the now defined geometry of the Graphene sheet. It will incorporate boundary conditions in two dimensions, Hooke's law, the normal modes of the lattice as well as phonons. Most of the ideas, formulas and the workthrough in general, has its roots in the book \text{\cite{Cleland2003}}. We refer the reader to this box for a more detailed describtion of nanomechanics.  
 \subsubsection{Mechanics and dynamics of a simple system containing two atoms PLOTS??}
 To describe the dynamics of the system one must decompose the system into simpler elements in order to understand what happens for the system as a whole. Basically we want to describe the displacements each atom makes and then sum it up to some bigger form of system. The basis of a system containing only two atoms can be described a mass-spring system where each atom has a mass and where the \textit{atomic interaction potential} works as the spring in between each atom. The specific interaction potential we will be working with is called the \textit{Lennard-Jones Potential}\text{\cite[eq.1.3]{Cleland2003}}. The potential is given by \begin{equation}
     \phi(r)=-\dfrac{A}{r^{6}}+\dfrac{B}{r^{12}}\label{LJPot}
@@ -70,6 +70,7 @@ To describe the atoms in the lattice and their vector field displacement $\mathb
 \end{align}Solving this system of equations requires finding the normal modes for system which is the same as the general solution for the system of equations. This means that all solutions must have the same time dependence. As the general solution form a complete set, we can describe the any motion in the lattice as a superposition of normal modes. When we take the same time dependence for all atoms in the lattice we get the same solution as with the two atom system, just in vector notation.\begin{equation}
     \mathbf{u}_{j}(t)=\mathbf{A}_{j}e^{i\omega t}
 \end{equation}Here $\mathbf{A}_{j}$ is the displacement for the $j$'th atom in all three directions. 
+
 
 \subsubsection{Periodic functions}
 \subsubsection{Reciprocal space, Blochs theorem, Bloch wavevector}
