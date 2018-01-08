@@ -45,12 +45,14 @@ for i in range(nof + 1):
         len(dynamical_matrix[i].constraints())) * 3)
 
 # Display loaded matrices and modes
-print('+---------------------------------------------------------------------+')
+print(
+    '+---------------------------------------------------------------------+')
 for i in range(nof):
     pstring = "| The File {} is loaded and contains {:4d} modes |".format(
         myfile[i], int(n_modes[i]))
     print(pstring)
-print('+---------------------------------------------------------------------+')
+print(
+    '+---------------------------------------------------------------------+')
 
 # -------------------------------------------------------------
 # Make projection vectors
@@ -84,7 +86,9 @@ for i in range(nof):
         "Calculating the projected phonon dispersion for {}".format(
             myfile[i]))
     T = 300. * Kelvin
-    qpoints[i], frequency_list[i], projection[i], anti_projection[i], RMS[i] = ProjectedPhononBandsDisplacement(
+    qpoints[i], frequency_list[i],
+    projection[i], anti_projection[i],
+    RMS[i] = ProjectedPhononBandsDisplacement(
         configuration[i], dynamical_matrix[i],
         fractional_qpoints, projection_vibration[i], temperature=T)
 

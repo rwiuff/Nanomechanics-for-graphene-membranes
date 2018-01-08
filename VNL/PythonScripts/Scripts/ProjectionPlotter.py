@@ -128,11 +128,11 @@ for i in range(nof):
     if plotmode == 0:
         scatter(numpy.repeat(np.array([i + 1]), n_modes[i]),
                 frequency_list[i].inUnitsOf(
-            eV).flatten()*1000, c=myscale[i], s=150, marker='o',
+            eV).flatten() * 1000, c=myscale[i], s=150, marker='o',
             edgecolor='none', cmap=cmap, norm=norm)
     elif plotmode == 1:
         scatter(numpy.repeat(np.array([i + 1]), n_modes[i]),
-                frequency_list[i].inUnitsOf(eV).flatten()*1000,
+                frequency_list[i].inUnitsOf(eV).flatten() * 1000,
                 c=myscale[i], s=15 + myscale[i] * 120, marker='o',
                 edgecolor='none', cmap=cmap, norm=norm)
 # colorbar
@@ -142,8 +142,8 @@ tick_locator = matplotlib.ticker.MaxNLocator(nbins=10, prune=None)
 cb.locator = tick_locator
 cb.update_ticks()
 # Set x-ticks
-kticks = [w * 1 for w in range(nof+2)]
-ticklabels = ['%i nm' % w for w in range(nof+1)]
+kticks = [w * 1 for w in range(nof + 2)]
+ticklabels = ['%i nm' % w for w in range(nof + 1)]
 xticks(kticks, ticklabels)
 grid(kticks)
 plt.subplots_adjust(left=None, bottom=None, right=0.97, top=None,
@@ -156,7 +156,7 @@ x = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 y = np.zeros(10)
 for i in range(nof):
     y[i] = np.sort(frequency_list[i].inUnitsOf(
-        eV).flatten()*1000)[0]
+        eV).flatten() * 1000)[0]
 
 # Define reciprocal function
 
@@ -182,7 +182,7 @@ x = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 y = np.zeros(10)
 for i in range(nof):
     y[i] = np.sort(frequency_list[i].inUnitsOf(
-        eV).flatten()*1000)[1]
+        eV).flatten() * 1000)[1]
 
 # Define reciprocal function
 

@@ -66,7 +66,7 @@ for j in range(3):
         print('+----------------------------------+')
         VM = vibrationalmodes.movie(
             mode_index=ModeIndex[i], temperature=T * Kelvin)
-        ZModes[c] = VM.image(image_index=ImageIndex[j,i])
+        ZModes[c] = VM.image(image_index=ImageIndex[j, i])
         VM = np.array([])
 
 

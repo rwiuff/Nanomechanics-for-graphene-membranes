@@ -1,11 +1,11 @@
 from NanoLanguage import *
 from NL.Analysis.Mobility import fermiDistribution
-#from NL.CommonConcepts.Configurations.Utilities import cartesianToFractional,fractionalToCartesian
 from pylab import *
 import itertools
 
 
-def ProjectedPhononBandsDisplacement(configuration, dynamical_matrix, qpoints, projection_vibration, normalize_by_projection=True, temperature=300. * Kelvin):
+def ProjectedPhononBandsDisplacement(configuration, dynamical_matrix, qpoints,
+                                     projection_vibration, normalize_by_projection=True, temperature=300. * Kelvin):
     """ """
     """
     Private function to calculate projected phonon dispersions.
@@ -69,8 +69,10 @@ def ProjectedPhononBandsDisplacement(configuration, dynamical_matrix, qpoints, p
 
     # Find constraints.
     if len(dynamical_matrix.constraints()) > 0:
-        constrained_displacements = numpy.sort(list(3 * dynamical_matrix.constraints()) + list(
-            3 * dynamical_matrix.constraints() + 1) + list(3 * dynamical_matrix.constraints() + 2)).astype(int)
+        constrained_displacements = numpy.sort(
+            list(3 * dynamical_matrix.constraints()) + list(
+                3 * dynamical_matrix.constraints() + 1) + list(
+                3 * dynamical_matrix.constraints() + 2)).astype(int)
     # Calculate projections for each mode and q.
     print("Calculating projections for each mode")
     frequency_list = numpy.zeros((n_qpoints, n_modes), dtype=float)
@@ -78,7 +80,6 @@ def ProjectedPhononBandsDisplacement(configuration, dynamical_matrix, qpoints, p
     anti_projection = numpy.zeros((n_qpoints, n_modes), dtype=float)
     RMS = numpy.zeros((n_qpoints, n_modes), dtype=float)
     qpoint = qpoints[:]
-
 
     # Calculate eigenvalues and eigenvectors from dynamical matrix.
     print("Calculating eigenvalues and eigenvectors")
@@ -95,21 +96,26 @@ def ProjectedPhononBandsDisplacement(configuration, dynamical_matrix, qpoints, p
 
         # Get characteristic length and mean-square mode displacement.
         eigenvalues_ph_mode = eigenvalues[mode].inUnitsOf(eV)
-        inverse_characteristic_length = numpy.sqrt(2) * numpy.sqrt(abs(eigenvalues_ph_mode)) * numpy.sqrt(numpy.real(numpy.dot(
-            numpy.conj(eigenvectors[:, mode].T), numpy.dot(masses_diagonal_matrix, eigenvectors[:, mode])))) / unit_factor  # 1/Ang
+        inverse_characteristic_length = numpy.sqrt(2) * numpy.sqrt(
+            abs(eigenvalues_ph_mode)) * numpy.sqrt(numpy.real(
+                numpy.dot(numpy.conj(eigenvectors[:, mode].T), numpy.dot(
+                    masses_diagonal_matrix,
+                    eigenvectors[:, mode])))) / unit_factor  # 1/Ang
         ratio_thermal_frequency = abs(
             eigenvalues_ph_mode) / (2 * thermal_smearing)
         # 1./(inverse_characteristic_length**2)#
         x_squared = coth(ratio_thermal_frequency) / \
             (inverse_characteristic_length**2)
 
-        # projection - NB: we project on absolute value of eigenmodes (direction is not important).
-        CP = "({}/{}) Calculating projections for mode".format(mode+1,n_modes)
+        CP = "({}/{}) Calculating projections for mode".format(mode + 1,
+                                                               n_modes)
         print(CP)
         projection[0, mode] = numpy.abs(
-            numpy.dot(numpy.abs(eigenvector), projection_vibration)) / projection_norm
+            numpy.dot(numpy.abs(eigenvector),
+                      projection_vibration)) / projection_norm
         anti_projection[0, mode] = numpy.abs(numpy.dot(
-            numpy.abs(eigenvector), anti_projection_vibration)) / anti_projection_norm
+            numpy.abs(eigenvector),
+            anti_projection_vibration)) / anti_projection_norm
         RMS[0, mode] = numpy.sqrt(x_squared)
 
     # Return result

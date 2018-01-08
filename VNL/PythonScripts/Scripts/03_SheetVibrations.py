@@ -21,6 +21,6 @@ vibrational_mode = VibrationalMode(
     dynamical_matrix=dynamical_matrix,
     kpoint_fractional=[0.0001, 0.0001, 0],
     mode_indices=None,
-    )
+)
 # Save configuration
 nlsave('SheetVib.hdf5', vibrational_mode)

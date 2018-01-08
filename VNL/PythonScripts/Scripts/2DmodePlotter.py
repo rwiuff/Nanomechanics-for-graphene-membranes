@@ -40,7 +40,8 @@ cmap = cm.get_cmap('brg')
 v_min = 0
 v_max = 0
 for i in range(len(ClampedModes)):
-    if v_min > np.min((ClampedModes[i].cartesianCoordinates().inUnitsOf(Ang)[:, 2]) - 10):
+    if v_min > np.min((
+            ClampedModes[i].cartesianCoordinates().inUnitsOf(Ang)[:, 2]) - 10):
         v_min = np.min(
             (ClampedModes[i].cartesianCoordinates().inUnitsOf(Ang)[:, 2]) - 10)
     else:
@@ -59,13 +60,15 @@ for i in range(1, len(ZModes)):
     else:
         v_min = v_min
 for i in range(len(ClampedModes)):
-    if v_max < np.max((ClampedModes[i].cartesianCoordinates().inUnitsOf(Ang)[:, 2]) - 10):
+    if v_max < np.max((
+            ClampedModes[i].cartesianCoordinates().inUnitsOf(Ang)[:, 2]) - 10):
         v_max = np.max(
             (ClampedModes[i].cartesianCoordinates().inUnitsOf(Ang)[:, 2]) - 10)
     else:
         v_max = v_max
 for i in range(1, len(ZModes)):
-    if v_max < np.max((ZModes[i].cartesianCoordinates().inUnitsOf(Ang)[:, 2]) - 11.8747):
+    if v_max < np.max((
+            ZModes[i].cartesianCoordinates().inUnitsOf(Ang)[:, 2]) - 11.8747):
         v_max = np.max(
             (ZModes[i].cartesianCoordinates().inUnitsOf(Ang)[:, 2]) - 11.8747)
     else:
@@ -157,8 +160,9 @@ cax = plt.axes([0.88, 0.1, 0.03, 0.8])
 cb = plt.colorbar(ticks=[v_min, 0, v_max], cax=cax)
 #cb.set_label('Out of plane displacement', fontsize=12)
 cb.ax.set_yticklabels(
-    ['Max\nunder\nplane', 'In\nplane', 'Max\nover\nplane'],fontsize=14)
+    ['Max\nunder\nplane', 'In\nplane', 'Max\nover\nplane'], fontsize=14)
 fig.suptitle(
-    'RMS values and displacement plots for different modes and substrates', size=18)
+    'RMS values and displacement plots for different modes and substrates',
+    size=18)
 
 plt.show()

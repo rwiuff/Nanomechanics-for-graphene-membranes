@@ -33,7 +33,7 @@ if lm == 1:
     sub = np.array([])
     # Sort coordinates for 1 layer
     for i in range(coor.shape[0]):
-        if coor[i,2] < 0.50:
+        if coor[i, 2] < 0.50:
             sub = np.append([sub], [i])
     # Convert indices to list and define tag with constraints
     sub = sub.astype(int)
@@ -70,9 +70,9 @@ if lm == 1:
     l1 = np.array([])
     l2 = np.array([])
     for i in range(coor.shape[0]):
-        if coor[i,2] < 0.50:
+        if coor[i, 2] < 0.50:
             l2 = np.append([l2], [i])
-        elif coor[i,2] > 0.50:
+        elif coor[i, 2] > 0.50:
             l1 = np.append([l1], [i])
     l1 = l1.astype(int)
     l2 = l2.astype(int)
