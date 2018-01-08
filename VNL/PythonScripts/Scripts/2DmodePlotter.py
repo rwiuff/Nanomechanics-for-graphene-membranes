@@ -73,7 +73,7 @@ for i in range(1, len(ZModes)):
             (ZModes[i].cartesianCoordinates().inUnitsOf(Ang)[:, 2]) - 11.8747)
     else:
         v_max = v_max
-levels = np.linspace(v_min, v_max, 1000)
+levels = np.linspace(v_min, v_max, 800)
 # -------------------------------------------------------------
 # Plot RMS
 # -------------------------------------------------------------

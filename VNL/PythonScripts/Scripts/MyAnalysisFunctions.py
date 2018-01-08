@@ -5,13 +5,17 @@ import itertools
 
 
 def ProjectedPhononBandsDisplacement(configuration, dynamical_matrix, qpoints,
-                                     projection_vibration, normalize_by_projection=True, temperature=300. * Kelvin):
+                                     projection_vibration,
+                                     normalize_by_projection=True,
+                                     temperature=300. * Kelvin):
     """ """
     """
     Private function to calculate projected phonon dispersions.
-    Projects |eigenmode vectors| on input projection_vibration's (NB: displacement signs are removed).
+    Projects |eigenmode vectors| on input projection_vibration's
+    (NB: displacement signs are removed).
 
-    @param configuration            : The BulkConfiguration for which to calculate the mobility.
+    @param configuration            : The BulkConfiguration for which to
+                                        calculate the mobility.
     @type                           : BulkConfiguration
 
     @param dynamical_matrix         : The dynamical matrix object.
@@ -20,10 +24,12 @@ def ProjectedPhononBandsDisplacement(configuration, dynamical_matrix, qpoints,
     @param qpoints                  : fractional q-points.
 
     @param projection_vibration     : The vibrational state to project onto.
-    @type                           : array with length equal to the number of phonon modes.
+    @type                           : array with length equal to the number
+                                        of phonon modes.
     @default                        : No unit
 
-    @normalize_by_projection        : Whether or not to normalize by norm of the projection vibrational state.
+    @normalize_by_projection        : Whether or not to normalize by norm
+                                        of the projection vibrational state.
     @type                           : Boolean.
     @default                        : True
 

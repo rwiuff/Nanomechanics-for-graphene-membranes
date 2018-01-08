@@ -50,8 +50,8 @@ To describe the atoms in the lattice and their vector field displacement $\mathb
 \end{equation*} at equilibrium, moreover the potential energy at the equilibrium positions $\mathbf{R}_{j}$ also equals 0. Again, dropping the higher order terms, this leaves us with the harmonic approximation\text{\cite[eq.2.30]{Cleland2003}}\begin{align}
     & U_{harm}(\mathbf{r}_{1},...\mathbf{r}_{N})=\nonumber\\ & \dfrac{1}{2}\sum_{jk=1}^{N}\sum_{\alpha\beta=1}^{3}\left\dfrac{\partial^{2} U}{\partial r_{j\alpha}\partial r_{k\beta}}\right|_{\mathbf{R}_{j}}u_{j\alpha}u_{k\beta}\label{harmapprox2}
 \end{align}In order to simplify the notation when working with the dynamics of the system, we introduce a \textit{tensor}\text{\cite[p.58]{Cleland2003}} which is a $3x3$ matrix. The tensor does not change when translated to another coordinate system, but elements within the tensor does change however. The tensor\text{\cite[eq.2.31]{Cleland2003}} is defined by\begin{equation}
-    \Phi_{\alpha\beta}(\mathbf{R}_{i},\mathbf{R}_{j})=\left\dfrac{\partial^{2}U}{\partial r_{i\alpha}\partial r_{j\beta}}\right|_{\mathbf{R}_{j}} 
-\end{equation} and is in terms of the curvature of the total interaction energy $U(\mathbf{r}_{1},...\mathbf{r}_{N})$\text{\cite[p.58]{Cleland2003}}. As the tensor are only dependent on the equilibrium positions $\mathbf{R}_{i},\mathbf{R}_{j}$ the crystal itself does not change under translation. This means that the tensor only depend on the difference in the atoms poitions. The tensor then becomes\text{\cite[eq.2.32]{Cleland2003}}\begin{equation}\Phi_{\alpha\beta}(\mathbf{R}_{i},\mathbf{R}_{j})=\Phi_{\alpha\beta}(\mathbf{R}_{i}-\mathbf{R}_{j})
+    \Phi_{\alpha\beta}(\mathbf{R}_{i},\mathbf{R}_{j})=\dfrac{\partial^{2}U}{\partial r_{i\alpha}\partial r_{j\beta}} 
+\end{equation} and is in terms of the curvature of the total interaction energy $U(\mathbf{r}_{1},...\mathbf{r}_{N})$\text{\cite[p.58]{Cleland2003}},evaluated at the equilibrium position. As the tensor are only dependent on the equilibrium positions $\mathbf{R}_{i},\mathbf{R}_{j}$ the crystal itself does not change under translation. This means that the tensor only depend on the difference in the atoms poitions. The tensor then becomes\text{\cite[eq.2.32]{Cleland2003}}\begin{equation}\Phi_{\alpha\beta}(\mathbf{R}_{i},\mathbf{R}_{j})=\Phi_{\alpha\beta}(\mathbf{R}_{i}-\mathbf{R}_{j})
 \end{equation}This will also change \cref{harmapprox2} to\begin{align}
     &U_{harm}(\mathbf{r}_{1},...\mathbf{r}_{N})=\nonumber\\
     &\dfrac{1}{2}\sum_{jk=1}^{N}\sum_{\alpha\beta=1}^{3}u_{j\alpha}\Phi_{\alpha\beta}(\mathbf{R}_{j}-\mathbf{R}_{k})u_{k\beta}
@@ -65,11 +65,14 @@ To describe the atoms in the lattice and their vector field displacement $\mathb
     & \dfrac{1}{2}\sum_{jk=1}^{N}\sum_{\alpha\beta=1}^{3}u_{j\alpha}\Phi_{\alpha\beta}(\mathbf{R}_{j}-\mathbf{R}_{k})u_{k\beta}=0\label{hamil}
 \end{align} Taking every index of $\alpha$, the displacement vector becomes $\mathbf{u}_{j}=u_{\alpha j}$. Moving things around in \cref{hamil} we get\begin{align}
      & \dfrac{1}{2}M\sum_{\alpha=1}^{3}\sum_{j=1}^{N}\dfrac{\partial^{2}}{\partial t^{2}}u_{j\alpha}^{2}=\nonumber\\
-    & -\dfrac{1}{2}\sum_{jk=1}^{N}\sum_{\alpha\beta=1}^{3}u_{j\alpha}\Phi_{\alpha\beta}(\mathbf{R}_{j}-\mathbf{R}_{k})u_{k\beta}\\
-    & M\dfrac{\partial^{2}}{\partial t^{2}}u_{j\alpha}=-\sum_{k=1}^{N}\sum_{\beta=1}^{3}\Phi_{\alpha\beta}(\mathbf{R}_{j}-\mathbf{R}_{k})u_{k\beta}
-\end{align}Solving this system of equations requires finding the normal modes for system which is the same as the general solution for the system of equations. This means that all solutions must have the same time dependence. As the general solution form a complete set, we can describe the any motion in the lattice as a superposition of normal modes. When we take the same time dependence for all atoms in the lattice we get the same solution as with the two atom system, just in vector notation.\begin{equation}
-    \mathbf{u}_{j}(t)=\mathbf{A}_{j}e^{i\omega t}
-\end{equation}Here $\mathbf{A}_{j}$ is the displacement for the $j$'th atom in all three directions. 
+    & -\dfrac{1}{2}\sum_{jk=1}^{N}\sum_{\alpha\beta=1}^{3}u_{j\alpha}\Phi_{\alpha\beta}(\mathbf{R}_{j}-\mathbf{R}_{k})u_{k\beta}\nonumber\\
+    & M\dfrac{\partial^{2}}{\partial t^{2}}u_{j\alpha}=-\sum_{k=1}^{N}\sum_{\beta=1}^{3}\Phi_{\alpha\beta}(\mathbf{R}_{j}-\mathbf{R}_{k})u_{k\beta}\label{Eqmotion}
+\end{align}Solving this system of equations requires finding the normal modes for system which is the same as the general solution for the system of equations. This means that all solutions must have the same time dependence. As the general solution form a complete set, we can describe the any motion in the lattice as a superposition of normal modes. When we take the same time dependence  `for all atoms in the lattice we get the same solution as with the two atom system, just in vector notation.\begin{equation}
+    \mathbf{u}_{j}(t)=\mathbf{A}e^{i\mathbf{q}\cdot\mathbf{R}_{j}}e^{i\omega t}
+\end{equation}Here $\mathbf{A}$ is the displacement for the $j$'th atom in all three directions and $\mathbf{q}$ is the wavevector which has the frequency $\omega$ for a given mode. This frequency will defined as $\omega_{\mathbf{q}}$.\\ Inserting this solution into \cref{Eqmotion} gives\begin{align}
+&\omega_{\mathbf{q}}^{2}MA_{\alpha}=\nonumber\\
+&\sum_{k=1}^{N}\sum_{\beta=1}^{3}\Phi_{\alpha\beta}(\mathbf{R}_{j}-\mathbf{R}_{k})e^{i\mathbf{q}\cdot(\mathbf{R}_{k}-\mathbf{R}_{j})}A_{\beta}
+\end{align}
 
 
 \subsubsection{Periodic functions}
