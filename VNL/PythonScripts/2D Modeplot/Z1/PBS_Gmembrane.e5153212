@@ -1,8 +1,0 @@
-Unloaded module: latex/TeXLive12
-Loaded module: intel/2013.1.039
-Loaded module: intelmpifix/1.0
-Traceback (most recent call last):
-  File "03_SheetVibrations.py", line 6, in <module>
-    configuration = nlread(path, BulkConfiguration)[-1]
-  File "zipdir/NL/IO/NLSaveUtilities.py", line 714, in nlread
-NL.ComputerScienceUtilities.Exceptions.NLValueError: The filename, DynamicalMatrix.hdf5, was not found - please check correct path and name.
