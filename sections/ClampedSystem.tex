@@ -12,7 +12,7 @@ This following section focuses on data extraction and analysis for a system of a
 
     \centering
     \includegraphics[width=\columnwidth]{Figures/DoubleMembrane.png}
-\caption{The picture on top shows the two layer system from above. The one on bottom shows the system from the side Both snapshots have been taken in ATK\cite{QuantumWise}.}
+\caption{The picture on top shows the two layer system from above. The one on bottom shows the system from the side. Both snapshots have been taken in ATK\cite{QuantumWise}.}
 \label{interlayersys}
 \end{figure}
 \clearpage
@@ -21,7 +21,8 @@ This following section focuses on data extraction and analysis for a system of a
 \subsubsection{Frequency vs. membrane size}
 In order to find the correlation between frequency of the modes in the membrane and the membrane size, the frequency over each membrane, which varies in size, is extracted and plotted as a function of the size of the given membrane. \\
 This is done by defining a sheet of a definite size in VNL and thereafter check the frequencies for the different membranes by inserting the different size membranes, one after the other. The distance from the edge of the membrane, to the edge of the sheet (or the next membrane) is called "neck" and has been chosen to be 5 nm for the biggest membrane which has a 10 nm diameter. With this "neck" size it is certain that the membrane do not transfer any energy to each other, according to reports \cref{p} \\
-Furthermore, only the frequencies for the first couple of modes will be checked.
+Furthermore, only the frequencies for the first couple of modes will be checked. \\
+In this section the frequency will sometimes be noted in terms of energy for the modes $[\text{eV}]$. Other times just as the frequency in $[\text{Hz}]$. That is because the energy can be converted to a frequency and vice versa by the relation: $1\text{Hz}=4.13\text{x}10^{-15}\text{eV}$. 
 \onecolumngrid
 
 \begin{figure}[H]
@@ -31,7 +32,7 @@ Furthermore, only the frequencies for the first couple of modes will be checked.
   \vspace{-0.8em}
   \includegraphics[width=1\linewidth]{Figures/FrequencyModeProjectionsNoZoom.eps}
   \label{svfa}
-  \vspace{-4.5em}
+  \vspace{-4.4em}
 \end{subfigure}\vspace{1mm}
 \begin{subfigure}{\textwidth}   
   \centering
@@ -48,9 +49,10 @@ Looking at the data it is clear to see that the frequency decreases when the siz
     f=a\cdot\dfrac{1}{x^n}
 \end{equation}Where $f$ is the frequency, $x$ is the size of the membranes, and where $a$ and $n$ are constants. Comparing the constants for the first mode to the constants for the second it is seen that $a$ relates to the frequency of the first membrane, while $n$ is relatively the same. This indicates that even though the modes start at different frequencies they will conjugate towards zero at the same rate about $\dfrac{1}{x^{1.4}}$. This trend can also be used as a scaling factor to predict the frequency for even bigger membranes, for example: If you want a 20 nm membrane we can predict that the frequency of first mode for this hole will be
     \begin{align}
-     f = & \left(8.743\cdot10^{-3}\pm2.012\cdot10^{-4}\right)\\
-    & \cdot\dfrac{1}{20^{1.428\pm5.166\cdot10^{-2}}}\\
-    = & 1.213\cdot10^{-4}\pm 1.898\cdot 10^{-5} \mathrm{eV}
+     f = & \left(8.743\cdot10^{-3}\pm2.012\cdot10^{-4}\right)\nonumber\\
+    & \cdot\dfrac{1}{20^{1.428\pm5.166\cdot10^{-2}}}\nonumber\\
+    = & 1.213\cdot10^{-4}\pm 1.898\cdot 10^{-5} \mathrm{eV}\nonumber\\
+    & =29.3\text{GHz}\pm 4.59\text{GHz}
     \end{align}
 This prediction fits with our understanding that the phonon in the membrane will decrease and eventually disappear as the membranes gets bigger, but never have a negative frequency.
 
@@ -65,7 +67,7 @@ This section will focus on a simulation of a more realistic system that contains
   \vspace{-0.8em}
   \includegraphics[width=1\linewidth]{Figures/FrequencyModeProjectionsZetaNoZoom.eps}
   \label{interpota}
-  \vspace{-3.9em}
+  \vspace{-3.8em}
 \end{subfigure}\vspace{1mm}
 \begin{subfigure}{\textwidth}   
   \centering
@@ -173,7 +175,7 @@ As seen on \cref{interpot} there is good correspondence in the frequency values 
                     10.0 &              54.2 \\
     \bottomrule
   \end{tabular}
-  \caption{}
+  \caption{Table showing the average deviation of the two layer systems with respect to the clamped system}
   \label{}
 \end{table}
 However, as \cref{interpot} also shows, the projection values does not have as much movement out of the plane as the clamped system. This can possibly be explained by the fact that there is some in-plane movement going on outside the area of the membrane. The calculation sums up movements over the whole sheet, why the out of plane movement over the membrane seems less because of the in-plane movement going on outside the membrane. We will therefore make calculations for the RMS-amplitude of every atom only within the membrane in the clamped system and compare it to corresponding calculations for the two layer system with all three interlayer potentials. \cref{2DRMS} shows the RMS calculations together with the out-of-plane displacements. 
@@ -182,9 +184,9 @@ However, as \cref{interpot} also shows, the projection values does not have as m
 \begin{figure}[H]
     \centering
     \includegraphics[width=\columnwidth]{Figures/2DRMS.eps}
-    \caption{Figure showing the out of plane displacements with RMS-values for five different modes for the clamped system and the two-layer system with the three different interaction potentials respectively (Top to bottom). The reason why the modes has the values 0,1,3,5,6 is because the modes pairs $[2,3]$, $[4,5]$ are degenerated pairs, why we have only chosen mode 3 and 5. }
+    \caption{Figure showing the out of plane displacements with RMS-values for five different modes for the clamped system and the two-layer system with the three different interaction potentials respectively (Top to bottom). The reason why the modes has the values 0,1,3,5,6 is because the modes pairs $[2,3]$, $[4,5]$ are degenerated pairs, why we have only chosen mode 3 and 5.}
     \label{2DRMS}
 \end{figure}
 \twocolumngrid
 
-In \cref{2DRMS} we can see that there is good correspondence between the clamped system and the two systems with the low interaction potential. Even more so, when looking at the RMS-values we can see that system with the $\text{SiO}_{2}$ ($\epsilon=1.00$). Substrate potential is pretty close to the RMS-values of the clamped system, even closer than graphite. The reason why the system with the strong interaction potential is blue is because the draws the upper sheet down towards the lower one. This causes the area around the rim to be blue no matter what mode we look at. Then again The system with strong interaction potential is only for reference. 
+In \cref{2DRMS} we can see that there is good correspondence between the clamped system and the two systems with the low interaction potential. Even more so, when looking at the RMS-values we can see that system with the $\text{SiO}_{2}$ ($\epsilon=1.00$). Substrate potential is pretty close to the RMS-values of the clamped system, even closer than graphite. The reason why the system with the strong interaction potential is blue is because the draws the upper sheet down towards the lower one. This causes the area around the rim to be blue no matter what mode we look at. Then again the system with strong interaction potential is only for reference. 
