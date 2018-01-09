@@ -107,11 +107,11 @@ multi-part-units = single ,
 \makeatother
 
 \begin{document}
-
 %Titlepage herunder:
 \begin{abstract}
  \begin{description}
-  \item[Abstract] In this report we will focus on nanomembranes and analyse how this react when a force is applied to them. Nanomembranes can be fabricated via the method of chemical vapor deposition (CVD) and this have been test in the lab by using electrostatic gates \cite{Zande2010}. There are also examples of using lasers to drive a vibration in a membrane \cite{Davidovikj2016} but both of this membranes however are way lager then the ones we will be studying in this report. the concept of carbon nanomembranes have existed for a couple of years all ready so what we are going to focus on are the the smallest nanomembranes that can be made right now.
+  \item[Abstract] This paper analyses simulated vibrational modes in nanomembranes between 1 and 5 nm, using Atomistix Toolkit\cite{QuantumWise}, with the purpose of characterising the frequency response of the membrane, along with atomic behaviour of a few localised modes as to obtain a correlation with findings of similar computational simulations of microscale membranes.\cite{Davidovikj2016}. The nanomembranes in question is both a theoretical single layer idealised membrane and a more realistic double layered membrane, imitating a graphene layer upon a substrate. We hypothesised that the findings of such similar simulations will correlate in behaviour when moving to the nanoscale.
+  As it turns out, the modes do scale, as the membrane sizes reduce to the nanoscale, and the frequencies and atomic movement are easily obtained using our developed analysistools. We discuss that our findings motivates to experimental tests on the nanoscale. Such membranes could be setup using nanomesh substrates with a graphene layer attached. These membranes could be produced using block copolymer lithography for the substrate and CVD for the graphene layer.
  \end{description}
 \end{abstract}
 
@@ -154,12 +154,16 @@ multi-part-units = single ,
 \section{Simulating vibrating membranes}
 \input{sections/OurWorkflow.tex}
 \input{sections/TheCodeBehind.tex}
+\input{sections/Sheetfig.tex}
 \section{Data extraction and analysis}\label{DEA}
 \input{sections/ClampedSystem.tex}
 \section{Discussion}
 \input{sections/Discussion.tex}
 \section{Conclusion}
 \input{sections/Conclusion.tex}
+\begin{acknowledgments}
+We would like to thank Tue Gunst and Mads Brandbyge at DTU Nanotech for their guidance and help.
+\end{acknowledgments}
 %End of text
 
 %Bibliography herunder:
