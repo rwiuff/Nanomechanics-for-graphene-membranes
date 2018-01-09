@@ -20,7 +20,7 @@ This following section focuses on data extraction and analysis for a system of a
 \clearpage
 \twocolumngrid
 
-\subsubsection{Frequency vs. membrane size}
+\subsubsection{Frequency vs. membrane size}\label{Fvms}
 In order to find the correlation between frequency of the modes in the membrane and the membrane size, the frequency over each membrane, which varies in size, is extracted and plotted as a function of the size of the given membrane. \\
 This is done by defining a sheet of a definite size in VNL and thereafter check the frequencies for the different membranes by inserting the different size membranes, one after the other. The distance from the edge of the membrane, to the edge of the sheet (or the next membrane) is called "neck" and has been chosen to be 5 nm for the biggest membrane which has a 10 nm diameter. With this neck size it is certain that the membrane do not transfer any energy to each other, according to reports \cref{p} \\
 Furthermore, only the frequencies for the first couple of modes will be checked. \\
@@ -195,12 +195,13 @@ In \cref{2DRMS} we can see that there is good correspondence between the clamped
 \subsection{Modes with varying membranes size, Clamped system}In this section will look at the clamped system only and investigate if and how shape of the modes in the membrane changes as we increase the size of the membrane.
 \onecolumngrid
 
- \begin{figure}
+ \begin{figure}[H]
      \centering
-     \includegraphics{Figures/2DRMSClamped.eps}
-     \caption{Caption}
+     \includegraphics[width=0.77\textwidth]{Figures/2DRMSClamped.eps}
+     \caption{Plot showing how the modes of the membrane develops as the membrane size increases. Beneath each plot of the different modes are the corresponding RMS-values for that specific mode.
+     }
      \label{BIG}
  \end{figure}
 \twocolumngrid
 
-In \cref{BIG} we can see that modes are similar in shape when increasing the membrane size. The size of the modes/membranes change as well as their orientation as some of them rotate around the axis at the center of the membrane going out of the plane. That they change in size, intuitively, makes good sense as we change the size of the membrane itself, but the rotation... When looking at the RMS-values it can also be seen that they increase as the membrane size increase i.e. there is more out of plane movement for larger membranes than small ones. Looking at the modes with respect to RMS, the values decrease as the modes increase. The reason why the RMS increase with the membrane size makes intuitively good sense, the more atoms there is in the membrane the higher the RMS-value. Why the RMS decreases with a mode increase can explained by the fact the an increase in mode number increases the number of nodes in the membrane. The atoms placed at the nodes do not move around that much why their RMS values are close to 0. Looking at \cref{BIG} we can also see that there is more green space i.e. node space as the modes increase no matter the membrane size. In \cref{PLOTZ} there is two plots showing how the RMS-values decrease with the increase of mode numbers for the different hole sizes.
+In \cref{BIG} we can see that modes are similar in shape when increasing the membrane size. The size of the modes/membranes change as well as their orientation as some of them rotate around the axis at the center of the membrane going out of the plane. That they change in size, intuitively, makes good sense as we change the size of the membrane itself. When looking at the RMS-values it can also be seen that they increase as the membrane size increase i.e. there is more out of plane movement for larger membranes than small ones. Looking at the modes with respect to RMS, the values decrease as the modes increase. The reason why the RMS increase with the membrane size makes intuitively good sense, the more atoms there is in the membrane the higher the RMS-value. Why the RMS decreases with a mode increase can explained by the fact the an increase in mode number increases the number of nodes in the membrane. The atoms placed at the nodes do not move around that much why their RMS values are close to 0. Looking at \cref{BIG} we can also see that there is more green space i.e. node space as the modes increase no matter the membrane size. In the section \cref{PLOTZ} there is a plot \cref{plot1} showing how the RMS-values decrease with the increase of mode numbers for the different hole sizes.
