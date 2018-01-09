@@ -7,7 +7,7 @@
 # =====================================================================
 
 # -------------------------------------------------------------
-# Analysis from File
+# Analysis from File. Load the Dynamical Matrix
 # -------------------------------------------------------------
 path = 'DynamicalMatrix.hdf5'
 configuration = nlread(path, BulkConfiguration)[-1]

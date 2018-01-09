@@ -86,7 +86,7 @@ info = np.array(
 # Hexagon creation loop
 while s == 1:
     try:
-        # Prompt user for hexagon enter offsets
+        # Prompt user for hexagon center offsets
         cXI = float(
             raw_input("Hexagon center X-offset (default: 0): "))
     except ValueError:
@@ -122,7 +122,8 @@ while s == 1:
     # Draw path connecting the six points
     p = path.Path([p1, p2, p3, p4, p5, p6, p1])
 
-    # Find atoms inside hexagon to Numpy array
+    # Find atoms inside hexagon path
+	# and add them to Numpy array							  
     Test = p.contains_points(sheetcoor)
     atoms = np.array([])
     for i in range(Test.size):

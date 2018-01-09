@@ -20,7 +20,7 @@ This following section focuses on data extraction and analysis for a system of a
 
 \subsubsection{Frequency vs. membrane size}
 In order to find the correlation between frequency of the modes in the membrane and the membrane size, the frequency over each membrane, which varies in size, is extracted and plotted as a function of the size of the given membrane. \\
-This is done by defining a sheet of a definite size in VNL and thereafter check the frequencies for the different membranes by inserting the different size membranes, one after the other. The distance from the edge of the membrane, to the edge of the sheet (or the next membrane) is called "neck" and has been chosen to be 5 nm for the biggest membrane which has a 10 nm diameter. With this "neck" size it is certain that the membrane do not transfer any energy to each other, according to reports \cref{p} \\
+This is done by defining a sheet of a definite size in VNL and thereafter check the frequencies for the different membranes by inserting the different size membranes, one after the other. The distance from the edge of the membrane, to the edge of the sheet (or the next membrane) is called "neck" and has been chosen to be 5 nm for the biggest membrane which has a 10 nm diameter. With this neck size it is certain that the membrane do not transfer any energy to each other, according to reports \cref{p} \\
 Furthermore, only the frequencies for the first couple of modes will be checked. \\
 In this section the frequency will sometimes be noted in terms of energy for the modes $[\text{eV}]$. Other times just as the frequency in $[\text{Hz}]$. That is because the energy can be converted to a frequency and vice versa by the relation: $1\text{Hz}=4.13\text{x}10^{-15}\text{eV}$. 
 \onecolumngrid
@@ -50,7 +50,7 @@ Looking at the data it is clear to see that the frequency decreases when the siz
 \end{equation}Where $f$ is the frequency, $x$ is the size of the membranes, and where $a$ and $n$ are constants. Comparing the constants for the first mode to the constants for the second it is seen that $a$ relates to the frequency of the first membrane, while $n$ is relatively the same. This indicates that even though the modes start at different frequencies they will conjugate towards zero at the same rate about $\dfrac{1}{x^{1.4}}$. This trend can also be used as a scaling factor to predict the frequency for even bigger membranes, for example: If you want a 20 nm membrane we can predict that the frequency of first mode for this hole will be
     \begin{align}
      f = & \left(8.743\cdot10^{-3}\pm2.012\cdot10^{-4}\right)\nonumber\\
-    & \cdot\dfrac{1}{20^{1.428\pm5.166\cdot10^{-2}}}\nonumber\\
+    & \cdot\dfrac{1}\si{20^{1.428}\pm5.166e-4}{\nm}\nonumber\\
     = & 1.213\cdot10^{-4}\pm 1.898\cdot 10^{-5} \mathrm{eV}\nonumber\\
     & =29.3\text{GHz}\pm 4.59\text{GHz}
     \end{align}

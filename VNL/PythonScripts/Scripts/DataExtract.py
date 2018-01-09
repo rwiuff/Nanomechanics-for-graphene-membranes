@@ -1,9 +1,6 @@
 # -------------------------------------------------------------
-# Load libraries, ProjectedPhononBandsDisplacement and switch
-# matplotlib backend
+# Load libraries and ProjectedPhononBandsDisplacement
 # -------------------------------------------------------------
-import matplotlib.pyplot as plt
-plt.switch_backend('agg')
 from NanoLanguage import *
 from pylab import *
 from MyAnalysisFunctions import ProjectedPhononBandsDisplacement

@@ -1,6 +1,5 @@
 # -------------------------------------------------------------
-# Load libraries, ProjectedPhononBandsDisplacement and switch
-# matplotlib backend
+# Load libraries
 # -------------------------------------------------------------
 import matplotlib.pyplot as plt
 from NanoLanguage import *
@@ -64,8 +63,11 @@ for j in range(3):
             int(c), int('15'))
         print(pstring)
         print('+----------------------------------+')
+		# Extract the trajectory from VibrationalMode at mode i and
+		# temperature T
         VM = vibrationalmodes.movie(
             mode_index=ModeIndex[i], temperature=T * Kelvin)
+		# Extract configuration from image j,i in trajectory
         ZModes[c] = VM.image(image_index=ImageIndex[j, i])
         VM = np.array([])
 

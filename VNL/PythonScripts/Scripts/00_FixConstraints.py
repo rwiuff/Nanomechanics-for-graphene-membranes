@@ -2,7 +2,7 @@
 #
 # By Tue Gunst & Rasmus Wiuff
 #
-# Script for correcting constrain tags to ommit ATKPython bug
+# Script for correcting constrain tags to omit ATKPython bug
 #
 # =====================================================================
 
