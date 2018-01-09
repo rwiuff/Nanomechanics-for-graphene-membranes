@@ -56,6 +56,7 @@ nlprint(bulk_configuration)
 # Optimise the geometry and positions of atoms according to the
 # defined potential
 # and with constrained atoms
+# -------------------------------------------------------------
 myConstraints = bulk_configuration.indicesFromTags('FixedFinal')
 bulk_configuration = OptimizeGeometry(
     bulk_configuration,
