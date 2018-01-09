@@ -4,27 +4,23 @@ All of the mentioned code and scripts exists as a repository available online:\n
 \url{https://github.com/rwiuff/Nanomechanics-for-graphene-membranes}
 Beware that ATKPython\cite{QuantumWise} is required to run the scripts.
 The code can also be found in the Code Compendium in \cref{CoCo}.
-
 \subsection{NanoSheetCreator.py and NanoMembraneCreator.py}\label{NSCS}
-The first script generates the graphene membrane with atoms tagged in a hexagonally shaped path. The output is the sheet in the \textit{.hdf5} format.
-
+The first script generates the graphene membrane with atoms tagged in a hexagonally shaped path. The output is the atomic configuration in the \textit{.hdf5} format.
 The workings of the script is briefly described as such:
-First the script creates a bravais-lattice consisting of a hexagonal unit cell. Then two carbon atoms are placed in the unitcell and the unit cell is repeated to the users specifications. \cref{2435} demonstrates, by example from NanoSheetCreator.py, how such lattice is created with Nanolanguage.
+First the script creates a bravais-lattice consisting of a hexagonal unit cell. Then two carbon atoms are placed in the unitcell and the unit cell is repeated to the users specifications. \cref{2435} demonstrates, by example from \textit{NanoSheetCreator.py}, how such lattice is created with Nanolanguage.
 \onecolumngrid
 
 \begin{listing}[H]
  \inputminted[python3=true,bgcolor=Black,linenos=true,firstline=24,lastline=35]{python}{Listings/NanoSheetCreator.py}
- \caption{Lines 24-35 from the NanoSheetCreator.py shows how Nanolanguage can be used to create a hexagonal bravais lattice}
+ \caption{Lines 24-35 from the \textit{NanoSheetCreator.py} script shows how Nanolanguage can be used to create a hexagonal bravais lattice}
  \label{2435}
 \end{listing}
 \twocolumngrid
 The user is then asked to input position and size of the hexagonal tag wanted for placement of the hole. Lastly the sheet can be repeated and information about the position and sizes of the tags are printed to a \textit{.txt} file.
-
 \subsection{00\_FixConstraints.py}\label{00}
-A historical bug in ATKPython demands consecutive indices for mapping constrained atoms, when using the function \textit{phononEigensystem}. Thus a script was written to ensure that tags with these indices were consecutive. Furthermore, when working with two layer membranes, the script tags the individual layers as "Layer1" and "Layer2".
-
+A historical bug in ATKPython demands consecutive indices for mapping constrained atoms, when using the method \textit{phononEigensystem}. Thus a script was written to ensure that tags with these indices were consecutive. Furthermore, when working with two layer membranes, the script tags the individual layers as "Layer1" and "Layer2".
 \subsection{01\_RelaxSheet.py and 01\_LennardJonesRelax.py}\label{01}
-After creating a membrane configuration, said configuration needs a potential defined and to be relaxed so as to minimise bonding energies. These scripts does this for two different cases. \textit{01\_RelaxSheet.py} defines the potential for a single layered membrane with the Tersoff/Brenner Carbon Potential\cite{Lindsay2010}. It the calculates the energies and adjust the geometry up to 200 times in order to find the optimal configuration. When handling a doubled layered membrane one needs to use \textit{01\_LennardJonesRelax.py}. This script uses a simplified version of the Lennard Jones potential; a version suitable for Van Der Waals structures. Normally the Lennard Jones potential takes in and accounts for angles between atoms, but this model merely uses distance, as the layers are homogeneous in structure. For two particles $i$ and $j$, the potential is defined as follows:
+After creating a membrane configuration, said configuration needs a potential defined and to be relaxed so as to minimise bonding energies. These scripts does this for two different cases. \textit{01\_RelaxSheet.py} defines the potential for a single layered membrane with the Tersoff/Brenner Carbon Potential\cite{Lindsay2010}. It then calculates the energies and adjust the geometry up to 200 times in order to find the optimal configuration. When handling a doubled layered membrane one needs to use \textit{01\_LennardJonesRelax.py}. This script uses a simplified version of the Lennard Jones potential; a version suitable for Van Der Waals structures. Normally the Lennard Jones potential takes in and accounts for angles between atoms, but this simplified model merely uses distance. For two particles $i$ and $j$, the potential is defined as follows:
 \begin{equation}
   V_{ij}(r) = 4 \epsilon_{ij} \left[ \frac{\sigma_{ij}}{r}^{12} - \frac{\sigma_{ij}}{r}^6 \right]
 \end{equation}
@@ -33,43 +29,54 @@ Where $\epsilon$ and $\sigma$ are material based parameters. They are given as:
   \epsilon_{ij} & = \sqrt{\epsilon_i \cdot \epsilon_j} \\
   \sigma_{ij} & = \frac{\sigma_i \cdot \sigma_j}{2}
 \end{align}
+The $\epsilon$ parameter is the depth of potential minimum for a given material.
 By altering the $\epsilon$ parameter we imitate different materials as to see the connection between substrate - graphene potential and vibrational modes.
+ATKPython allows combining potentials.
+\onecolumngrid
+
+\begin{listing}[H]
+ \inputminted[python3=true,bgcolor=Black,linenos=true,firstline=28,lastline=48]{python}{VNL/PythonScripts/Scripts/01_LennardJonesRelax.py}
+ \caption{Lines 28-48 from the \textit{01\_LennardJonesRelax.py} script shows how the 2 intralayer potentials are combined with the interlayer potential.}
+ \label{LJP}
+\end{listing}
+\twocolumngrid
+\cref{LJP} shows how two intralayer Tersoff Brenner potentials are defined along with the interlayer potential. The potentials are then combined and further calculations now relies on these potentials.
 \subsection{02\_DynamicalMatrix.py}\label{02}
-At this point in the workflow, the dynamical matrix is required to continue. The script \textit{02\_DynamicalMatrix.py} accomplishes this by using the function \textit{DynamicalMatrix}. This function is demonstrated on \cref{DML}. The script can easily be parallised by using more processor units (the function calculates one displacement per CPU at a time). As such a server cluster can reduce calculation time drastically.
+At this point in the workflow, the dynamical matrix is required to continue. The script \textit{02\_DynamicalMatrix.py} accomplishes this by using the function \textit{DynamicalMatrix}. This function is demonstrated on \cref{DML}. The function displaces atoms back and forth to calculate the finite difference of the forces in order to find the force constants. Each atom moves in 3 dimensions thus each atom has 3 degrees of freedom. Each displacement in every degree of freedom for each atom can be parallised as each displacement takes up one CPU. We used high performance computing clusters at DTU Nanotech to parallise the calculations. Usually we assigned 8 nodes (and therefore 8 CPU = 8 displacement simultaneously calculated at a time) therefore reducing the calculation time.
 \onecolumngrid
 
 \begin{listing}[H]
  \inputminted[python3=true,bgcolor=Black,linenos=true,firstline=22,lastline=34]{python}{VNL/PythonScripts/Scripts/02_DynamicalMatrix.py}
- \caption{Lines 22-34 from the 02\_DynamicalMatrix.py script shows the function for calculating the dynamical matrix.}
+ \caption{Lines 22-34 from the \textit{02\_DynamicalMatrix.py} script shows the function for calculating the dynamical matrix.}
  \label{DML}
 \end{listing}
 \twocolumngrid
 \subsection{03\_SheetVibrations.py}\label{03}
-The last step before using more home concucted tools are that of the \textit{VibrationalModes}. This function produces a file, from wich all information about a configurations vibrational modes can be extracted. However, this process demands large amounts of RAM, and without a server cluster, it is almost impossible to calculate holes larger than \SIrange{4}{5}{\nm} in diameter.
+The last step before using more home concucted tools are that of the \textit{VibrationalModes}. This function produces a file, from wich all information about a configurations vibrational modes can be extracted. However, this process demands large amounts of RAM, and without a server cluster, it is almost impossible to calculate holes larger than \SIrange{4}{5}{\nm} in diameter. We used the HPC at DTU Nanotech to calculate the vibrational modes.
 \subsection{DataExtract.py}\label{DE}
-The first tool designed from scratch is the DataExtract utility. It loads a number of dynamical matrices and outputs pickled\footnote{Binary datafile easily saved from or loaded into python via the Pickle package.} datafiles containing information on the configurations phonon Frequencies, relative projections and root-mean-square of atom displacement out of the plane. The script uses the function \textit{ProjectedPhononBandsDisplacement}, written by Tue Gunst. The function is described in \cref{MAF}.
-The function \textit{ProjectedPhononBandsDisplacement} relies on the ATKPython function \textit{phononEigensystem}. This function demands large amounts of RAM, and as with \textit{03\_SheetVibrations.py} (\cref{03} a server cluster may be needed.
+The first tool designed from scratch is the DataExtract utility. It loads a number of dynamical matrices and outputs pickled\footnote{Binary datafile easily saved from or loaded into python via the Pickle package.} datafiles containing information on the configurations phonon frequencies, relative projections and root-mean-square of atom displacement out of the plane. The script uses the function \textit{ProjectedPhononBandsDisplacement}, written by Tue Gunst. The function is described in \cref{MAF}.
+The function \textit{ProjectedPhononBandsDisplacement} relies on the ATKPython method \textit{phononEigensystem}. This function demands large amounts of RAM, and as with \textit{03\_SheetVibrations.py} (\cref{03}, a server cluster may be needed.
 \subsection{MyAnalysisFunction.py}\label{MAF}
-!!! INPUT FRA TUE ANG FUNKTION!!!
-The function \textit{MyAnalysisFunction.py} calculates the vibrational modes from a dynamical matrix and isolates the motion out of the lattice plane. It normalises and projects the motion unto a vector with each element $=< 1$. It then calculates the characteristic length of the modes and from this length, the root-mean-square of the out of plane displacement is calculated and returned along with an array with mode frequencies and projections.
+This script were given to us by Tue Gunst, and was designed for, and used in the paper "Suppression of intrinsic roughness in encapsulated graphene"\cite{Thomsen2017}.
+The function \textit{MyAnalysisFunction.py} calculates the vibrational modes from a dynamical matrix and isolates the motion out of the lattice plane. It normalises and projects the motion unto a vector with each element $=< 1$. It then calculates the characteristic length of the modes, and from this length, the root-mean-square of the out of plane displacement is calculated and returned along with an array of mode frequencies and projections.
 \subsection{ProjectionPlotter.py}
-The \textit{ProjectionPlotter.py} script is an analysis tool for analysing the out of plane projection for all modes in a series of membranes, varying in size. By loading pickled data created by the \textit{DataExtract.py} tool, this script plots a scatter plot with a series of out of plane projection given frequencies for different sized membranes. The script then fits a reciprocal function on the frequencies of the two lowest modes.
+The \textit{ProjectionPlotter.py} script is an analysis tool for analysing the out of plane projection for all modes in a series of membranes, varying in size. By loading pickled data created by the \textit{DataExtract.py} tool, this script plots a scatter plot with a series of out of plane projection, and given frequencies for different sized membranes. The script then fits a reciprocal function on the frequencies of the two lowest modes.
 The function is given as:
 \begin{equation}
   f = a \cdot \frac{1}{x^n}
 \end{equation}
 The tool can be used to analyse the scaling of frequencies as the nanomembrane grows in diameter.
 \subsection{ZetaPlotter.py}
-At this point in the workflow the idealised single layer membrane has been analysed and its modes, plottet. The next step is to simulate a double layer lattice. By optimising the geometry and setting a Lennard Jones potential with 01\_LennardJonesRelax.py (\cref{01}), with varying $\epsilon$ values and the calculating distinct dynamical matrices and vibrational modes with the described tools, the \textit{ZetaPlotter.py} script can be used to compare the modes of varying double layered membranes with those of a known single layered idealised membrane. The script takes in pickled data and produces a scatter plot with varying series for variying $\epsilon$ parameters and the plots the single layer membrane's modes along with lines marking the single layered membrane's mode frequencies. This tool is usefull for comparing $\epsilon$ values.
+At this point in the workflow the idealised single layer membrane has been analysed and its modes, plottet. The next step is to simulate a double layer lattice. By optimising the geometry and setting a Lennard Jones potential with \textit{01\_LennardJonesRelax.py} (\cref{01}), with varying $\epsilon$ values and then calculate distinct dynamical matrices and vibrational modes with the described tools, the \textit{ZetaPlotter.py} script can be used to compare the modes of varying double layered membranes with those of a known single layered idealised membrane. The script takes in pickled data and produces a scatter plot with varying series for variying $\epsilon$ parameters and then plots the single layer membrane's modes along with lines marking the single layered membrane's mode frequencies. This tool is usefull for comparing $\epsilon$ values.
 \subsection{2DdataExtract.py}\label{2DE}
-This scipt is used for the sole purpose of extracting data from \textit{.hdf5} files containing vibrational modes and save it as pickled files to be loaded with \textit{2DmodePlotter.py} (\cref{2DMP}). It inputs files, each containing modes for various double layered membranes and a known single layered membrane for comparisson. Vibrational modes are saved as the class \textit{VibrationalMode} in each file. ATKPython has a function for extracting trajectories from such class. The trajectory contains a series of configurations, each representing a time step in a full period of a vibrational mode. The function takes the configuration of atoms when the displacement is largest (at which point, the vibrational mode has its largest amplitude), and saves the coordinates for the atoms in the configuration in the pickled files. This is shown on \cref{VM}
+This script is used for the sole purpose of extracting data from \textit{.hdf5} files containing vibrational modes and save it as pickled files to be loaded with \textit{2DmodePlotter.py} (\cref{2DMP}). It inputs files, each containing modes for various double layered membranes and a known single layered membrane for comparisson. Vibrational modes are saved as the class \textit{VibrationalMode} in each file. ATKPython has a method for extracting trajectories from such class. The trajectory contains a series of configurations, each representing a time step in a full period of a vibrational mode. The function takes the configuration of atoms when the displacement is largest (at which point, the vibrational mode has its largest amplitude), and saves the coordinates for the atoms in the configuration in the pickled files. This is shown on \cref{VM}
 \subsection{2DmodePlotter.py}\label{2DMP}
 This script is designed to visualise and compare selected modes from a single layered membrane and various double layered membranes. By taking the z-coordinates of the configurations described in \cref{2DE}, the script finds the largest overall amplitudes of the membranes and creates a colorscale. It then plot contours of the modes, along with information on root-mean-squeare displacement of the moving atoms (manually inputed, but easily obtained from the pickled files constructed by the script \textit{DataExtract.py} \cref{DE}). The result is a series of contour plots showing the shape and amplitudes of the atoms in five vibrational modes for various membranes. This tool is valuable in comparing size, shape and root-mean-square displacement between the idealised single layered membrane and double layered membranes with varying $\epsilon$ values.
 \onecolumngrid
 
 \begin{listing}[H]
- \inputminted[python3=true,bgcolor=Black,linenos=true,firstline=67,lastline=69]{python}{VNL/PythonScripts/Scripts/2DdataExtract.py}
- \caption{Lines 67-69 from the 2DdataExtract.py script shows how coordinates from a configuration of atoms can be easily obtained from the class \textit{VibrationalMode}.}
+ \inputminted[python3=true,bgcolor=Black,linenos=true,firstline=66,lastline=71]{python}{VNL/PythonScripts/Scripts/2DdataExtract.py}
+ \caption{Lines 66-71 from the 2DdataExtract.py script shows how coordinates from a configuration of atoms can be easily obtained from the class \textit{VibrationalMode} using the movie and image methods.}
  \label{VM}
 \end{listing}
 \twocolumngrid

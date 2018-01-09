@@ -1,3 +1,5 @@
+% !TEX root = ../Main.tex
+
 \subsection{Clamped System}
 This following section focuses on data extraction and analysis for a system of a clamped graphene sheet with a free standing hexagon membrane in the middle of the sheet. See \cref{fig:clamped}. The free standing hexagon will therefore be a simplified model compared to that of a more realistic model containing two graphene sheets: a constrained sheet with hexagonal holes and a free standing sheet on top. This model will be discussed later.
 \onecolumngrid
@@ -22,7 +24,7 @@ This following section focuses on data extraction and analysis for a system of a
 In order to find the correlation between frequency of the modes in the membrane and the membrane size, the frequency over each membrane, which varies in size, is extracted and plotted as a function of the size of the given membrane. \\
 This is done by defining a sheet of a definite size in VNL and thereafter check the frequencies for the different membranes by inserting the different size membranes, one after the other. The distance from the edge of the membrane, to the edge of the sheet (or the next membrane) is called "neck" and has been chosen to be 5 nm for the biggest membrane which has a 10 nm diameter. With this neck size it is certain that the membrane do not transfer any energy to each other, according to reports \cref{p} \\
 Furthermore, only the frequencies for the first couple of modes will be checked. \\
-In this section the frequency will sometimes be noted in terms of energy for the modes $[\text{eV}]$. Other times just as the frequency in $[\text{Hz}]$. That is because the energy can be converted to a frequency and vice versa by the relation: $1\text{Hz}=4.13\text{x}10^{-15}\text{eV}$. 
+In this section the frequency will sometimes be noted in terms of energy for the modes $[\text{eV}]$. Other times just as the frequency in $[\text{Hz}]$. That is because the energy can be converted to a frequency and vice versa by the relation: $1\text{Hz}=4.13\text{x}10^{-15}\text{eV}$.
 \onecolumngrid
 
 \begin{figure}[H]
@@ -34,7 +36,7 @@ In this section the frequency will sometimes be noted in terms of energy for the
   \label{svfa}
   \vspace{-4.4em}
 \end{subfigure}\vspace{1mm}
-\begin{subfigure}{\textwidth}   
+\begin{subfigure}{\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{Figures/FrequencyModeProjectionsZoomFit.eps}
   \label{svfb}
@@ -50,14 +52,14 @@ Looking at the data it is clear to see that the frequency decreases when the siz
 \end{equation}Where $f$ is the frequency, $x$ is the size of the membranes, and where $a$ and $n$ are constants. Comparing the constants for the first mode to the constants for the second it is seen that $a$ relates to the frequency of the first membrane, while $n$ is relatively the same. This indicates that even though the modes start at different frequencies they will conjugate towards zero at the same rate about $\dfrac{1}{x^{1.4}}$. This trend can also be used as a scaling factor to predict the frequency for even bigger membranes, for example: If you want a 20 nm membrane we can predict that the frequency of first mode for this hole will be
     \begin{align}
      f = & \left(8.743\cdot10^{-3}\pm2.012\cdot10^{-4}\right)\nonumber\\
-    & \cdot\dfrac{1}\si{20^{1.428}\pm5.166e-4}{\nm}\nonumber\\
+    & \cdot\dfrac{1}{20^{1.428\pm5.166e-4}\text{nm}}\nonumber\\
     = & 1.213\cdot10^{-4}\pm 1.898\cdot 10^{-5} \mathrm{eV}\nonumber\\
     & =29.3\text{GHz}\pm 4.59\text{GHz}
     \end{align}
 This prediction fits with our understanding that the phonon in the membrane will decrease and eventually disappear as the membranes gets bigger, but never have a negative frequency.
 
 \subsection{Interlayer interaction}
-This section will focus on a simulation of a more realistic system that contains two graphene sheets. See \cref{interlayersys}. One sheet, containing holes, will be constrained and the other sheet will be standing free above. We will test what effect the interaction between the layers will have on the membranes of the free standing sheet. To to this we have chosen a specific holes size for the constrained sheet of 5nm and then varied the strength of the interaction potential between the layer. Three values were chosen: $\epsilon_{graphite}=0.31, \epsilon_{\text{SiO}_{2}}=1.00 \ \text{and} \ \epsilon_{strong}=10.0$. The values are the depth of the potential minimum for graphite, silicon dioxide and then a fictive and very strong potential. The reason for including the very strong potential is to make a reference point for the two other substrate values and how well they correspond with the clamped system. 
+This section will focus on a simulation of a more realistic system that contains two graphene sheets. See \cref{interlayersys}. One sheet, containing holes, will be constrained and the other sheet will be standing free above. We will test what effect the interaction between the layers will have on the membranes of the free standing sheet. To to this we have chosen a specific holes size for the constrained sheet of 5nm and then varied the strength of the interaction potential between the layer. Three values were chosen: $\epsilon_{graphite}=0.31, \epsilon_{\text{SiO}_{2}}=1.00 \ \text{and} \ \epsilon_{strong}=10.0$. The values are the depth of the potential minimum for graphite, silicon dioxide and then a fictive and very strong potential. The reason for including the very strong potential is to make a reference point for the two other substrate values and how well they correspond with the clamped system.
 \onecolumngrid
 
 \begin{figure}[H]
@@ -69,7 +71,7 @@ This section will focus on a simulation of a more realistic system that contains
   \label{interpota}
   \vspace{-3.8em}
 \end{subfigure}\vspace{1mm}
-\begin{subfigure}{\textwidth}   
+\begin{subfigure}{\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{Figures/FrequencyModeProjectionsZeta.eps}
   \label{interpotb}
@@ -80,7 +82,7 @@ This section will focus on a simulation of a more realistic system that contains
 \end{figure}
 \twocolumngrid
 
-As seen on \cref{interpot} there is good correspondence in the frequency values of the clamped system and the two first interaction potentials in the two sheet system. In \cref{freqval}, a list of the frequencies for the two layer system and the deviation of the two layer system with respect to the clamped system can be seen. \cref{freqclamp} shows the frequencies for the clamped system. 
+As seen on \cref{interpot} there is good correspondence in the frequency values of the clamped system and the two first interaction potentials in the two sheet system. In \cref{freqval}, a list of the frequencies for the two layer system and the deviation of the two layer system with respect to the clamped system can be seen. \cref{freqclamp} shows the frequencies for the clamped system.
 % \begin{table}[H]
 %   \centering
 %   \begin{tabular}{c|c|c|c|c}
@@ -121,7 +123,7 @@ As seen on \cref{interpot} there is good correspondence in the frequency values 
     \toprule
      Modes &     \multicolumn{2}{c}{Frequency}\\
            &   [\si{\meV}] & [THz] \\
-    \hline \hline  
+    \hline \hline
            1 &        0.78 & 189 \\
            2 &        1.61 & 389 \\
            4 &        2.61 & 631 \\
@@ -178,7 +180,7 @@ As seen on \cref{interpot} there is good correspondence in the frequency values 
   \caption{Table showing the average deviation of the two layer systems with respect to the clamped system}
   \label{}
 \end{table}
-However, as \cref{interpot} also shows, the projection values does not have as much movement out of the plane as the clamped system. This can possibly be explained by the fact that there is some in-plane movement going on outside the area of the membrane. The calculation sums up movements over the whole sheet, why the out of plane movement over the membrane seems less because of the in-plane movement going on outside the membrane. We will therefore make calculations for the RMS-amplitude of every atom only within the membrane in the clamped system and compare it to corresponding calculations for the two layer system with all three interlayer potentials. \cref{2DRMS} shows the RMS calculations together with the out-of-plane displacements. 
+However, as \cref{interpot} also shows, the projection values does not have as much movement out of the plane as the clamped system. This can possibly be explained by the fact that there is some in-plane movement going on outside the area of the membrane. The calculation sums up movements over the whole sheet, why the out of plane movement over the membrane seems less because of the in-plane movement going on outside the membrane. We will therefore make calculations for the RMS-amplitude of every atom only within the membrane in the clamped system and compare it to corresponding calculations for the two layer system with all three interlayer potentials. \cref{2DRMS} shows the RMS calculations together with the out-of-plane displacements.
 \onecolumngrid
 
 \begin{figure}[H]
@@ -189,4 +191,16 @@ However, as \cref{interpot} also shows, the projection values does not have as m
 \end{figure}
 \twocolumngrid
 
-In \cref{2DRMS} we can see that there is good correspondence between the clamped system and the two systems with the low interaction potential. Even more so, when looking at the RMS-values we can see that system with the $\text{SiO}_{2}$ ($\epsilon=1.00$). Substrate potential is pretty close to the RMS-values of the clamped system, even closer than graphite. The reason why the system with the strong interaction potential is blue is because the draws the upper sheet down towards the lower one. This causes the area around the rim to be blue no matter what mode we look at. Then again the system with strong interaction potential is only for reference. 
+In \cref{2DRMS} we can see that there is good correspondence between the clamped system and the two systems with the low interaction potential. Even more so, when looking at the RMS-values we can see that system with the $\text{SiO}_{2}$ ($\epsilon=1.00$). Substrate potential is pretty close to the RMS-values of the clamped system, even closer than graphite. The reason why the system with the strong interaction potential is blue is because the draws the upper sheet down towards the lower one. This causes the area around the rim to be blue no matter what mode we look at. Then again the system with strong interaction potential is only for reference.
+\subsection{Modes with varying membranes size, Clamped system}In this section will look at the clamped system only and investigate if and how shape of the modes in the membrane changes as we increase the size of the membrane.
+\onecolumngrid
+
+ \begin{figure}
+     \centering
+     \includegraphics{Figures/2DRMSClamped.eps}
+     \caption{Caption}
+     \label{BIG}
+ \end{figure}
+\twocolumngrid
+
+In \cref{BIG} we can see that modes are similar in shape when increasing the membrane size. The size of the modes/membranes change as well as their orientation as some of them rotate around the axis at the center of the membrane going out of the plane. That they change in size, intuitively, makes good sense as we change the size of the membrane itself, but the rotation... When looking at the RMS-values it can also be seen that they increase as the membrane size increase i.e. there is more out of plane movement for larger membranes than small ones. Looking at the modes with respect to RMS, the values decrease as the modes increase. The reason why the RMS increase with the membrane size makes intuitively good sense, the more atoms there is in the membrane the higher the RMS-value. Why the RMS decreases with a mode increase can explained by the fact the an increase in mode number increases the number of nodes in the membrane. The atoms placed at the nodes do not move around that much why their RMS values are close to 0. Looking at \cref{BIG} we can also see that there is more green space i.e. node space as the modes increase no matter the membrane size. In \cref{PLOTZ} there is two plots showing how the RMS-values decrease with the increase of mode numbers for the different hole sizes.

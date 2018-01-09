@@ -7,7 +7,7 @@
 %\begin{center}
 %  \animategraphics[autoplay,loop,width=\textwidth]{60}{VNL/Frames/frame}{1}{60}
 %\end{center}
-\section{Mechanics and dynamics of a simple system containing two atoms PLOTS??}\label{Simplemec}
+\section{Mechanics and dynamics of a simple system containing two atoms}\label{Simplemec}
 To describe the dynamics of the system one must decompose the system into simpler elements in order to understand what happens for the system as a whole. Basically we want to describe the displacements each atom makes and then sum it up to some bigger form of system. The basis of a system containing only two atoms can be described a mass-spring system where each atom has a mass and where the \textit{atomic interaction potential} works as the spring in between each atom. The interaction potential that we will be working with is called the \textit{Lennard-Jones Potential}\text{\cite[eq.1.3]{Cleland2003}}. The potential in its simplified an general form is given by \begin{equation}
     \phi(r)=-\dfrac{A}{r^{6}}+\dfrac{B}{r^{12}}\label{LJPot}
 \end{equation} where $A$ is the strength of the attractive interaction , $B$ is the strength of the repulsive interaction and $r$ is the spacing between the atoms.
@@ -60,30 +60,34 @@ where
 Here $m,n$ are integers in the interval $-\dfrac{\mathcal{N}}{2}, +\dfrac{\mathcal{N}}{2}$. The range of $q_{x},q_{y}$ becomes $-\dfrac{\pi}{r_{0}},+\dfrac{\pi}{r_{0}}$.\\
 In the specific case of this study we work with a fixed boundary, more specific, a clamped boundary which means that no bending is allowed in the plane. A clamped boundary results in the need for numerical approximations in calculations of the dynamics. As the tools used for calculations are on a"per atom" atom basis, there wont be any need for finite-element models nor any partial differential equations solver (PDE).
 
-\section{Code Compendium}\label{CoCo}
-\subsection{NanoSheetCreator.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/NanoSheetCreator.py}
-\subsection{NanoMembraneCreator.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/NanoMembraneCreator.py}
-\subsection{00\_FixConstraints.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/00_FixConstraints.py}
-\subsection{01\_RelaxSheet.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/01_RelaxSheet.py}
-\subsection{01\_LennardJonesRelax.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/01_LennardJonesRelax.py}
-\subsection{02\_DynamicalMatrix.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/02_DynamicalMatrix.py}
-\subsection{03\_SheetVibrations.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/03_SheetVibrations.py}
-\subsection{DataExtract.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/DataExtract.py}
-\subsection{MyAnalysisFunctions.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/MyAnalysisFunctions.py}
-\subsection{ProjectionPlotter.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/ProjectionPlotter.py}
-\subsection{ZetaPlotter.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/ZetaPlotter.py}
-\subsection{2DdataExtract.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/2DdataExtract.py}
-\subsection{2DmodePlotter.py}
-\inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/2DmodePlotter.py}
+\section{Plots of RMS-values with varying mode numbers}
+
+\label{PLOTZ}
+
+% \section{Code Compendium}\label{CoCo}
+% \subsection{NanoSheetCreator.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/NanoSheetCreator.py}
+% \subsection{NanoMembraneCreator.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/NanoMembraneCreator.py}
+% \subsection{00\_FixConstraints.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/00_FixConstraints.py}
+% \subsection{01\_RelaxSheet.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/01_RelaxSheet.py}
+% \subsection{01\_LennardJonesRelax.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/01_LennardJonesRelax.py}
+% \subsection{02\_DynamicalMatrix.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/02_DynamicalMatrix.py}
+% \subsection{03\_SheetVibrations.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/03_SheetVibrations.py}
+% \subsection{DataExtract.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/DataExtract.py}
+% \subsection{MyAnalysisFunctions.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/MyAnalysisFunctions.py}
+% \subsection{ProjectionPlotter.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/ProjectionPlotter.py}
+% \subsection{ZetaPlotter.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/ZetaPlotter.py}
+% \subsection{2DdataExtract.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/2DdataExtract.py}
+% \subsection{2DmodePlotter.py}
+% \inputminted[python3=true,bgcolor=Black,linenos=true]{python}{VNL/PythonScripts/Scripts/2DmodePlotter.py}
