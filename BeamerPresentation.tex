@@ -2,6 +2,7 @@
 
 \documentclass[hyperref={colorlinks=true,urlcolor=blue,linkcolor=.},aspectratio=1610,mathserif]{beamer}
 \usepackage[utf8]{inputenc}
+\usepackage{pgfpages}
 \usepackage{mathdots}
 \usepackage{graphicx}
 \usepackage[autoplay,loop,keepaspectratio]{animate}
@@ -9,6 +10,35 @@
 \setminted{fontsize=\tiny}
 \usemintedstyle{monokai}
 
+% ------------------------ Define note handout layout -------------------------
+\newcommand{\pgflayout}{
+\pgfpagesphysicalpageoptions
+{%
+logical pages=2,%
+physical height=\paperheight,%
+physical width=\paperwidth,%
+}%
+\pgfpageslogicalpageoptions{2}
+{%
+resized width=\pgfphysicalwidth,%
+resized height=.8\pgfphysicalheight,%
+center=\pgfpoint{.5\pgfphysicalwidth}{.25\pgfphysicalheight}%
+}%
+\pgfpageslogicalpageoptions{1}
+{%
+resized width=\pgfphysicalwidth,%
+resized height=.8\pgfphysicalheight,%
+center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
+}%
+}
+% -----------------------------------------------------------------------------
+
+% ---------------------------- Show note handout: -----------------------------
+%\setbeameroption{show only notes}
+%\pgflayout
+% -----------------------------------------------------------------------------
+
+% -------------------------- Define Beamer options ----------------------------
 \beamertemplatenavigationsymbolsempty
 \usefonttheme{structuresmallcapsserif}
 \usecolortheme{beaver}
@@ -22,6 +52,16 @@
 \end{beamercolorbox}%
 }
 
+\setbeamertemplate{note page}{%
+\vskip7em
+  \begin{columns}[c]{\paperheight}
+    \column{0.5\paperheight}
+    \insertnote
+    \column{0.5\paperheight}
+    \insertslideintonotes{0.5}
+  \end{columns}%
+}
+
 \setbeamersize{text margin left=30mm,text margin right=30mm}
 
 \definecolor{DTUred}{cmyk}{0,0.91,0.72,0.23}
@@ -33,6 +73,8 @@
 \setbeamercolor{section in toc}{fg=DTUred}
 \setbeamercolor{itemize item}{fg=itemcolor}
 \setbeamercolor{redbox}{fg=White,bg=blockbodycolor}
+% -----------------------------------------------------------------------------
+
 
 \title{Nanomechanics of Graphene Membranes}
 \subtitle{vibrational modes on the nanoscale}
@@ -69,6 +111,12 @@
   \column{0.5\textwidth}<3->
   \includegraphics[width=\columnwidth]{Figures/motivation.eps}
  \end{columns}
+ \note[item]<5->{Introduce Graphene Lattice}
+ \note[item]<5->{Properties: High tensile strength}
+ \note[item]<5->{Properties: High electric conductivity}
+ \note[item]<5->{Properties: Simple structure}
+ \note[item]<5->{Micro drums}
+ \note[item]<5->{Nano scale}
 \end{frame}
 
 \begin{frame}
@@ -81,7 +129,7 @@
   \column{\textwidth}
   \vskip1em
   \begin{beamercolorbox}[sep=1em,wd=8cm]{redbox}
-      Does drum modes exist in graphene supported by a nanomesh with nanometersized holes?
+      Does drum modes exist in graphene supported by a nanomesh with nanometer sized holes?
   \end{beamercolorbox}
  \end{columns}
 \end{frame}
@@ -129,7 +177,7 @@
    \item<2-> HPC server cluster
    \item<3-> Workflow
          \begin{enumerate}
-          \item<3-> Create Configuration
+          \item<3-> Create configuration
           \item<4-> Set potentials and optimise geometry
                 \begin{itemize}
                  \item Intralayer: Tersoff-Brenner (2010)
@@ -151,6 +199,9 @@
    \includegraphics[width=\columnwidth]{Figures/DoubleMembrane.png}
   \end{figure}
  \end{columns}
+ \note[item]<7->{Micro: FEM, Nano Atomistic}
+ \note[item]<7->{Dynamical Matrix: Parallise displacement to nodes (8)}
+ \note[item]<7->{Vibrational Modes: High amount of RAM (10-30 GB)}
 \end{frame}
 
 \subsection{Visualising Modes}
@@ -169,6 +220,9 @@
    Supported system
   \end{center}
  \end{columns}
+ \note[item]{Layers}
+ \note[item]{Potentials}
+ \note[item]{Boundary}
 \end{frame}
 
 \subsection{Extracting Modes}
@@ -183,6 +237,9 @@
   \item ATKPython
   \item Matplotlib \& Pyplot
  \end{itemize}
+ \note[item]<3->{.movie = trajectory}
+ \note[item]<3->{Trajectory = series of configurations}
+ \note[item]<3->{.image = One of such configurations}
 \end{frame}
 
 \section{Our Findings}
@@ -200,6 +257,9 @@
   \column{0.8\textwidth}
   \includegraphics[width=\columnwidth]{Figures/FrequencyModeProjectionsZoomFit.eps}
  \end{columns}
+ \note[item]{Freqence vs size}
+ \note[item]{Trend line}
+ \note[item]{$\dfrac{1}{x^2}$}
 \end{frame}
 
 \begin{frame}
@@ -207,6 +267,9 @@
  \begin{center}
   \includegraphics[width=0.4\textwidth]{Figures/2DRMSClamped.eps}
  \end{center}
+ \note[item]{Size vs size}
+ \note[item]{Nodes}
+ \note[item]{RMS}
 \end{frame}
 
 \subsection{Clamped vs Supported Systems}
@@ -219,9 +282,8 @@
   \column{0.7\textwidth}
   \includegraphics[width=\columnwidth]{Figures/FrequencyModeProjectionsZeta.eps}
  \end{columns}
- \begin{equation}
-  V_{ij}(r) = 4 \epsilon_{ij} \left[ \left( \frac{\sigma_{ij}}{r} \right) ^{12} - \left( \frac{\sigma_{ij}}{r} \right) ^6 \right] \nonumber
- \end{equation}
+ \note[item]{Different LJ potentials}
+ \note[item]{$\epsilon = 1$: $\approx 10\%$ deviation}
 \end{frame}
 
 \begin{frame}
@@ -229,6 +291,9 @@
  \begin{center}
   \includegraphics[width=0.9\textwidth]{Figures/2DRMS.eps}
  \end{center}
+ \note[item]{Different LJ potentials}
+ \note[item]{$\epsilon = 1$: Most similar geometry}
+ \note[item]{$\epsilon = 1$: Closest RMS}
 \end{frame}
 
 \section{Conclusion}
