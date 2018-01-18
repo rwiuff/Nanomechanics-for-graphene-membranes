@@ -26,14 +26,17 @@
 
 \definecolor{DTUred}{cmyk}{0,0.91,0.72,0.23}
 \definecolor{itemcolor}{cmyk}{0,0,0,0.56}
+\definecolor{blockbodycolor}{cmyk}{0,1,1,0.5}
+\definecolor{White}{cmyk}{0,0,0,0}
 \setbeamercolor{titlelike}{fg=DTUred}
 \setbeamercolor{section in head/foot}{fg=DTUred}
 \setbeamercolor{section in toc}{fg=DTUred}
 \setbeamercolor{itemize item}{fg=itemcolor}
+\setbeamercolor{redbox}{fg=White,bg=blockbodycolor}
 
 \title{Nanomechanics of Graphene Membranes}
 \subtitle{vibrational modes on the nanoscale}
-\author{\centering\includegraphics[width=10cm]{Miscellaneous/Graphics/Logo.eps}\\Christoffer Vendelbo Sørensen \and Frederik Grunnet Kristensen \and Rasmus Kronborg Finnemann Wiuff}
+\author{\centering\includegraphics[width=8cm]{Miscellaneous/Graphics/Logo.eps}\\Christoffer Vendelbo Sørensen \and Frederik Grunnet Kristensen \and Rasmus Kronborg Finnemann Wiuff\\Supervisors: Mads Brandbyge \and Tue Gunst}
 \institute{Technical University of Denmark}
 \date{\today}
 
@@ -60,12 +63,26 @@
    \item<3-> Dejan Davidovikj, Jesse J. Slim, Santiago J. Cartamil-Bueno, Herre S J Van Der Zant, Peter G. Steeneken, and Warner J. Venstra\\
          “Visualizing the Motion of Graphene Nanodrums”\\
          \href{http://dx.doi.org/10.1021/acs.nanolett.6b00477}{Nano Letters \textbf{16}, 2768-2773 (2016)} \href{http://arxiv.org/abs/1602.00135}{arXiv:1602.00135}
-   \item<4-> Nanodrums on the microscale (Fig 1)
-   \item<5-> Nanomembranes on the nanoscale
-   \item<6-> Simulation and analysistools
+   \item<4-> Microdrums on the micron scale
+   \item<5-> Nanomembranes on the nanometer scale
   \end{itemize}
   \column{0.5\textwidth}<3->
   \includegraphics[width=\columnwidth]{Figures/motivation.eps}
+ \end{columns}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Introduction}
+ \begin{columns}[c]
+  \column{0.4\textwidth}
+  \begin{flushright}
+      Hypothesis:
+  \end{flushright}
+  \column{\textwidth}
+  \vskip1em
+  \begin{beamercolorbox}[sep=1em,wd=8cm]{redbox}
+      Does drum modes exist in graphene supported by a nanomesh with nanometersized holes?
+  \end{beamercolorbox}
  \end{columns}
 \end{frame}
 
@@ -76,31 +93,25 @@
  \begin{itemize}[<+->]
   \pause
   \item Matrix in Eigenvalue problem (below)
-  \item Elements are Fouriertransform of the spring constants between configuration atoms
+  \item Elements in matrix are Fouriertransform of the spring constants between configuration atoms
   \item Essential for calculating vibrational modes
  \end{itemize}
  \begin{equation}
   M\omega_{\mathbf{q}}^{2}
   \begin{bmatrix}
-   A_{1}  \\
-   A_{2}  \\
-   A_{3}  \\
-   \vdots \\
-   A_{n}
+   A_{1} \\
+   A_{2} \\
+   A_{3}
   \end{bmatrix}
   =
   \begin{bmatrix}
-   D_{11} & D_{12} & D_{13} & \cdots                 & D_{1m} \\
-   D_{21} & D_{22} & D_{23} &                        & \vdots \\
-   D_{31} & D_{32} & D_{33} &                        & \vdots \\
-   \vdots &        &        & \reflectbox{$\iddots$} & \vdots \\
-   D_{n1} & \cdots & \cdots & \cdots                 & D_{nm}
+   D_{11} & D_{12} & D_{13} \\
+   D_{21} & D_{22} & D_{23} \\
+   D_{31} & D_{32} & D_{33}
   \end{bmatrix}\begin{bmatrix}
-   A_{1}  \\
-   A_{2}  \\
-   A_{3}  \\
-   \vdots \\
-   A_{n}
+   A_{1} \\
+   A_{2} \\
+   A_{3}
   \end{bmatrix} \nonumber
  \end{equation}
 \end{frame}
@@ -115,15 +126,21 @@
   \column{0.7\textwidth}
   \begin{itemize}
    \item<1-> Atomistic calculations
-   \item<2-> Workflow
+   \item<2-> HPC server cluster
+   \item<3-> Workflow
          \begin{enumerate}
           \item<3-> Create Configuration
-          \item<4-> Optimise geometry and set potential
+          \item<4-> Set potentials and optimise geometry
+                \begin{itemize}
+                 \item Intralayer: Tersoff-Brenner (2010)
+                 \item Interlayer: Lennard-Jones:\begin{equation}
+                        V_{ij}(r) = 4 \epsilon_{ij} \left[ \left( \frac{\sigma_{ij}}{r} \right) ^{12} - \left( \frac{\sigma_{ij}}{r} \right) ^6 \right] \nonumber
+                       \end{equation}
+                \end{itemize}
           \item<5-> Calculate the Dynamical Matrix
           \item<6-> Calculate the vibrational modes
          \end{enumerate}
-   \item<7-> HPC server cluster
-   \item<8-> Analysing modes
+   \item<7-> Analysing modes
   \end{itemize}
   \column{0.68\textwidth}<1->
   \begin{figure}
@@ -143,8 +160,14 @@
  \begin{columns}[T]
   \column{0.75\textwidth}
   \animategraphics[width=\columnwidth]{30}{VNL/Clamped/frame}{0}{29}
+  \begin{center}
+   Clamped system
+  \end{center}
   \column{0.75\textwidth}
   \animategraphics[width=\columnwidth]{30}{VNL/Substrate/frame}{0}{29}
+  \begin{center}
+   Supported system
+  \end{center}
  \end{columns}
 \end{frame}
 
@@ -168,6 +191,9 @@
 
 \begin{frame}
  \frametitle{Frequencies vs size}
+ \begin{center}
+  Clamped System
+ \end{center}
  \begin{columns}[T]
   \column{0.8\textwidth}
   \includegraphics[width=\columnwidth]{Figures/FrequencyModeProjectionsNoZoom.eps}
@@ -183,10 +209,10 @@
  \end{center}
 \end{frame}
 
-\subsection{Clamped vs Substraded}
+\subsection{Clamped vs Supported Systems}
 
 \begin{frame}
- \frametitle{Clamped vs Substraded}
+ \frametitle{Clamped vs Supported Systems}
  \begin{columns}[T]
   \column{0.7\textwidth}
   \includegraphics[width=\columnwidth]{Figures/FrequencyModeProjectionsZetaNoZoom.eps}
@@ -199,7 +225,7 @@
 \end{frame}
 
 \begin{frame}
- \frametitle{Clamped vs Substraded}
+ \frametitle{Clamped vs Supported Systems}
  \begin{center}
   \includegraphics[width=0.9\textwidth]{Figures/2DRMS.eps}
  \end{center}
@@ -215,7 +241,7 @@
    \item<2-> Simulation enviroment works
    \item<3-> Geometric behavior similar to Vibrational Nanodrums
    \item<4-> Vibrational modes are theoretically scaleable to nanoscale
-   \item<5-> Next step: Molecular Dynamics and Experimental testing
+   \item<5-> Next step: Molecular Dynamics, Hole Coupling and Experimental testing
   \end{itemize}
   \column{0.7\textwidth}<5->
   \begin{center}
@@ -224,8 +250,9 @@
  \end{columns}
 \end{frame}
 
-\section*{The End}
-
+\section*{Questions}
+\title{Questions}
+\subtitle{}
 \begin{frame}
  \titlepage
 \end{frame}
