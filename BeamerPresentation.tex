@@ -6,28 +6,25 @@
 \usepackage{mathdots}
 \usepackage{graphicx}
 \usepackage[autoplay,loop,keepaspectratio]{animate}
-\usepackage{minted}
-\setminted{fontsize=\tiny}
-\usemintedstyle{monokai}
 
 % ------------------------ Define note handout layout -------------------------
 \newcommand{\pgflayout}{
 \pgfpagesphysicalpageoptions
 {%
 logical pages=2,%
-physical height=\paperheight,%
-physical width=\paperwidth,%
+physical height=210mm,%
+physical width=297mm,%
 }%
 \pgfpageslogicalpageoptions{2}
 {%
 resized width=\pgfphysicalwidth,%
-resized height=.8\pgfphysicalheight,%
+resized height=\pgfphysicalheight,%
 center=\pgfpoint{.5\pgfphysicalwidth}{.25\pgfphysicalheight}%
 }%
 \pgfpageslogicalpageoptions{1}
 {%
 resized width=\pgfphysicalwidth,%
-resized height=.8\pgfphysicalheight,%
+resized height=\pgfphysicalheight,%
 center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
 }%
 }
@@ -132,6 +129,15 @@ center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
       Does drum modes exist in graphene supported by a nanomesh with nanometer sized holes?
   \end{beamercolorbox}
  \end{columns}
+ \begin{center}
+   \begin{columns}[c]
+     \column{\textwidth}Jingwei Bai, Xing Zhong, Shan Jiang, Yu Huang, and Xiangfeng Duan\\
+     “Graphene nanomesh”\\
+     \href{http://dx.doi.org/10.1038/nnano.2010.8}{Nature Nanotechnology \textbf{5}, 190-194 (2010)} \href{http://arxiv.org/abs/NIHMS150003}{arXiv:NIHMS150003}
+     \column{0.4\textwidth}
+     \includegraphics[width=0.9\textwidth]{Figures/jaminkan.png}
+   \end{columns}
+ \end{center}
 \end{frame}
 
 \section{The Dynamical Matrix}
@@ -162,6 +168,10 @@ center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
    A_{3}
   \end{bmatrix} \nonumber
  \end{equation}
+ \note<4->{Equivalent to Hookes law in 3D}
+ \note<4->{\begin{equation}
+\mathbf{\phi}_{\alpha\beta}(\mathbf{R}_{i},\mathbf{R}_{j})=\dfrac{\partial^{2}U}{\partial r_{i\alpha}\partial r_{j\beta}} \nonumber
+\end{equation}}
 \end{frame}
 
 \section{Our methods}
@@ -188,7 +198,8 @@ center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
           \item<5-> Calculate the Dynamical Matrix
           \item<6-> Calculate the vibrational modes
          \end{enumerate}
-   \item<7-> Analysing modes
+    \item<7-> ATKPython
+    \item<8-> Matplotlib \& Pyplot
   \end{itemize}
   \column{0.68\textwidth}<1->
   \begin{figure}
@@ -199,9 +210,10 @@ center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
    \includegraphics[width=\columnwidth]{Figures/DoubleMembrane.png}
   \end{figure}
  \end{columns}
- \note[item]<7->{Micro: FEM, Nano Atomistic}
- \note[item]<7->{Dynamical Matrix: Parallise displacement to nodes (8)}
- \note[item]<7->{Vibrational Modes: High amount of RAM (10-30 GB)}
+ \note[item]<8->{Micro: FEM, Nano: Atomistic}
+ \note[item]<8->{HPC used for DM and VM}
+ \note[item]<8->{Dynamical Matrix: Parallelise displacement to nodes (8)}
+ \note[item]<8->{Vibrational Modes: High amount of RAM (10-30 GB)}
 \end{frame}
 
 \subsection{Visualising Modes}
@@ -222,24 +234,7 @@ center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
  \end{columns}
  \note[item]{Layers}
  \note[item]{Potentials}
- \note[item]{Boundary}
-\end{frame}
-
-\subsection{Extracting Modes}
-
-\begin{frame}
- \frametitle{Extracting Modes}
- \begin{listing}[H]
-  \inputminted[python3=true,bgcolor=Black,linenos=true,firstline=66,lastline=71,breaklines=true,breakautoindent=true]{python}{VNL/PythonScripts/Scripts/2DdataExtract.py}
- \end{listing}
- \begin{itemize}[<+->]
-  \pause
-  \item ATKPython
-  \item Matplotlib \& Pyplot
- \end{itemize}
- \note[item]<3->{.movie = trajectory}
- \note[item]<3->{Trajectory = series of configurations}
- \note[item]<3->{.image = One of such configurations}
+ \note[item]{Boundary - Atoms far away?}
 \end{frame}
 
 \section{Our Findings}
@@ -258,8 +253,9 @@ center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
   \includegraphics[width=\columnwidth]{Figures/FrequencyModeProjectionsZoomFit.eps}
  \end{columns}
  \note[item]{Freqence vs size}
+ \note[item]{Energy/Frequency relation: $1\mathrm{Hz} = 4.13\cdot10^{-15}\mathrm{eV}$}
  \note[item]{Trend line}
- \note[item]{$\dfrac{1}{x^2}$}
+ \note[item]{Classic$\left(\dfrac{1}{x}\right)$ $<\dfrac{1}{x^{1.4}}<$ Graphene$\left(\dfrac{1}{x^2}\right)$}
 \end{frame}
 
 \begin{frame}
@@ -268,7 +264,7 @@ center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
   \includegraphics[width=0.4\textwidth]{Figures/2DRMSClamped.eps}
  \end{center}
  \note[item]{Size vs size}
- \note[item]{Nodes}
+ \note[item]{Degenerate Pairs (1,2), (3,4)}
  \note[item]{RMS}
 \end{frame}
 
@@ -282,8 +278,12 @@ center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
   \column{0.7\textwidth}
   \includegraphics[width=\columnwidth]{Figures/FrequencyModeProjectionsZeta.eps}
  \end{columns}
+ \begin{equation}
+        V_{ij}(r) = 4 \epsilon_{ij} \left[ \left( \frac{\sigma_{ij}}{r} \right) ^{12} - \left( \frac{\sigma_{ij}}{r} \right) ^6 \right] \nonumber
+ \end{equation}
  \note[item]{Different LJ potentials}
- \note[item]{$\epsilon = 1$: $\approx 10\%$ deviation}
+ \note[item]{$\epsilon = 1$: $\approx 10\%$ avg. deviation}
+ \note[item]{Explain drop in out-of-plane-movement for supported system}
 \end{frame}
 
 \begin{frame}
@@ -291,9 +291,10 @@ center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
  \begin{center}
   \includegraphics[width=0.9\textwidth]{Figures/2DRMS.eps}
  \end{center}
- \note[item]{Different LJ potentials}
+ \note[item]{Different LJ potentials, 5nm}
  \note[item]{$\epsilon = 1$: Most similar geometry}
  \note[item]{$\epsilon = 1$: Closest RMS}
+ \note[item]{Drop in RMS as Modes rise $\rightarrow$ Nodes}
 \end{frame}
 
 \section{Conclusion}
@@ -306,13 +307,19 @@ center=\pgfpoint{.5\pgfphysicalwidth}{.70\pgfphysicalheight}%
    \item<2-> Simulation enviroment works
    \item<3-> Geometric behavior similar to Vibrational Nanodrums
    \item<4-> Vibrational modes are theoretically scaleable to nanoscale
-   \item<5-> Next step: Molecular Dynamics, Hole Coupling and Experimental testing
+   \item<5-> Normal mode frequency in THz spectrum
+   \item<6-> $\text{SiO}_{2}$ Substrate: A good candidate
+   \item<7-> Next step: Optimal Substrates, Molecular Dynamics, Hole Coupling, and Experimental testing
   \end{itemize}
   \column{0.7\textwidth}<5->
   \begin{center}
    \includegraphics[height=0.6\textheight]{Figures/Fuck_dig_christoffer.eps}
   \end{center}
  \end{columns}
+ \note[item]<7->{Explain figure: Capasitor gate}
+ \note[item]<7->{Why go nano?}
+ \note[item]<7->{$\omega \propto \frac{v}{r} \rightarrow \text{Smaller Radius} = \text{Higher Frequency}$}
+ \note[item]<7->{Special course with Peter Uth, DTU Photonics}
 \end{frame}
 
 \section*{Questions}
