@@ -27,7 +27,7 @@
 # these rules might exclude image files for figures etc.
 # *.ps
 # *.eps
-*.pdf
+# *.pdf
 !*eps-converted-to.pdf
 !Resume.pdf
 !*nm.pdf
